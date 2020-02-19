@@ -14,7 +14,7 @@ QR <- read_csv('../data/2005_-_2019_Quality_Review_Ratings.csv')
 SS_17 <- read_csv('../data/School Survey 2017.csv')
 
 
-
+bn_sl <- SL %>% select (DBN, location_name)
 QR_1519 <- QR%>%
   filter(Start_Date>='2015-01-01')%>%
   merge(bn_sl, by.x=c("BN"),by.y=c("location_code"))%>%
