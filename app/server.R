@@ -15,10 +15,10 @@ shinyServer(function(input, output) {
   
   output$map <- renderLeaflet({
     m <- leaflet() %>%
-      addTiles() %>%
+      addProviderTiles(providers$CartoDB.Positron) %>%
       setView(-73.9252853,40.7910694,zoom = 13)
       leafletProxy("map", data = School_Locations) %>%
-      addCircleMarkers(lng=~LONGITUDE,lat=~LATITUDE,popup=~location_name,radius=5)
+      addCircleMarkers(lng=~LONGITUDE,lat=~LATITUDE,popup=~location_name,radius=4,opacity=1,fillOpacity =1 ,stroke=F,color='#c4f1f2')
     
     m
   })  

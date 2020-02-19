@@ -12,20 +12,20 @@ shinyUI(fluidPage(
     dashboardHeader(title = "School dashboard"),
     dashboardSidebar(
       sidebarMenu(
-        menuItem("Map", tabName = "menuMap", icon = icon("map"))
+        menuItem("Dashboard", tabName = "menuDash", icon = icon("dashboard")),
+        menuItem("Map", tabName = "menuMap", icon = icon("map")),
+        menuItem("Stat", tabName = "menuChart", icon = icon("chart-line"))
       )
     ),
     dashboardBody(
-      tabItem(tabName = 'menuMap',
-        leafletOutput("map",width="100%",height=700)
-             
-             
-             
-             
-      )      
-             
+      tabItems( 
+        tabItem(tabName = "menuDash",h2("tab content")),
+        tabItem(tabName = 'menuMap',
+          leafletOutput("map",width="100%",height=700)),
+        tabItem(tabName = "menuChart")
+      
+      )        
     )
-    )
-  
   )
-)
+  
+  ))
