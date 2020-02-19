@@ -54,32 +54,46 @@ QR_1519_rename <- QR_1519 %>% rename("Curriculum" = "Indicator_1.1",
                    "Teacher_Team_Leadership_Development" = "Indicator_4.2", 
                    "Monitoring_Revising_Systems" = "Indicator_5.1"
                    ) %>%
-  select(BN,location_name, School_Year,Curriculum,Pedagogy,Leveraging_Resources,Positive_Learning_Evironment,
-         Assessment,Goals_and_Action_Plans,High_Expectations,Teacher_Support_Supervision,Teacher_Team_Leadership_Development,Monitoring_Revising_Systems) %>% 
-  mutate (Curriculum = factor(Curriculum),
-          Pedagogy = factor(Pedagogy),
+  select(BN,location_name,School_Year,Curriculum,Pedagogy,Leveraging_Resources,
+         Positive_Learning_Evironment,Assessment,Goals_and_Action_Plans,
+         High_Expectations,Teacher_Support_Supervision,Teacher_Team_Leadership_Development,
+         Monitoring_Revising_Systems) %>% 
+  mutate (Curriculum = factor(Curriculum),Pedagogy = factor(Pedagogy),
           Leveraging_Resources = factor(Leveraging_Resources),
           Positive_Learning_Evironment = factor(Positive_Learning_Evironment),
-         Assessment = factor(Assessment),
-         Goals_and_Action_Plans = factor(Goals_and_Action_Plans),
+         Assessment = factor(Assessment),Goals_and_Action_Plans = factor(Goals_and_Action_Plans),
          High_Expectations = factor(High_Expectations),
          Teacher_Support_Supervision = factor(Teacher_Support_Supervision),
          Teacher_Team_Leadership_Development = factor(Teacher_Team_Leadership_Development),
          Monitoring_Revising_Systems = factor(Monitoring_Revising_Systems), 
          # change to rating 1 to 5 
-         Curriculum = fct_recode(Curriculum, "1" = "U/UD", "2" = "UPF", "3" = "D", "4" = "P", "5" = "WD", "6" = "O"), 
-          Pedagogy = fct_recode(Pedagogy, "1" = "U/UD", "2" = "UPF", "3" = "D", "4" = "P", "5" = "WD", "6" = "O"),
-          Leveraging_Resources = fct_recode(Leveraging_Resources, "1" = "U/UD", "2" = "UPF", "3" = "D", "4" = "P", "5" = "WD", "6" = "O"),
-          Positive_Learning_Evironment = fct_recode(Positive_Learning_Evironment, "1" = "U/UD", "2" = "UPF", "3" = "D", "4" = "P", "5" = "WD", "6" = "O"),
-         Assessment = fct_recode(Assessment, "1" = "U/UD", "2" = "UPF", "3" = "D", "4" = "P", "5" = "WD", "6" = "O"),
-         Goals_and_Action_Plans = fct_recode(Goals_and_Action_Plans, "1" = "U/UD", "2" = "UPF", "3" = "D", "4" = "P", "5" = "WD", "6" = "O"),
-         High_Expectations = fct_recode(High_Expectations, "1" = "U/UD", "2" = "UPF", "3" = "D", "4" = "P", "5" = "WD", "6" = "O"),
-         Teacher_Support_Supervision = fct_recode(Teacher_Support_Supervision, "1" = "U/UD", "2" = "UPF", "3" = "D", "4" = "P", "5" = "WD", "6" = "O"),
-         Teacher_Team_Leadership_Development = fct_recode(Teacher_Team_Leadership_Development, "1" = "U/UD", "2" = "UPF", "3" = "D", "4" = "P", "5" = "WD", "6" = "O"),
-         Monitoring_Revising_Systems = fct_recode(Monitoring_Revising_Systems, "1" = "U/UD", "2" = "UPF", "3" = "D", "4" = "P", "5" = "WD", "6" = "O"))
-QR_1519_rename
+         Curriculum = fct_recode(Curriculum, "1" = "U/UD", "2" = "UPF", "3" = "D", 
+                                 "4" = "P", "5" = "WD", "6" = "O"), 
+          Pedagogy = fct_recode(Pedagogy, "1" = "U/UD", "2" = "UPF", "3" = "D", 
+                                "4" = "P", "5" = "WD", "6" = "O"),
+          Leveraging_Resources = fct_recode(Leveraging_Resources, "1" = "U/UD", "2" = "UPF", 
+                                            "3" = "D", "4" = "P", "5" = "WD", "6" = "O"),
+          Positive_Learning_Evironment = fct_recode(Positive_Learning_Evironment, 
+                                                    "1" = "U/UD","2" = "UPF", "3" = "D", 
+                                                    "4" = "P", "5" = "WD", "6" = "O"),
+         Assessment = fct_recode(Assessment, "1" = "U/UD", "2" = "UPF", "3" = "D", 
+                                 "4" = "P", "5" = "WD", "6" = "O"),
+         Goals_and_Action_Plans = fct_recode(Goals_and_Action_Plans, "1" = "U/UD", "2" = "UPF",
+                                             "3" = "D", "4" = "P", "5" = "WD", "6" = "O"),
+         High_Expectations = fct_recode(High_Expectations, "1" = "U/UD", "2" = "UPF", "3" = "D",
+                                        "4" = "P", "5" = "WD", "6"= "O"),
+         Teacher_Support_Supervision = fct_recode(Teacher_Support_Supervision, "1" = "U/UD", 
+                                                  "2" = "UPF", "3" = "D", "4" = "P", 
+                                                  "5" = "WD", "6" = "O"),
+         Teacher_Team_Leadership_Development = fct_recode(Teacher_Team_Leadership_Development, 
+                                                          "1" = "U/UD", "2" = "UPF", "3" = "D",
+                                                          "4" = "P", "5" = "WD", "6" = "O"),
+         Monitoring_Revising_Systems = fct_recode(Monitoring_Revising_Systems, "1" = "U/UD", 
+                                                  "2" = "UPF", "3" = "D", "4" = "P", 
+                                                  "5" = "WD", "6" = "O"))%>%
+  pivot_wider(names_from = School_Year,values_from=c(Curriculum:Monitoring_Revising_Systems))%>%
+  unnest()
 save(QR_1519_rename, file="../output/QR_1519_rename.RData")
-
 ```
 
 
