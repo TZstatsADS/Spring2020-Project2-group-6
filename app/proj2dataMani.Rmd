@@ -20,6 +20,7 @@ library(stringr)
 library(shinydashboard)
 library(tidyverse)
 library(tidyr)
+library(naniar)
 ```
 
 
@@ -27,10 +28,13 @@ library(tidyr)
 load('../output/School_Locations.RData')
 QR <- read_csv('../data/2005_-_2019_Quality_Review_Ratings.csv')
 SS_17 <- read_csv('../data/School Survey 2017.csv')
+SS_18 <- read_csv('../data/School Survey 2018.csv')
+SS_19 <- read_csv('../data/School Survey 2019.csv')
 
-SL <- School_Locations%>%filter(Status_descriptions=='Open')%>%
-  select(location_code,location_name,location_type_description,Location_Category_Description,
-         primary_address_line_1,LONGITUDE,LATITUDE)
+#SL <- School_Locations%>%filter(Status_descriptions=='Open')%>%
+ # select(location_code,location_name,location_type_description,Location_Category_Description,
+         #primary_address_line_1,LONGITUDE,LATITUDE)
+
 QR_1519 <- QR%>%
   filter(Start_Date>='2015-01-01')%>%
   select(BN,School_Year,Indicator_1.1,Indicator_1.2,Indicator_1.3,Indicator_1.4,
@@ -39,8 +43,8 @@ QR_1519 <- QR%>%
 ```
 
 ```{r}
-bn_sl <- SL %>% select (location_code, location_name)
-QR_1519 <- QR_1519 %>%  dplyr::inner_join(bn_sl, by = c("BN" = "location_code")) 
+bn_sl <- SL %>% select (BN, location_name)
+QR_1519 <- QR_1519 %>%  dplyr::inner_join(bn_sl, by = c('BN'='BN')) 
 
 
 QR_1519_rename <- QR_1519 %>% rename("Curriculum" = "Indicator_1.1", 
@@ -54,6 +58,7 @@ QR_1519_rename <- QR_1519 %>% rename("Curriculum" = "Indicator_1.1",
                    "Teacher_Team_Leadership_Development" = "Indicator_4.2", 
                    "Monitoring_Revising_Systems" = "Indicator_5.1"
                    ) %>%
+  replace_with_na_all(condition = ~.x=='No Data')%>%
   select(BN,location_name,School_Year,Curriculum,Pedagogy,Leveraging_Resources,
          Positive_Learning_Evironment,Assessment,Goals_and_Action_Plans,
          High_Expectations,Teacher_Support_Supervision,Teacher_Team_Leadership_Development,
@@ -102,9 +107,6 @@ demographic_by_borough <- read_csv('../data/demographic/demographic_by_borough.c
 demographic_by_citywide <- read_csv('../data/demographic/demographic_by_citywide.csv')
 demographic_by_school <- read_csv('../data/demographic/demographic_by_school.csv')
 demographic_by_district <- read_csv('../data/demographic/demographic_by_district.csv')
-
-
-
 ```
 
 # category elementary, middle and high school 
