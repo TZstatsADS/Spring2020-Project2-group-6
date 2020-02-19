@@ -19,8 +19,8 @@ QR_1519 <- QR%>%
   filter(Start_Date>='2015-01-01')%>%
   merge(bn_sl, by.x=c("BN"),by.y=c("BN"))%>%
   select(BN,location_name, School_Year,Indicator_1.1,Indicator_1.2,Indicator_1.3,Indicator_1.4,
-         Indicator_2.2,Indicator_3.1,Indicator_3.4,Indicator_4.1,Indicator_4.2,Indicator_5.1)
-  #pivot_wider(names_from = School_Year,values_from = starts_with('Indicator'))
+         Indicator_2.2,Indicator_3.1,Indicator_3.4,Indicator_4.1,Indicator_4.2,Indicator_5.1) %>% 
+  pivot_wider(names_from = School_Year,values_from = starts_with('Indicator'))
 
 
 
