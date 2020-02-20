@@ -27,9 +27,7 @@ library(naniar)
 ```{r}
 load('../output/School_Locations.RData')
 QR <- read_csv('../data/2005_-_2019_Quality_Review_Ratings.csv')
-SS_17 <- read_csv('../data/School Survey 2017.csv')
-SS_18 <- read_csv('../data/School Survey 2018.csv')
-SS_19 <- read_csv('../data/School Survey 2019.csv')
+
 
 #SL <- School_Locations%>%filter(Status_descriptions=='Open')%>%
  # select(location_code,location_name,location_type_description,Location_Category_Description,
@@ -101,6 +99,47 @@ QR_1519_rename <- QR_1519 %>% rename("Curriculum" = "Indicator_1.1",
 save(QR_1519_rename, file="../output/QR_1519_rename.RData")
 ```
 
+```{r}
+SS_17 <- read_csv('../data/School Survey 2017.csv')
+SS_18 <- read_csv('../data/School Survey 2018.csv')
+SS_19 <- read_csv('../data/School Survey 2019.csv')
+SS_17 <- SS_17%>%select(DBN,`School Name`,`Collaborative Teachers Score`:`Trust Score`)%>%
+  replace_with_na_all(condition = ~.x=='N/A')%>%
+  filter_all(any_vars(!is.na(.)))%>%
+  rename('17 Collaborative Teachers Score'='Collaborative Teachers Score',
+                        '17 Effective School Leadership Score'=
+                          'Effective School Leadership Score',
+                        '17 Rigorous Instruction Score'='Rigorous Instruction Score',
+                        '17 Supportive Environment Score'='Supportive Environment Score',
+                        '17 Strong Family-Community Ties Score'=
+                          'Strong Family-Community Ties Score',
+                        '17 Trust Score'='Trust Score')
+SS_18 <- SS_18%>%select(DBN,`Collaborative Teachers Score`:`Trust Score`)%>%
+  replace_with_na_all(condition = ~.x=='N/A')%>%
+  filter_all(any_vars(!is.na(.)))%>%
+  rename('18 Collaborative Teachers Score'='Collaborative Teachers Score',
+                        '18 Effective School Leadership Score'=
+                          'Effective School Leadership Score',
+                        '18 Rigorous Instruction Score'='Rigorous Instruction Score',
+                        '18 Supportive Environment Score'='Supportive Environment Score',
+                        '18 Strong Family-Community Ties Score'=
+                          'Strong Family-Community Ties Score',
+                        '18 Trust Score'='Trust Score')
+SS_19 <- SS_19%>%select(DBN,`Collaborative Teachers Score`:`Trust Score`)%>%
+  replace_with_na_all(condition = ~.x=='N/A')%>%
+  filter_all(any_vars(!is.na(.)))%>%
+  rename('19 Collaborative Teachers Score'='Collaborative Teachers Score',
+                        '19 Effective School Leadership Score'=
+                          'Effective School Leadership Score',
+                        '19 Rigorous Instruction Score'='Rigorous Instruction Score',
+                        '19 Supportive Environment Score'='Supportive Environment Score',
+                        '19 Strong Family-Community Ties Score'=
+                          'Strong Family-Community Ties Score',
+                        '19 Trust Score'='Trust Score')
+SS <- SS_17%>%inner_join(SS_18,by='DBN')%>%
+  inner_join(SS_19,by='DBN')%>%inner_join(select(SL,DBN),by='DBN')
+save(SS, file="../output/School_Survey17-19.RData")
+```
 
 ```{r}
 demographic_by_borough <- read_csv('../data/demographic/demographic_by_borough.csv')
