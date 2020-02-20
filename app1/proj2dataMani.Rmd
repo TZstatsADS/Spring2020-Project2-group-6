@@ -3,15 +3,11 @@ title: "proj 2"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
 ## R Markdown
 # run libraries 
 ```{r}
 library(shiny)
-library(choroplethr)
+library(choroplethr) 
 library(dplyr)
 library(leaflet)
 library(maps)
@@ -44,7 +40,7 @@ QR_1519 <- QR%>%
 
 ```{r}
 bn_sl <- SL %>% select (BN, location_name)
-QR_1519 <- QR_1519 %>%  dplyr::inner_join(bn_sl, by = c('BN'='BN')) 
+QR_1519 <- QR_1519 %>%  inner_join(bn_sl, by = c('BN'='BN')) 
 
 
 QR_1519_rename <- QR_1519 %>% rename("Curriculum" = "Indicator_1.1", 
@@ -95,8 +91,8 @@ QR_1519_rename <- QR_1519 %>% rename("Curriculum" = "Indicator_1.1",
                                                           "4" = "P", "5" = "WD", "6" = "O"),
          Monitoring_Revising_Systems = fct_recode(Monitoring_Revising_Systems, "1" = "U", "1" = "UD",
                                                   "2" = "UPF", "3" = "D", "4" = "P", 
-                                                  "5" = "WD", "6" = "O"))%>%
-  tidyr::pivot_wider(names_from = School_Year,values_from=c(Curriculum:Monitoring_Revising_Systems))%>%
+                                                  "5" = "WD", "6" = "O")) %>%
+  pivot_wider(names_from = School_Year,values_from=c(Curriculum:Monitoring_Revising_Systems))%>%
   unnest()
 save(QR_1519_rename, file="../output/QR_1519_rename.RData")
 ```
@@ -125,9 +121,10 @@ demographic_by_school$gradeLevel[demographic_by_school$`Grade 1` == 0 & demograp
 
 demographic_by_school$gradeLevel[demographic_by_school$`Grade 1` == 0 & demographic_by_school$`Grade 6` == 0 & demographic_by_school$`Grade 9` != 0] <- "high" 
 demographic_by_school$gradeLevel[demographic_by_school$`Grade 1` != 0 & demographic_by_school$`Grade 6` == 0 & demographic_by_school$`Grade 9` != 0] <- "elementary, high" 
-
+demographic_by_school <- demographic_by_school %>% inner_join(bn_sl, by = c('School Name' = 'location_name'))
 
 save(demographic_by_school, file="../output/demographic_by_school.RData")
 
 ```
+
 
