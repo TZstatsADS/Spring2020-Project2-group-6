@@ -1,0 +1,31 @@
+---
+title: "drawChart"
+output: html_document
+---
+
+```{r}
+load('../output/demographic_by_school.RData')
+demographic_by_school
+```
+
+# gender, ethnicity piechart
+# poverty, economic need index line chart
+# function
+
+```{r}
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+gender_piechart <- function(bn) {
+  demographic_by_school %>% 
+    group_by(`School Name`) %>% 
+    filter (BN == bn & Year == max(Year)) %>%
+    select(`% Female`,`% Male`) %>%
+    gather(key = "key", value = "value", -`School Name`) %>%
+    mutate (value = as.numeric(value))
+  
+
+  
+}
+gender_piechart('M015')
+```
