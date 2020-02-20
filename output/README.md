@@ -4,3 +4,5 @@
 
 The output directory contains analysis output, processed datasets, logs, or other processed things.
 
+house1 is the raw data of house price.
+house_processed is the processed data of house price.
