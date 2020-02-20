@@ -7,7 +7,7 @@ library(shinyWidgets)
 library(shinydashboard)
 
 
-shinyUI(fluidPage(
+shinyUI(
   dashboardPage(
     dashboardHeader(title = "School dashboard"),
     dashboardSidebar(
@@ -20,11 +20,19 @@ shinyUI(fluidPage(
     dashboardBody(
       tabItems( 
         tabItem(tabName = "menuDash",h2("tab content")),
-        tabItem(tabName = 'menuMap',
-          leafletOutput("map",width="100%",height=700)),
+        tabItem(tabName = 'menuMap', splitLayout(cellWidths = c("40%", "60%"),
+        box(width=12,
+              checkboxGroupInput("click_school_type", "school Types",
+                                                  choices =c('Elementary','High school','Junior High-Intermediate-Middle','K-8'), 
+                                 selected =c('Elementary','High school','Junior High-Intermediate-Middle','K-8')),
+              checkboxGroupInput("click_school_type", "school Types",
+                                 choices =c('Elementary','High school','Junior High-Intermediate-Middle','K-8'), 
+                                 selected =c('Elementary','High school','Junior High-Intermediate-Middle','K-8')), 
+              h2("result")),
+         
+            leafletOutput("map",width="100%",height=700))
+          ),
         tabItem(tabName = "menuChart")
-      
-      )        
     )
   )
   
