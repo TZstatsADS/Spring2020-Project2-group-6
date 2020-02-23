@@ -1,6 +1,9 @@
 NYC School and Housing
-Whether you are choosing a school for the first time for your child or your child is making the transition to a new school, you probably have many questions. What are your options? How much choice do you really have? What’s the best option for your child and your family? Where should you begin?
+In recent years, 
 
-School choice options available to parents have increased dramatically in recent years. There’s a growing national sentiment that promoting competition in public education may spur schools to improve and that parents who invest energy in choosing a school will continue to be involved in their child’s education.
+Whether you are moving to NYC from another city with your family and would like to choose a school for your children, or your kids just reached the age to start elementary school, you probably have many questions. What are your options? How is the quality of each school? What is the best option for your child and your family? Where should you begin?
 
-Our shiny app is about school and housing in New York city, we aim at two types of customers: parents and students. For parents, they may care about finding the school be close to home or the place to work. Or they will need a school with English as a Second Language (ESL) program as a first generation. When coordinating of their multiple children’s educations, school location and student demographic information are helpful for them to find a good quality school or decide whether the school fit their needs well. 
+School options available to parents have increased dramatically in past few years, and parents have becoming more aware of the i
+There is a growing national sentiment that promoting competition in public education may spur schools to improve and that parents who invest energy in choosing a school will continue to be involved in their child's education.
+
+Our shiny app provides school and housing information in New York city, which will help both parents and students who are looking for schools to find the best option. For parents, they may care about finding the school be close to home or the place to work. Or they will need a school with English as a Second Language (ESL) program as a first generation. When coordinating of their multiple children's educations, school location and student demographic information are helpful for them to find a good quality school or decide whether the school fit their needs well. 
