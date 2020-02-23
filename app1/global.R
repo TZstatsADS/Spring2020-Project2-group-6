@@ -6,7 +6,7 @@ library(plyr)
 library(ggrepel)
 
 load('../output/demographic_by_school.RData')
-
+load('../output/School_Survey17-19.RData')
 
 gender_piechart <- function(bn) {
   
@@ -96,4 +96,8 @@ total_enrollment_history_linechart <- function(bn) {
     theme(plot.title = element_text(hjust = 0.5, color = "#666666"))
   total_enrollment_plot
   
+}
+
+school_survey_linechart <- function(bn){
+  trust <- 
 }
