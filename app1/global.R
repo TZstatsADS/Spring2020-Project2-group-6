@@ -98,6 +98,11 @@ total_enrollment_history_linechart <- function(bn) {
   
 }
 
-school_survey_linechart <- function(bn){
-  trust <- 
+trust_score_linechart <- function(bn){
+  ss <- SS%>%filter(BN==bn)
+  year <- c('2017','2018','2019')
+  trust <- as.numeric(c(ss$`17 Trust Score`,ss$`18 Trust Score`,ss$`19 Trust Score`))
+  tr <- as_tibble(cbind(year,trust))
+  ggplot(tr,aes(x=year,y=trust,group=1))+geom_line()+geom_point()+theme_light()
 }
+

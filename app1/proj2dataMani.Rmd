@@ -133,7 +133,8 @@ SS_19 <- SS_19%>%select(DBN,`Collaborative Teachers Score`:`Trust Score`)%>%
                           'Strong Family-Community Ties Score',
                         '19 Trust Score'='Trust Score')
 SS <- SS_17%>%inner_join(SS_18,by='DBN')%>%
-  inner_join(SS_19,by='DBN')%>%inner_join(select(SL,DBN),by='DBN')
+  inner_join(SS_19,by='DBN')%>%inner_join(select(SL,DBN),by='DBN')%>%
+  mutate(DBN=str_extract(DBN, '[A-Z][0-9][0-9][0-9]'))%>%rename('BN'='DBN')
 save(SS, file="../output/School_Survey17-19.RData")
 ```
 
