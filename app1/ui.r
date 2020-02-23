@@ -34,7 +34,6 @@ shinyUI(
             leafletOutput("map",width="100%",height=800))
           ),
         tabItem(tabName = "menuChart",
-                fluidRow(imageOutput("statimage1")),
                 fluidRow(box(width=6,textInput("statinput1","Enter Name")),
                          box(width=6,textInput("statinput2","Enter Name")))),
         tabItem(tabName = "menudata",

@@ -11,7 +11,6 @@ library(ggplot2)
 
 load('../output/final.RData')
 load('../output/demographic_by_school.Rdata')
-load('../output/house1.Rdata')
 load('../output/zip_code.Rdata')
 QR <- read_csv('../data/2005_-_2019_Quality_Review_Ratings.csv')
 
@@ -59,14 +58,6 @@ shinyServer(function(input, output) {
     m
   })  
   output$tableschool<-renderDataTable({a},filter='top',options = list(pageLength = 20, scrollX=T))
-  output$statimage1 <- renderImage({
-    filename <- normalizePath(file.path('../doc/figs',
-                                        'Rplot.png'))
-    
-    # Return a list containing the filename and alt text
-    list(src = filename,height=350)
-    
-  }, deleteFile = FALSE)
-  
+ 
   
   })
