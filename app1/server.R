@@ -39,25 +39,40 @@ shinyServer(function(input, output) {
     m <- leaflet() %>%
       addProviderTiles(providers$CartoDB.Positron) %>%
       setView(-73.9252853,40.7910694,zoom = 13)
-      leafletProxy("map", data = SL) %>%
+    leafletProxy("map", data = SL) %>%
       addCircleMarkers(lng=~LONGITUDE,lat=~LATITUDE,popup=~location_name,radius=4,opacity=1,fillOpacity =1 ,stroke=F,color='green')%>%
-        addPolygons(data = char_zips,
-                    fillColor = ~pal(price),
-                    weight = 2,
-                    opacity = 1,
-                    color = "white",
-                    dashArray = "3",
-                    fillOpacity = 0.5,
-                    highlight = highlightOptions(weight = 2,
-                                                 color = "#666",
-                                                 dashArray = "",
-                                                 fillOpacity = 0.7,
-                                                 bringToFront = TRUE),
-                    label = labels,group='Price')%>%
-        addLayersControl(overlayGroups = c('Price'))
+      addPolygons(data = char_zips,
+                  fillColor = ~pal(price),
+                  weight = 2,
+                  opacity = 1,
+                  color = "white",
+                  dashArray = "3",
+                  fillOpacity = 0.5,
+                  highlight = highlightOptions(weight = 2,
+                                               color = "#666",
+                                               dashArray = "",
+                                               fillOpacity = 0.7,
+                                               bringToFront = TRUE),
+                  label = labels,group='Price')%>%
+      addLayersControl(overlayGroups = c('Price'))
     m
   })  
   output$tableschool<-renderDataTable({a},filter='top',options = list(pageLength = 20, scrollX=T))
- 
+  output$plot_total_enrollment1 <- renderPlot({
+    y <- input$choice2
+    total_enrollment_history_linechart(y)
+  },width=300)
+  output$plot_total_enrollment2 <- renderPlot({
+    y <- input$choice3
+    total_enrollment_history_linechart(y)
+  },width=300)
+  output$plot_gender1 <- renderPlot({
+    y <- input$choice2
+    gender_piechart(y)
+  },width=300)
+  output$plot_gender2 <- renderPlot({
+    y <- input$choice3
+    gender_piechart(y)
+  },width=300)
   
-  })
+})
