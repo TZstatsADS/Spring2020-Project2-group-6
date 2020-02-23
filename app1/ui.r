@@ -60,8 +60,18 @@ shinyUI(
                   column(6,
                          selectInput("choice3", 'Choose school 2',
                                      choices = c("M015", "M019", "More"))),
+                # left side
+                fluidRow(plotOutput("plot_total_enrollment1")), 
+                fluidRow(plotOutput("plot_gender1")), 
+                fluidRow(plotOutput("plot_enthicity1")), 
+                fluidRow(plotOutput("plot_esl1")), 
+                #right side
+                fluidRow(plotOutput("plot_total_enrollment2")), 
+                fluidRow(plotOutput("plot_gender2")), 
+                fluidRow(plotOutput("plot_enthicity2")), 
+                fluidRow(plotOutput("plot_esl2"))
                 
-                fluidRow(plotOutput("plot3", height = "600px"))
+                
               ))),
       
       #source
