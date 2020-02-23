@@ -14,7 +14,8 @@ shinyUI(
       sidebarMenu(
         menuItem("Dashboard", tabName = "menuDash", icon = icon("dashboard")),
         menuItem("Map", tabName = "menuMap", icon = icon("map")),
-        menuItem("Stat", tabName = "menuChart", icon = icon("chart-line"))
+        menuItem("Stat", tabName = "menuChart", icon = icon("chart-line")),
+        menuItem("Data", tabName = "menudata", icon = icon("table"))
       )
     ),
     dashboardBody(
@@ -30,10 +31,16 @@ shinyUI(
                                  selected =c('Elementary','High school','Junior High-Intermediate-Middle','K-8')), 
               h2("result")),
          
-            leafletOutput("map",width="100%",height=700))
+            leafletOutput("map",width="100%",height=800))
           ),
-        tabItem(tabName = "menuChart")
-    )
+        tabItem(tabName = "menuChart",
+                fluidRow(imageOutput("statimage1")),
+                fluidRow(box(width=6,textInput("statinput1","Enter Name")),
+                         box(width=6,textInput("statinput2","Enter Name")))),
+        tabItem(tabName = "menudata",
+                dataTableOutput('tableschool'))
+    
+        )
   )
   
   ))
