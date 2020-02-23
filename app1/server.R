@@ -53,6 +53,12 @@ shinyServer(function(input, output) {
                     label = labels,group='Price')%>%
         addLayersControl(overlayGroups = c('Price'))
     m
-  })  
+  })
+  
+  output$plot3 <- renderPlot({
+    gender_piechart(input)
+  })
+  
+  
   
 })
