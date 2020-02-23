@@ -68,5 +68,46 @@ shinyServer(function(input, output) {
     
   }, deleteFile = FALSE)
   
+  output$plot_total_enrollment1 <- renderPlot({
+    y <- input$choice2
+    total_enrollment_history_linechart(y)
+  },width=300)
+  
+  output$plot_gender1 <- renderPlot({
+    y <- input$choice2
+    gender_piechart(y)
+  },width=300)
+  
+  output$plot_enthicity1 <- renderPlot({
+    y <- input$choice2
+    ethnicity_piechart(y)
+  },width=300)
+  
+  output$plot_esl1 <- renderPlot({
+    y <- input$choice2
+    esl_piechart(y)
+  },width=300)
+  
+  # output right side
+  output$plot_total_enrollment2 <- renderPlot({
+    y <- input$choice3
+    total_enrollment_history_linechart(y)
+  },width=300)
+  
+  output$plot_gender2 <- renderPlot({
+    y <- input$choice3
+    gender_piechart(y)
+  },width=300)
+  
+  output$plot_enthicity2 <- renderPlot({
+    y <- input$choice3
+    ethnicity_piechart(y)
+  },width=300)
+  
+  output$plot_esl2 <- renderPlot({
+    y <- input$choice3
+    esl_piechart(y)
+  },width=300)
+  
   
   })

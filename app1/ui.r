@@ -35,8 +35,21 @@ shinyUI(
           ),
         tabItem(tabName = "menuChart",
                 fluidRow(imageOutput("statimage1")),
-                fluidRow(box(width=6,textInput("statinput1","Enter Name")),
-                         box(width=6,textInput("statinput2","Enter Name")))),
+                fluidRow(box(width=6,textInput("choice2","Enter Name")),
+                         box(width=6,textInput("choice3","Enter Name"))),
+                
+                # left side
+                fluidRow(plotOutput("plot_total_enrollment1")), 
+                fluidRow(plotOutput("plot_gender1")), 
+                fluidRow(plotOutput("plot_enthicity1")), 
+                fluidRow(plotOutput("plot_esl1")), 
+                #right side
+                fluidRow(plotOutput("plot_total_enrollment2")), 
+                fluidRow(plotOutput("plot_gender2")), 
+                fluidRow(plotOutput("plot_enthicity2")), 
+                fluidRow(plotOutput("plot_esl2"))
+                
+                ),
         tabItem(tabName = "menudata",
                 dataTableOutput('tableschool'))
     
