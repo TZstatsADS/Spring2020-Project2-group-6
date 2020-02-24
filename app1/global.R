@@ -5,6 +5,7 @@ library(scales)
 library(ggrepel)
 library(stringr)
 library(plotly)
+load('../output/final.RData')
 load('../output/demographic_by_school.RData')
 load('../output/School_Survey17-19.RData')
 
@@ -59,19 +60,15 @@ esl_piechart <- function(bn) {
   pie
   
 }
+
+
 total_enrollment_history_linechart <- function(bn) {
   total_enrollment_df <- demographic_by_school %>% 
-    group_by(`School Name`) %>% 
     filter (BN == bn) %>%
-    select(Year, `Total Enrollment`) 
+    select(`School Name`, Year, `Total Enrollment`) 
   
-  total_enrollment_plot <- total_enrollment_df %>% ggplot(aes(x = Year,y = `Total Enrollment`, group = 1)) +
-    geom_line()+
-    geom_point() +
-    labs(title = "Total Enrollment from 2015 to 2019") +
-    theme_classic() + 
-    theme(plot.title = element_text(hjust = 0.5, color = "#666666"))
-  total_enrollment_plot
+  total_enrollment_plot <- total_enrollment_plot <- plot_ly(total_enrollment_df, x = ~Year, y = ~`Total Enrollment`, type = 'scatter', mode = 'lines')%>%
+    layout(title="Total Enrollment from 2015 to 2019")
   
 }
 

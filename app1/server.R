@@ -3,11 +3,10 @@ library(leaflet)
 library(stringr)
 library(shinydashboard)
 library(tigris) 
-library(DT)
 library(ggplot2)
 
 
-load('../output/final.RData')
+
 load('../output/demographic_by_school.Rdata')
 load('../output/zip_code.Rdata')
 QR <- read_csv('../data/2005_-_2019_Quality_Review_Ratings.csv')
@@ -88,15 +87,19 @@ shinyServer(function(input, output) {
   })
   
   
-  output$tableschool<-renderDataTable({a},filter='top',options = list(pageLength = 20, scrollX=T))
-  output$plot_total_enrollment1 <- renderPlot({
+  output$tableschool<-DT::renderDataTable({a},filter='top',options = list(pageLength = 20, scrollX=T))
+  
+  
+  
+  
+  output$plot_total_enrollment1 <- renderPlotly({
     y <- input$choice2
     total_enrollment_history_linechart(y)
-  },width=300)
-  output$plot_total_enrollment2 <- renderPlot({
+  })
+  output$plot_total_enrollment2 <- renderPlotly({
     y <- input$choice3
     total_enrollment_history_linechart(y)
-  },width=300)
+  })
   output$plot_gender1 <- renderPlotly({
     y <- input$choice2
     gender_piechart(y)
