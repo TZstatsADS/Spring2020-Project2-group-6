@@ -1,7 +1,4 @@
-library(shiny)
-library(leaflet)
 library(data.table)
-library(plotly)
 library(shinythemes)
 library(shinyWidgets)
 library(shinydashboard)
@@ -27,11 +24,29 @@ shinyUI(
                 fluidPage(
                   fluidRow(
                     box(width = 12, title = "Introduction", status = "primary",
-                        solidHeader = TRUE, h3("NYC School"),
+                        solidHeader = TRUE, h3("NYC School & Housing Information"),
                         h4("By Liangcao Ling, Kexin Su, Guoying Li, Zhongtian Pan, Jack"),
-                        h5("Whether you are choosing a school for the first time for your child or your child is making the transition to a new school, you probably have many questions. What are your options? How much choice do you really have? What's the best option for your child and your family? Where should you begin? School choice options available to parents have increased dramatically in recent years. There's a growing national sentiment that promoting competition in public education may spur schools to improve and that parents who invest energy in choosing a school will continue to be involved in their child's education."),
-                        h5("Our shiny app is about school and housing in New York city, we aim at two types of customers: parents and students. For parents, they may care about finding the school be close to home or the place to work. Or they will need a school with English as a Second Language (ESL) program as a first generation. When coordinating of their multiple children's educations, school location and student demographic information are helpful for them to find a good quality school or decide whether the school fit their needs well."), 
- 
+                        h5("Whether you are moving to New York with your family and would like 
+                           to find a school for your children, or your children has reached school
+                           age and you have no idea which school they should attend, you probably 
+                           have many questions. How is the quality of each school? What are the 
+                           housing options around the school? What's the best option for your 
+                           children and your family? No worries, our app can help you figure out 
+                           these questions. "),
+                        h5("Our shiny app provides you information about school and housing in 
+                           New York city, which benefits both parents and student.  For parents, 
+                           our app provides detailed school information including teaching 
+                           quality score, family-community ties score, etc, that helps parents 
+                           select which school they want their children to attend. 
+                           When combine school and housing information, parents can choose 
+                           the best school option within the family’s housing budget. 
+                           Furthermore, by looking at the median housing price of the area, 
+                           they can also get a sense of the level of development and safety of 
+                           the area, as well as the socioeconomic status of the people living 
+                           in that neighborhood. For students, they can have a better 
+                           understanding of the school they are attending with the school’s 
+                           demographic information and learning environment score our app 
+                           provided."), 
                     )), 
                   fluidRow(box(width = 12, title = "User Guide", status = "primary",
                                solidHeader = TRUE, h3("What Does This App Do?"),
@@ -42,6 +57,7 @@ shinyUI(
                                ))))
                   
                   )),
+
         tabItem(tabName = 'menuMap', splitLayout(cellWidths = c("40%", "60%"),
                                                  box(width=12,
                                                      checkboxGroupInput("click_school_type", "school Types",
@@ -58,15 +74,20 @@ shinyUI(
                 fluidRow(
                   column(6,
                          selectInput("choice2", 'Choose school 1',
-                                     choices = c("M015", "M019", "More"))),
+                                     choices = c("M015", "M019", "More")
+                                     )
+                         ),
                   column(6,
                          selectInput("choice3", 'Choose school 2',
-                                     choices = c("M019", "More")))),
+                                     choices = c("M019", "More")
+                                     )
+                         ),
                 fluidRow(column(6,plotOutput("plot_total_enrollment1")),column(6,plotOutput("plot_total_enrollment2"))),
-                fluidRow(column(6,plotOutput("plot_gender1")),column(6,plotOutput("plot_gender2"))),
+                fluidRow(column(6,plotlyOutput("plot_gender1")),column(6,plotlyOutput("plot_gender2"))),
                 fluidRow(column(6,plotOutput("plot_ethnicity1")),column(6,plotOutput("plot_ethnicity2"))),
                 fluidRow(column(6,plotOutput("plot_esl1")),column(6,plotOutput("plot_esl2")))
-                ),
+                )
+              ),
     
         tabItem(tabName = "menuSource",
                 fluidPage(
@@ -77,10 +98,14 @@ shinyUI(
                   fluidRow(box(width = 12, title = "Project Code", status = "primary",
                                solidHeader = TRUE, "The codes for this project are shared at",
                                tags$a(href = "https://github.com/TZstatsADS/fall2019-proj2--sec2-grp10",
-                                      "Github"), ".")))),
+                                      "Github"), "."
+                               )
+                           )
+                  )
+                ),
         tabItem(tabName = "menudata",
-                dataTableOutput('tableschool'))
-        
+                dataTableOutput('tableschool')
+        )
 
         )
   )
