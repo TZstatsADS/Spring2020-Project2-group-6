@@ -83,6 +83,9 @@ shinyServer(function(input, output) {
     ethnicity_piechart(y)
   },width=300)
   
+<<<<<<< HEAD
+  })
+=======
   output$plot_esl1 <- renderPlot({
     y <- input$choice2
     esl_piechart(y)
@@ -94,3 +97,4 @@ shinyServer(function(input, output) {
   
   
 })
+>>>>>>> 2965b1b8ad6e73167da663a48e1f709be3d10886
