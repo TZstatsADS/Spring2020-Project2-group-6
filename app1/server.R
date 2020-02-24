@@ -20,13 +20,13 @@ a<- SL%>%select(c(1,2,3,4,14,15,16,19,21,23,25,27,29,31))%>%mutate(`19 Trust Sco
 
 pal <- colorNumeric(
   palette = "Greens",
-  domain = char_zips@data$price)
+  domain = char_zips@data$ONE.FAMILY.DWELLINGS)
 labels <- 
   paste0(
     "Zip Code: ",
     char_zips@data$GEOID10, "<br/>",
     "price: ",
-    scales::dollar(char_zips@data$price)) %>%
+    scales::dollar(char_zips@data$ONE.FAMILY.DWELLINGS)) %>%
   lapply(htmltools::HTML)
 
 
@@ -55,7 +55,7 @@ shinyServer(function(input, output) {
                      stroke=F,
                      color='green')%>%
     addPolygons(data = char_zips,
-                  fillColor = ~pal(price),
+                  fillColor = ~pal(ONE.FAMILY.DWELLINGS),
                   weight = 2,
                   opacity = 1,
                   color = "white",

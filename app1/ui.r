@@ -12,7 +12,9 @@ shinyUI(
       sidebarMenu(
         menuItem("Guidance", tabName = "menuDash", icon = icon("dashboard")),
         menuItem("Map", tabName = "menuMap", icon = icon("map")),
-        menuItem("Comparison Chart", tabName = "menuChart", icon = icon("chart-line")),
+        menuItem("Chart", tabName = "menuChart", icon = icon("chart-line"), startexpanded =T,
+            menuSubItem("Overall",tabName = "menuOverall"),
+            menuSubItem("Comparison",tabName = "menuComparison")),
         menuItem("Data & Ranking", tabName = "menudata", icon = icon("table")),
         menuItem("Source", tabName = "menuSource", icon = icon("osi"))
         )
@@ -72,7 +74,7 @@ shinyUI(
                                                  
                                                  leafletOutput("map",width="100%",height=800))
         ),
-        tabItem(tabName = "menuChart",
+        tabItem(tabName = "menuComparison",
                 fluidRow(
                   column(6,
                          selectizeInput("choice2", 'Choose school 1',
