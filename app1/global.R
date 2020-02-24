@@ -82,6 +82,7 @@ trust_score_linechart <- function(bn){
   tr <- as_tibble(cbind(year,trust))
   ggplot(tr,aes(x=year,y=trust,group=1))+geom_line()+geom_point()+theme_light()
 }
+
 school_survey_hist <- function(bn){
   ss <- SS%>%filter(BN==bn)
 }
