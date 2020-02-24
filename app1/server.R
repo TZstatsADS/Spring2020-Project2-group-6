@@ -1,35 +1,36 @@
 library(shiny)
-library(choroplethr)
 library(dplyr)
 library(leaflet)
-library(maps)
-library(rgdal)
 library(stringr)
 library(shinydashboard)
 library(tidyverse)
+library(tigris) 
+library(DT)
+library(ggplot2)
 
-load('../output/School_Locations.RData')
+
+load('../output/final.RData')
 load('../output/demographic_by_school.Rdata')
+load('../output/zip_code.Rdata')
 QR <- read_csv('../data/2005_-_2019_Quality_Review_Ratings.csv')
-SS_17 <- read_csv('../data/School Survey 2017.csv')
 
-SL <- School_Locations%>%filter(Status_descriptions=='Open')%>%
-  select(location_code,location_name,location_type_description,Location_Category_Description,
-         primary_address_line_1,LONGITUDE,LATITUDE)
 
-bn_sl <- SL %>% select (location_code, location_name)
-QR_1519 <- QR%>%
-  filter(Start_Date>='2015-01-01')%>%
-  merge(bn_sl, by.x=c("BN"),by.y=c("location_code"))%>%
-  select(BN,location_name, School_Year,Indicator_1.1,Indicator_1.2,Indicator_1.3,Indicator_1.4,
-<<<<<<< HEAD
-         Indicator_2.2,Indicator_3.1,Indicator_3.4,Indicator_4.1,Indicator_4.2,Indicator_5.1) %>% 
-  pivot_wider(names_from = School_Year,values_from = starts_with('Indicator'))
 
-=======
-         Indicator_2.2,Indicator_3.1,Indicator_3.4,Indicator_4.1,Indicator_4.2,Indicator_5.1)%>%
-  pivot_wider(names_from = School_Year,values_from = starts_with('Indicator'))
->>>>>>> c3de004c8491a20994807691ae07e76676610266
+#SL<-SL%>%filter(Location_Category_Description %in% c('Elementary','High school','Junior High-Intermediate-Middle','K-8'))
+#house<-house%>%group_by(`ZIP CODE`)%>%summarize(price=median(avg_price_per_square_foot))%>%filter(is.na(`ZIP CODE`)==F)
+a<- SL%>%select(c(1,2,3,4,14,15,16,19,21,23,25,27,29,31))%>%mutate(`19 Trust Score`=as.numeric(`19 Trust Score`))
+
+
+pal <- colorNumeric(
+  palette = "Greens",
+  domain = char_zips@data$price)
+labels <- 
+  paste0(
+    "Zip Code: ",
+    char_zips@data$GEOID10, "<br/>",
+    "price: ",
+    scales::dollar(char_zips@data$price)) %>%
+  lapply(htmltools::HTML)
 
 
 shinyServer(function(input, output) {
@@ -38,10 +39,62 @@ shinyServer(function(input, output) {
     m <- leaflet() %>%
       addProviderTiles(providers$CartoDB.Positron) %>%
       setView(-73.9252853,40.7910694,zoom = 13)
-      leafletProxy("map", data = SL) %>%
-      addCircleMarkers(lng=~LONGITUDE,lat=~LATITUDE,popup=~location_name,radius=4,opacity=1,fillOpacity =1 ,stroke=F,color='#c4f1f2')
-    
+    leafletProxy("map", data = SL) %>%
+      addCircleMarkers(lng=~LONGITUDE,lat=~LATITUDE,popup=~location_name,radius=4,opacity=1,fillOpacity =1 ,stroke=F,color='green')%>%
+      addPolygons(data = char_zips,
+                  fillColor = ~pal(price),
+                  weight = 2,
+                  opacity = 1,
+                  color = "white",
+                  dashArray = "3",
+                  fillOpacity = 0.5,
+                  highlight = highlightOptions(weight = 2,
+                                               color = "#666",
+                                               dashArray = "",
+                                               fillOpacity = 0.7,
+                                               bringToFront = TRUE),
+                  label = labels,group='Price')%>%
+      addLayersControl(overlayGroups = c('Price'))
     m
   })  
+  output$tableschool<-renderDataTable({a},filter='top',options = list(pageLength = 20, scrollX=T))
+  output$plot_total_enrollment1 <- renderPlot({
+    y <- input$choice2
+    total_enrollment_history_linechart(y)
+  },width=300)
+  output$plot_total_enrollment2 <- renderPlot({
+    y <- input$choice3
+    total_enrollment_history_linechart(y)
+  },width=300)
+  output$plot_gender1 <- renderPlot({
+    y <- input$choice2
+    gender_piechart(y)
+  },width=300)
+  output$plot_gender2 <- renderPlot({
+    y <- input$choice3
+    gender_piechart(y)
+  },width=300)
+  output$plot_ethnicity1 <- renderPlot({
+    y <- input$choice2
+    ethnicity_piechart(y)
+  },width=300)
+  output$plot_ethnicity2 <- renderPlot({
+    y <- input$choice3
+    ethnicity_piechart(y)
+  },width=300)
+  
+<<<<<<< HEAD
+  })
+=======
+  output$plot_esl1 <- renderPlot({
+    y <- input$choice2
+    esl_piechart(y)
+  },width=300)
+  output$plot_esl2 <- renderPlot({
+    y <- input$choice3
+    esl_piechart(y)
+  },width=300)
+  
   
 })
+>>>>>>> 2965b1b8ad6e73167da663a48e1f709be3d10886
