@@ -36,9 +36,9 @@ shinyUI(
                         h5("Our shiny app provides you information about school and housing in 
                            New York city, which benefits both parents and student.  For parents, 
                            our app provides detailed school information including teaching 
-                           quality score, family-community ties score, etc, that helps the 
-                           parents to select which school they want their children to attend. 
-                           When combine school and housing information, the parents can choose 
+                           quality score, family-community ties score, etc, that helps parents 
+                           select which school they want their children to attend. 
+                           When combine school and housing information, parents can choose 
                            the best school option within the family’s housing budget. 
                            Furthermore, by looking at the median housing price of the area, 
                            they can also get a sense of the level of development and safety of 
