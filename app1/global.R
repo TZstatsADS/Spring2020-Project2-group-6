@@ -28,50 +28,34 @@ ethnicity_piechart <- function(bn) {
   
   
   ethnicity_df <- demographic_by_school %>% 
-    group_by(`School Name`) %>% 
-    filter (BN == bn & Year == max(Year)) %>%
-    select(`% Asian`,`% Black`, `% Hispanic`, `% White`, `% Multiple Race Categories Not Represented`) %>%
-    dplyr::rename("% Multiracial" = `% Multiple Race Categories Not Represented`)%>%
-    gather(key = "ethnicity", value = "value", -`School Name`) %>%
-    separate(value, c("prop", "v2"), "%") %>%
-    mutate(prop = as.numeric(prop)) %>%
-    select(-v2)
+    filter (BN == bn & Year == max(Year)) %>%rename(`%Multiple Race`=`% Multiple Race Categories Not Represented`)%>%
+    select(`School Name`,`% Asian`,`% Black`, `% Hispanic`, `% White`, `%Multiple Race`)  %>%
+    pivot_longer(names_to ="ethnicity", values_to = "prop", cols = c(`% Asian`,`% Black`, `% Hispanic`, `% White`, `%Multiple Race`))%>%
+    mutate(prop=as.numeric(str_remove(prop, '%')))
   
   
-  pie = ggplot(ethnicity_df, aes(x="", y=prop, fill=ethnicity)) + geom_bar(stat="identity", width=1)
-  pie = pie + coord_polar("y", start=0) + geom_text_repel(aes(label = paste0(round(prop), "%")), position = position_stack(vjust = 0.5))
-  pie = pie + scale_fill_manual(values=c("#55DDE0", "#33658A", "#2F4858", "#F6AE2D", "#F26419")) 
-  pie = pie + labs(x = NULL, y = NULL, fill = NULL, title = "Percentages of Ethnicity")
-  pie = pie + theme_classic() + theme(axis.line = element_blank(),
-                                      axis.text = element_blank(),
-                                      axis.ticks = element_blank(),
-                                      plot.title = element_text(hjust = 0.5, color = "#666666"))
+  pie <- plot_ly(ethnicity_df, labels = ~ethnicity, values = ~prop, type = 'pie') %>%
+    layout(title = 'Percentages of the Ethnicity',
+           xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+           yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
   pie
 } 
 
 esl_piechart <- function(bn) {
   
   esl_df <- demographic_by_school %>% 
-    group_by(`School Name`) %>% 
     filter (BN == bn & Year == max(Year)) %>%
-    select(`% English Language Learners`) %>%
-    separate(`% English Language Learners`, c("% English Language Learners", "v2"), "%") %>%
-    select(-v2) %>%
-    mutate(`% English Language Learners` = as.numeric(`% English Language Learners`), 
+    mutate(`% English Language Learners` = as.numeric(str_remove(`% English Language Learners`,'%')), 
            `% non English Language Learners` = 100 -`% English Language Learners`) %>%
-    dplyr::rename("% ESL" = `% English Language Learners`, "% non ESL"= `% non English Language Learners`) %>%
-    gather(key = "esl", value = "prop", -`School Name`) %>%
-    mutate(prop = as.numeric(prop)) 
-  
-  pie = ggplot(esl_df, aes(x="", y=prop, fill=esl)) +
-    geom_bar(stat="identity", width=1)
-  pie = pie + coord_polar("y", start=0) + geom_text_repel(aes(label = paste0(round(prop), "%")), position = position_stack(vjust = 0.5))
-  pie = pie + scale_fill_manual(values=c("#2F4858", "#F6AE2D")) 
-  pie = pie + labs(x = NULL, y = NULL, fill = NULL, title = "Percentages of ESL")
-  pie = pie + theme_classic() + theme(axis.line = element_blank(),
-                                      axis.text = element_blank(),
-                                      axis.ticks = element_blank(),
-                                      plot.title = element_text(hjust = 0.5, color = "#666666"))
+    rename("% ESL" = `% English Language Learners`, "% non ESL"= `% non English Language Learners`)%>%
+    select(`School Name`,`% ESL`,`% non ESL`)%>%
+    pivot_longer(names_to ="type", values_to = "prop", cols = c(`% ESL`,`% non ESL`))
+    
+    
+  pie <- plot_ly(esl_df, labels = ~type, values = ~prop, type = 'pie') %>%
+    layout(title = 'Percentages of the ESL',
+           xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+           yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
   pie
   
 }
