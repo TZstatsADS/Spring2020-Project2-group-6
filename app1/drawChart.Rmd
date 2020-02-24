@@ -66,6 +66,7 @@ ethnicity_piechart <- function(bn) {
     group_by(`School Name`) %>% 
     filter (BN == bn & Year == max(Year)) %>%
     select(`% Asian`,`% Black`, `% Hispanic`, `% White`, `% Multiple Race Categories Not Represented`) %>%
+    dplyr::rename("% Multiracial" = `% Multiple Race Categories Not Represented`)%>%
     gather(key = "ethnicity", value = "value", -`School Name`) %>%
     separate(value, c("prop", "v2"), "%") %>%
     mutate(prop = as.numeric(prop)) %>%
@@ -96,6 +97,7 @@ esl_piechart <- function(bn) {
     select(-v2) %>%
     mutate(`% English Language Learners` = as.numeric(`% English Language Learners`), 
       `% non English Language Learners` = 100 -`% English Language Learners`) %>%
+    dplyr::rename("% ESL" = `% English Language Learners`, "% non ESL"= `% non English Language Learners`) %>%
     gather(key = "esl", value = "prop", -`School Name`) %>%
     mutate(prop = as.numeric(prop)) 
   
@@ -133,6 +135,9 @@ total_enrollment_history_linechart <- function(bn) {
 }
 total_enrollment_history_linechart('M015')
 ```
+
+
+
 ```{r}
 trust_score_linechart <- function(bn){
   ss <- SS%>%filter(BN==bn)
@@ -141,4 +146,6 @@ trust_score_linechart <- function(bn){
   tr <- as_tibble(cbind(year,trust))
   ggplot(tr,aes(x=year,y=trust,group=1))+geom_line()+geom_point()+theme_light()
 }
+
+
 ```

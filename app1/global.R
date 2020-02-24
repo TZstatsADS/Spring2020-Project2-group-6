@@ -36,6 +36,7 @@ ethnicity_piechart <- function(bn) {
     group_by(`School Name`) %>% 
     filter (BN == bn & Year == max(Year)) %>%
     select(`% Asian`,`% Black`, `% Hispanic`, `% White`, `% Multiple Race Categories Not Represented`) %>%
+    dplyr::rename("% Multiracial" = `% Multiple Race Categories Not Represented`)%>%
     gather(key = "ethnicity", value = "value", -`School Name`) %>%
     separate(value, c("prop", "v2"), "%") %>%
     mutate(prop = as.numeric(prop)) %>%
@@ -45,7 +46,7 @@ ethnicity_piechart <- function(bn) {
   pie = ggplot(ethnicity_df, aes(x="", y=prop, fill=ethnicity)) + geom_bar(stat="identity", width=1)
   pie = pie + coord_polar("y", start=0) + geom_text_repel(aes(label = paste0(round(prop), "%")), position = position_stack(vjust = 0.5))
   pie = pie + scale_fill_manual(values=c("#55DDE0", "#33658A", "#2F4858", "#F6AE2D", "#F26419")) 
-  pie = pie + labs(x = NULL, y = NULL, fill = NULL, title = "Percentages of the Ethnicity")
+  pie = pie + labs(x = NULL, y = NULL, fill = NULL, title = "Percentages of Ethnicity")
   pie = pie + theme_classic() + theme(axis.line = element_blank(),
                                       axis.text = element_blank(),
                                       axis.ticks = element_blank(),
@@ -63,6 +64,7 @@ esl_piechart <- function(bn) {
     select(-v2) %>%
     mutate(`% English Language Learners` = as.numeric(`% English Language Learners`), 
            `% non English Language Learners` = 100 -`% English Language Learners`) %>%
+    dplyr::rename("% ESL" = `% English Language Learners`, "% non ESL"= `% non English Language Learners`) %>%
     gather(key = "esl", value = "prop", -`School Name`) %>%
     mutate(prop = as.numeric(prop)) 
   
@@ -70,7 +72,7 @@ esl_piechart <- function(bn) {
     geom_bar(stat="identity", width=1)
   pie = pie + coord_polar("y", start=0) + geom_text_repel(aes(label = paste0(round(prop), "%")), position = position_stack(vjust = 0.5))
   pie = pie + scale_fill_manual(values=c("#2F4858", "#F6AE2D")) 
-  pie = pie + labs(x = NULL, y = NULL, fill = NULL, title = "Percentages of English Language Learners")
+  pie = pie + labs(x = NULL, y = NULL, fill = NULL, title = "Percentages of ESL")
   pie = pie + theme_classic() + theme(axis.line = element_blank(),
                                       axis.text = element_blank(),
                                       axis.ticks = element_blank(),
@@ -78,7 +80,6 @@ esl_piechart <- function(bn) {
   pie
   
 }
-
 total_enrollment_history_linechart <- function(bn) {
   total_enrollment_df <- demographic_by_school %>% 
     group_by(`School Name`) %>% 
@@ -101,5 +102,10 @@ trust_score_linechart <- function(bn){
   trust <- as.numeric(c(ss$`17 Trust Score`,ss$`18 Trust Score`,ss$`19 Trust Score`))
   tr <- as_tibble(cbind(year,trust))
   ggplot(tr,aes(x=year,y=trust,group=1))+geom_line()+geom_point()+theme_light()
+}
+
+school_survey_hist <- function(bn){
+  ss <- SS%>%filter(BN==bn)
+  
 }
 
