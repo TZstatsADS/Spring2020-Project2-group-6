@@ -1,30 +1,25 @@
-
+library(shiny)
+library(leaflet)
+library(tidyverse)
 library(scales)
 library(ggrepel)
-
+library(stringr)
+library(plotly)
 load('../output/demographic_by_school.RData')
 load('../output/School_Survey17-19.RData')
 
 gender_piechart <- function(bn) {
   
   gender_df <- demographic_by_school %>% 
-    group_by(`School Name`) %>% 
     filter (BN == bn & Year == max(Year)) %>%
-    select(`% Female`,`% Male`) %>%
-    gather(key = "gender", value = "value", -`School Name`) %>%
-    separate(value, c("prop", "v2"), "%") %>%
-    mutate(prop = as.numeric(prop)) %>%
-    select(-v2)
+    select(`School Name`,`% Female`,`% Male`) %>%
+    pivot_longer(names_to ="gender", values_to = "prop", cols = c(`% Female`,`% Male`))%>%
+    mutate(prop=as.numeric(str_remove(prop, '%')))
   
-  pie = ggplot(gender_df, aes(x="", y=prop, fill=gender)) +
-    geom_bar(stat="identity", width=1)
-  pie = pie + coord_polar("y", start=0) + geom_text_repel(aes(label = paste0(round(prop), "%")), position = position_stack(vjust = 0.5))
-  pie = pie + scale_fill_manual(values=c("#55DDE0", "#33658A")) 
-  pie = pie + labs(x = NULL, y = NULL, fill = NULL, title = "Percentages of the Gender")
-  pie = pie + theme_classic() + theme(axis.line = element_blank(),
-                                      axis.text = element_blank(),
-                                      axis.ticks = element_blank(),
-                                      plot.title = element_text(hjust = 0.5, color = "#666666"))
+  pie <- plot_ly(gender_df, labels = ~gender, values = ~prop, type = 'pie') %>%
+    layout(title = 'Percentages of the Gender',
+           xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+           yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
   pie
   
 }

@@ -1,9 +1,7 @@
 library(shiny)
-library(dplyr)
 library(leaflet)
 library(stringr)
 library(shinydashboard)
-library(tidyverse)
 library(tigris) 
 library(DT)
 library(ggplot2)
@@ -66,14 +64,14 @@ shinyServer(function(input, output) {
     y <- input$choice3
     total_enrollment_history_linechart(y)
   },width=300)
-  output$plot_gender1 <- renderPlot({
+  output$plot_gender1 <- renderPlotly({
     y <- input$choice2
     gender_piechart(y)
-  },width=300)
-  output$plot_gender2 <- renderPlot({
+  })
+  output$plot_gender2 <- renderPlotly({
     y <- input$choice3
     gender_piechart(y)
-  },width=300)
+  })
   output$plot_ethnicity1 <- renderPlot({
     y <- input$choice2
     ethnicity_piechart(y)

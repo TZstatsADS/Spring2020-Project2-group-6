@@ -1,7 +1,4 @@
-library(shiny)
-library(leaflet)
 library(data.table)
-library(plotly)
 library(shinythemes)
 library(shinyWidgets)
 library(shinydashboard)
@@ -67,7 +64,7 @@ shinyUI(
                                      )
                          ),
                 fluidRow(column(6,plotOutput("plot_total_enrollment1")),column(6,plotOutput("plot_total_enrollment2"))),
-                fluidRow(column(6,plotOutput("plot_gender1")),column(6,plotOutput("plot_gender2"))),
+                fluidRow(column(6,plotlyOutput("plot_gender1")),column(6,plotlyOutput("plot_gender2"))),
                 fluidRow(column(6,plotOutput("plot_ethnicity1")),column(6,plotOutput("plot_ethnicity2"))),
                 fluidRow(column(6,plotOutput("plot_esl1")),column(6,plotOutput("plot_esl2")))
                 )
