@@ -8,6 +8,7 @@ library(plotly)
 load('../output/final.RData')
 load('../output/demographic_by_school.RData')
 load('../output/School_Survey17-19.RData')
+load('../output/School_Survey_newest.RData')
 
 gender_piechart <- function(bn) {
   
@@ -77,9 +78,29 @@ trust_score_linechart <- function(bn){
   year <- c('2017','2018','2019')
   trust <- as.numeric(c(ss$`17 Trust Score`,ss$`18 Trust Score`,ss$`19 Trust Score`))
   tr <- as_tibble(cbind(year,trust))
-  ggplot(tr,aes(x=year,y=trust,group=1))+geom_line()+geom_point()+theme_light()
-}
-school_survey_hist <- function(bn){
-  ss <- SS%>%filter(BN==bn)
+  plot_ly(tr, x = ~year, y = ~trust, type = 'scatter', mode = 'lines')%>%
+    layout(title="Trust Score from 2017 to 2019",
+           yaxis=list(title='trust score',rangemode = "normal",range=c(1,5)))
 }
 
+school_survey_hist <- function(bn){
+  ss <- SS_newest%>%filter(BN==bn)
+  plot_ly(x=c('Collaborative Teachers Score','Effective School Leadership Score',
+              'Rigorous Instruction Score','Supportive Environment Score',
+              'Strong Family-Community Ties Score','Trust Score'),
+          y=c(ss$colab_teacher,ss$eff_sch_leader,ss$rig_instr,ss$suprt_env,ss$fam_com_tie,ss$trust_score),
+          type='bar')
+}
+ss <- SS_newest%>%filter(BN=='K001')
+plot_ly(x=c('Collaborative Teachers Score','Effective School Leadership Score',
+           'Rigorous Instruction Score','Supportive Environment Score',
+           'Strong Family-Community Ties Score','Trust Score'),
+       y=c(ss$colab_teacher,ss$eff_sch_leader,ss$rig_instr,ss$suprt_env,ss$fam_com_tie,ss$trust_score),
+       type='bar')
+new <- cbind(c('Collaborative Teachers Score','Effective School Leadership Score',
+        'Rigorous Instruction Score','Supportive Environment Score',
+        'Strong Family-Community Ties Score','Trust Score'),
+      c(ss$colab_teacher,ss$eff_sch_leader,ss$rig_instr,ss$suprt_env,ss$fam_com_tie,ss$trust_score)
+)
+#ggplot(new,aes(new[,1]))
+#school_survey_hist('K002')
