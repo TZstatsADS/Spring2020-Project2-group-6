@@ -74,22 +74,25 @@ shinyUI(
         tabItem(tabName = "menuChart",
                 fluidRow(
                   column(6,
-                         selectInput("choice2", 'Choose school 1',
-                                     choices = c("M015", "M019", "More")
+                         selectizeInput("choice2", 'Choose school 1',
+                                     choices = levels(demographic_by_school$BN)
                                      )
                          ),
                   column(6,
-                         selectInput("choice3", 'Choose school 2',
-                                     choices = c("M019", "More")
+                         selectizeInput("choice3", 'Choose school 2',
+                                      choices = levels(demographic_by_school$BN)
                                      )
                          ),
-                fluidRow(column(6,plotOutput("plot_total_enrollment1")),column(6,plotOutput("plot_total_enrollment2"))),
+                fluidRow(column(6,plotlyOutput("plot_total_enrollment1")),column(6,plotlyOutput("plot_total_enrollment2"))),
                 fluidRow(column(6,plotlyOutput("plot_gender1")),column(6,plotlyOutput("plot_gender2"))),
                 fluidRow(column(6,plotlyOutput("plot_ethnicity1")),column(6,plotlyOutput("plot_ethnicity2"))),
                 fluidRow(column(6,plotlyOutput("plot_esl1")),column(6,plotlyOutput("plot_esl2")))
                 )
               ),
     
+        tabItem(tabName = "menudata",
+                DT::dataTableOutput('tableschool')
+        ),
         tabItem(tabName = "menuSource",
                 fluidPage(
                   fluidRow(box(width = 12, title = "Data Source", status = "primary",
@@ -103,10 +106,7 @@ shinyUI(
                                )
                            )
                   )
-                ),
-        tabItem(tabName = "menudata",
-                dataTableOutput('tableschool')
-        )
+                )
 
         )
   )
