@@ -25,11 +25,11 @@ shinyUI(
                   fluidRow(
                     box(width = 12, title = "Introduction", status = "primary",
                         solidHeader = TRUE, h3("NYC School & Housing Information"),
-                        h4("By Liangcao Ling, Kexin Su, Guoying Li, Zhongtian Pan, Jack"),
+                        h4("By Liangcao Ling, Kexin Su, Guoying Li, Zhongtian Pan, Jiancong(Jack) Shen"),
                         h5("Whether you are moving to New York with your family and would like 
                            to find a school for your children, or your children has reached school
                            age and you have no idea which school they should attend, you probably 
-                           have many questions. How is the quality of each school? What are the 
+                           have many questions. What is the quality of each school? What are the 
                            housing options around the school? What's the best option for your 
                            children and your family? No worries, our app can help you figure out 
                            these questions. "),
@@ -60,10 +60,9 @@ shinyUI(
 
         tabItem(tabName = 'menuMap', splitLayout(cellWidths = c("40%", "60%"),
                                                  box(width=12,
-                                                     pickerInput("schoollevel", 'School Level',
-                                                                 choices = levels(SL$Level),
-                                                                 options = list(`actions-box` = TRUE),
-                                                                 multiple = TRUE, width = '100px'),
+                                                     checkboxGroupInput("click_school_type", "school Types",
+                                                                        choices =c('Elementary','High school','Junior High-Intermediate-Middle','K-8'), 
+                                                                        selected =c('Elementary','High school','Junior High-Intermediate-Middle','K-8')),
                                                      checkboxGroupInput("click_school_type", "school Types",
                                                                         choices =c('Elementary','High school','Junior High-Intermediate-Middle','K-8'), 
                                                                         selected =c('Elementary','High school','Junior High-Intermediate-Middle','K-8')), 
@@ -85,8 +84,8 @@ shinyUI(
                          ),
                 fluidRow(column(6,plotOutput("plot_total_enrollment1")),column(6,plotOutput("plot_total_enrollment2"))),
                 fluidRow(column(6,plotlyOutput("plot_gender1")),column(6,plotlyOutput("plot_gender2"))),
-                fluidRow(column(6,plotlyOutput("plot_ethnicity1")),column(6,plotlyOutput("plot_ethnicity2"))),
-                fluidRow(column(6,plotlyOutput("plot_esl1")),column(6,plotlyOutput("plot_esl2")))
+                fluidRow(column(6,plotOutput("plot_ethnicity1")),column(6,plotOutput("plot_ethnicity2"))),
+                fluidRow(column(6,plotOutput("plot_esl1")),column(6,plotOutput("plot_esl2")))
                 )
               ),
     
