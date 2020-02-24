@@ -83,4 +83,4 @@ trust_score_linechart <- function(bn){
 school_survey_hist <- function(bn){
   ss <- SS%>%dplyr::filter(BN==bn)
 }
-
+trust_score_linechart('K001')
