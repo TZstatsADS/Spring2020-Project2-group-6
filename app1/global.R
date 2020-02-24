@@ -1,8 +1,5 @@
-library(ggplot2)
-library(dplyr)
-library(tidyr)
+
 library(scales)
-library(plyr)
 library(ggrepel)
 
 load('../output/demographic_by_school.RData')
