@@ -25,11 +25,11 @@ shinyUI(
                   fluidRow(
                     box(width = 12, title = "Introduction", status = "primary",
                         solidHeader = TRUE, h3("NYC School & Housing Information"),
-                        h4("By Liangcao Ling, Kexin Su, Guoying Li, Zhongtian Pan, Jack"),
+                        h4("By Liangcao Ling, Kexin Su, Guoying Li, Zhongtian Pan, Jiancong(Jack) Shen"),
                         h5("Whether you are moving to New York with your family and would like 
                            to find a school for your children, or your children has reached school
                            age and you have no idea which school they should attend, you probably 
-                           have many questions. How is the quality of each school? What are the 
+                           have many questions. What is the quality of each school? What are the 
                            housing options around the school? What's the best option for your 
                            children and your family? No worries, our app can help you figure out 
                            these questions. "),
@@ -53,7 +53,7 @@ shinyUI(
                                tags$div(tags$ul(
                                  tags$li("Maps: This part is our search map. There are six filters in total: Boroughs, Start Date, End Date, Race, Gender and Age. Users can select their own choice to understand the shooting crimes in their chosen areas. For example, Amy, a 24 years-old Black girl. She's going to New York to work, but she has never been to New York. Then she can use our map to find places where she thinks safe to live in. Besides, for different boroughs, we have different pie charts for Race, Gender and Age, which could help users understand the situations in these boroughs more intuitively."),
                                  tags$li("Comparison Chart: We have nine graphs for this part in total: Interactive pie-bar charts for different boroughs, Shooting Counts by Year, Season, Week, Boroughs, Murder or not, Race, Age and Gender. All these nine graphs help police departments to better understand the specific factors that drive gun violence."),
-                                 tags$li("Ranking: This part is our interesting finding. We found that on the day of holiday, there were more shooting crimes than other days. There are four holidays users can choose: Independence Day, Halloween, Christmas Day and New Year's Day. For example, on Christmas Day of 2017, there were 7 shootings in NYC, this was the day with the most shootings from Dec 20, 2017 to Dec 31, 2017. This finding could help police departments to better distribute the polices in important holidays.")
+                                 tags$li("Ranking: This part is our interesting finding. We found that on the day of holiday, there were more shooting crimes than other days. There are four holidays users can choose: Independence Day, Halloween, Christmas Day and New Year's Day. For example, on Christmas Day of 2017, there were 7 shootings in NYC, this was the day with the most shootings from Dec 20, 2017 to Dec 31, 2017. This finding could help police departments to better distribute the polices in important holidays."),
                                  tags$li("Source: This part is our interesting finding. We found that on the day of holiday, there were more shooting crimes than other days. There are four holidays users can choose: Independence Day, Halloween, Christmas Day and New Year's Day. For example, on Christmas Day of 2017, there were 7 shootings in NYC, this was the day with the most shootings from Dec 20, 2017 to Dec 31, 2017. This finding could help police departments to better distribute the polices in important holidays.")
                                 ))))
                   
@@ -61,10 +61,9 @@ shinyUI(
 
         tabItem(tabName = 'menuMap', splitLayout(cellWidths = c("40%", "60%"),
                                                  box(width=12,
-                                                     pickerInput("schoollevel", 'School Level',
-                                                                 choices = levels(SL$Level),
-                                                                 options = list(`actions-box` = TRUE),
-                                                                 multiple = TRUE, width = '100px'),
+                                                     checkboxGroupInput("click_school_type", "school Types",
+                                                                        choices =c('Elementary','High school','Junior High-Intermediate-Middle','K-8'), 
+                                                                        selected =c('Elementary','High school','Junior High-Intermediate-Middle','K-8')),
                                                      checkboxGroupInput("click_school_type", "school Types",
                                                                         choices =c('Elementary','High school','Junior High-Intermediate-Middle','K-8'), 
                                                                         selected =c('Elementary','High school','Junior High-Intermediate-Middle','K-8')), 
@@ -75,22 +74,25 @@ shinyUI(
         tabItem(tabName = "menuChart",
                 fluidRow(
                   column(6,
-                         selectInput("choice2", 'Choose school 1',
-                                     choices = c("M015", "M019", "More")
+                         selectizeInput("choice2", 'Choose school 1',
+                                     choices = levels(demographic_by_school$BN)
                                      )
                          ),
                   column(6,
-                         selectInput("choice3", 'Choose school 2',
-                                     choices = c("M019", "More")
+                         selectizeInput("choice3", 'Choose school 2',
+                                      choices = levels(demographic_by_school$BN)
                                      )
                          ),
-                fluidRow(column(6,plotOutput("plot_total_enrollment1")),column(6,plotOutput("plot_total_enrollment2"))),
+                fluidRow(column(6,plotlyOutput("plot_total_enrollment1")),column(6,plotlyOutput("plot_total_enrollment2"))),
                 fluidRow(column(6,plotlyOutput("plot_gender1")),column(6,plotlyOutput("plot_gender2"))),
-                fluidRow(column(6,plotlyOutput("plot_ethnicity1")),column(6,plotlyOutput("plot_ethnicity2"))),
-                fluidRow(column(6,plotlyOutput("plot_esl1")),column(6,plotlyOutput("plot_esl2")))
+                fluidRow(column(6,plotOutput("plot_ethnicity1")),column(6,plotOutput("plot_ethnicity2"))),
+                fluidRow(column(6,plotOutput("plot_esl1")),column(6,plotOutput("plot_esl2")))
                 )
               ),
     
+        tabItem(tabName = "menudata",
+                DT::dataTableOutput('tableschool')
+        ),
         tabItem(tabName = "menuSource",
                 fluidPage(
                   fluidRow(box(width = 12, title = "Data Source", status = "primary",
@@ -104,10 +106,7 @@ shinyUI(
                                )
                            )
                   )
-                ),
-        tabItem(tabName = "menudata",
-                dataTableOutput('tableschool')
-        )
+                )
 
         )
   )
