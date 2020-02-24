@@ -3,7 +3,7 @@ title: "house_temp"
 output: html_document
 ---
 
-
+This file is used to process house price data.
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
