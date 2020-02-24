@@ -74,5 +74,23 @@ shinyServer(function(input, output) {
     y <- input$choice3
     gender_piechart(y)
   },width=300)
+  output$plot_ethnicity1 <- renderPlot({
+    y <- input$choice2
+    ethnicity_piechart(y)
+  },width=300)
+  output$plot_ethnicity2 <- renderPlot({
+    y <- input$choice3
+    ethnicity_piechart(y)
+  },width=300)
+  
+  output$plot_esl1 <- renderPlot({
+    y <- input$choice2
+    esl_piechart(y)
+  },width=300)
+  output$plot_esl2 <- renderPlot({
+    y <- input$choice3
+    esl_piechart(y)
+  },width=300)
+  
   
 })

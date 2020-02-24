@@ -12,11 +12,11 @@ shinyUI(
     dashboardHeader(title = "School dashboard"),
     dashboardSidebar(
       sidebarMenu(
-        menuItem("Dashboard", tabName = "menuDash", icon = icon("dashboard")),
+        menuItem("Guidance", tabName = "menuDash", icon = icon("dashboard")),
         menuItem("Map", tabName = "menuMap", icon = icon("map")),
-        menuItem("Stat", tabName = "menuChart", icon = icon("chart-line")),
-        menuItem("Data", tabName = "menudata", icon = icon("table")),
-        menuItem("  Source", tabName = "menuSource", icon = icon("osi"))
+        menuItem("Comparison Chart", tabName = "menuChart", icon = icon("chart-line")),
+        menuItem("Ranking", tabName = "menudata", icon = icon("table")),
+        menuItem("Source", tabName = "menuSource", icon = icon("osi"))
         )
     ),
     dashboardBody(
@@ -24,13 +24,13 @@ shinyUI(
         tabItem(tabName = "menuDash",
                 fluidPage(
                   fluidRow(
-                    box(width = 12, title = "Introduction", 
-                        solidHeader = TRUE, h3("NYC School"),
+                    box(width = 12, #title = "Introduction", 
+                        solidHeader = TRUE, h1("Introduction"), h3("NYC School"),
                         h4("By Liangcao Ling, Kexin Su, Guoying Li, Zhongtian Pan, Jack"),
                         h5("Whether you are choosing a school for the first time for your child or your child is making the transition to a new school, you probably have many questions. What are your options? How much choice do you really have? What's the best option for your child and your family? Where should you begin? School choice options available to parents have increased dramatically in recent years. There's a growing national sentiment that promoting competition in public education may spur schools to improve and that parents who invest energy in choosing a school will continue to be involved in their child's education."),
                         h5("Our shiny app is about school and housing in New York city, we aim at two types of customers: parents and students. For parents, they may care about finding the school be close to home or the place to work. Or they will need a school with English as a Second Language (ESL) program as a first generation. When coordinating of their multiple children's educations, school location and student demographic information are helpful for them to find a good quality school or decide whether the school fit their needs well."), 
-                        fluidRow(box(width = 12, title = "User Guide", 
-                                     solidHeader = TRUE, h3("What Does This App Do?"),
+                        fluidRow(box(width = 12, # title = "User Guide", 
+                                     solidHeader = TRUE, h1("User Guide"), h3("What Does This App Do?"),
                                      tags$div(tags$ul(
                                        tags$li("Maps: This part is our search map. There are six filters in total: Boroughs, Start Date, End Date, Race, Gender and Age. Users can select their own choice to understand the shooting crimes in their chosen areas. For example, Amy, a 24 years-old Black girl. She's going to New York to work, but she has never been to New York. Then she can use our map to find places where she thinks safe to live in. Besides, for different boroughs, we have different pie charts for Race, Gender and Age, which could help users understand the situations in these boroughs more intuitively."),
                                        tags$li("Stats: We have nine graphs for this part in total: Interactive pie-bar charts for different boroughs, Shooting Counts by Year, Season, Week, Boroughs, Murder or not, Race, Age and Gender. All these nine graphs help police departments to better understand the specific factors that drive gun violence."),
@@ -56,9 +56,13 @@ shinyUI(
                                      choices = c("M015", "M019", "More"))),
                   column(6,
                          selectInput("choice3", 'Choose school 2',
-                                     choices = c("M015", "M019", "More")))),
+                                     choices = c("M019", "More")))),
                 fluidRow(column(6,plotOutput("plot_total_enrollment1")),column(6,plotOutput("plot_total_enrollment2"))),
-                fluidRow(column(6,plotOutput("plot_gender1")),column(6,plotOutput("plot_gender2")))),
+                fluidRow(column(6,plotOutput("plot_gender1")),column(6,plotOutput("plot_gender2"))),
+                fluidRow(column(6,plotOutput("plot_ethnicity1")),column(6,plotOutput("plot_ethnicity2"))),
+                fluidRow(column(6,plotOutput("plot_esl1")),column(6,plotOutput("plot_esl2")))
+                ),
+    
         tabItem(tabName = "menuSource",
                 fluidPage(
                   fluidRow(box(width = 12, title = "Data Source", status = "warning",
