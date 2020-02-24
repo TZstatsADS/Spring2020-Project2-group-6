@@ -33,13 +33,29 @@ labels <-
 
 shinyServer(function(input, output) {
   
+  
+  filteredData <- reactive({
+    if(is.null(input$schoollevel)){selected_schoollevel = levels(SL$Level)}
+    else{selected_schoollevel = input$schoollevel}
+
+    SL %>% filter(Level %in% selected_schoollevel) 
+  })
+  
+  
   output$map <- renderLeaflet({
     m <- leaflet() %>%
       addProviderTiles(providers$CartoDB.Positron) %>%
       setView(-73.9252853,40.7910694,zoom = 13)
     leafletProxy("map", data = SL) %>%
-      addCircleMarkers(lng=~LONGITUDE,lat=~LATITUDE,popup=~location_name,radius=4,opacity=1,fillOpacity =1 ,stroke=F,color='green')%>%
-      addPolygons(data = char_zips,
+    addCircleMarkers(lng=~LONGITUDE,
+                     lat=~LATITUDE,
+                     popup=~location_name,
+                     radius=4,
+                     opacity=1,
+                     fillOpacity =1 ,
+                     stroke=F,
+                     color='green')%>%
+    addPolygons(data = char_zips,
                   fillColor = ~pal(price),
                   weight = 2,
                   opacity = 1,
@@ -55,6 +71,23 @@ shinyServer(function(input, output) {
       addLayersControl(overlayGroups = c('Price'))
     m
   })  
+  
+  
+  observe({
+    df.marker = filteredData()
+    leafletProxy("map",data = df.marker) %>%
+      clearPopups() %>%
+      clearMarkers() %>%
+      addCircleMarkers(lng = ~LONGITUDE, lat = ~LATITUDE, 
+                       popup=~location_name,
+                       radius=4,
+                       opacity=1,
+                       fillOpacity =1 ,
+                       stroke=F,
+                       color='green')
+  })
+  
+  
   output$tableschool<-renderDataTable({a},filter='top',options = list(pageLength = 20, scrollX=T))
   output$plot_total_enrollment1 <- renderPlot({
     y <- input$choice2
@@ -72,23 +105,23 @@ shinyServer(function(input, output) {
     y <- input$choice3
     gender_piechart(y)
   })
-  output$plot_ethnicity1 <- renderPlot({
+  output$plot_ethnicity1 <- renderPlotly({
     y <- input$choice2
     ethnicity_piechart(y)
-  },width=300)
-  output$plot_ethnicity2 <- renderPlot({
+  })
+  output$plot_ethnicity2 <- renderPlotly({
     y <- input$choice3
     ethnicity_piechart(y)
-  },width=300)
+  })
   
-  output$plot_esl1 <- renderPlot({
+  output$plot_esl1 <- renderPlotly({
     y <- input$choice2
     esl_piechart(y)
-  },width=300)
-  output$plot_esl2 <- renderPlot({
+  })
+  output$plot_esl2 <- renderPlotly({
     y <- input$choice3
     esl_piechart(y)
-  },width=300)
+  })
   
   
 })
