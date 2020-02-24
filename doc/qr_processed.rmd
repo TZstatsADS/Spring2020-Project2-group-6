@@ -1,0 +1,101 @@
+---
+title: "qr processing"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+This rmd file processes the data  qr_1519 in the output folder.
+
+
+```{r }
+library(dplyr)
+load('../output/QR_1519_rename.RData')
+colnames(QR_1519_rename)
+
+```
+
+
+
+```{r , echo=FALSE}
+
+# 1. curriculum
+df <- QR_1519_rename[3:7]
+df <- data.frame(df)
+indx <- which(!is.na(df), arr.ind=TRUE)
+df1 <- df[cbind(1:nrow(df),tapply(indx[,2], indx[,1], FUN=max))]
+
+# 2. Pedagogy
+df <- QR_1519_rename[8:12]
+df <- data.frame(df)
+indx <- which(!is.na(df), arr.ind=TRUE)
+df2 <- df[cbind(1:nrow(df),tapply(indx[,2], indx[,1], FUN=max))]
+
+# 3. Leveraging
+df <- QR_1519_rename[13:17]
+df <- data.frame(df)
+indx <- which(!is.na(df), arr.ind=TRUE)
+df3 <- df[cbind(1:nrow(df),tapply(indx[,2], indx[,1], FUN=max))]
+
+# 4. Environment
+df <- QR_1519_rename[18:22]
+df <- data.frame(df)
+indx <- which(!is.na(df), arr.ind=TRUE)
+df4 <- df[cbind(1:nrow(df),tapply(indx[,2], indx[,1], FUN=max))]
+
+# 5. Assessment
+df <- QR_1519_rename[23:27]
+df <- data.frame(df)
+indx <- which(!is.na(df), arr.ind=TRUE)
+df5 <- df[cbind(1:nrow(df),tapply(indx[,2], indx[,1], FUN=max))]
+
+# 6. Goals
+df <- QR_1519_rename[28:32]
+df <- data.frame(df)
+indx <- which(!is.na(df), arr.ind=TRUE)
+df6 <- df[cbind(1:nrow(df),tapply(indx[,2], indx[,1], FUN=max))]
+
+# 7. Expectations
+df <- QR_1519_rename[33:37]
+df <- data.frame(df)
+indx <- which(!is.na(df), arr.ind=TRUE)
+df7 <- df[cbind(1:nrow(df),tapply(indx[,2], indx[,1], FUN=max))]
+
+# 8. Teacher
+df <- QR_1519_rename[38:42]
+df <- data.frame(df)
+indx <- which(!is.na(df), arr.ind=TRUE)
+df8 <- df[cbind(1:nrow(df),tapply(indx[,2], indx[,1], FUN=max))]
+
+# 9. Leadership
+df <- QR_1519_rename[43:47]
+df <- data.frame(df)
+indx <- which(!is.na(df), arr.ind=TRUE)
+df9 <- df[cbind(1:nrow(df),tapply(indx[,2], indx[,1], FUN=max))]
+
+# 10. Monitoring
+df <- QR_1519_rename[48:52]
+df <- data.frame(df)
+indx <- which(!is.na(df), arr.ind=TRUE)
+df10 <- df[cbind(1:nrow(df),tapply(indx[,2], indx[,1], FUN=max))]
+
+df <- cbind(df1,df2)%>%
+  cbind(.,df3)%>%
+  cbind(.,df4)%>%
+  cbind(.,df5)%>%
+  cbind(.,df6)%>%
+  cbind(.,df7)%>%
+  cbind(.,df8)%>%
+  cbind(.,df9)%>%
+  cbind(.,df10)
+
+df <- cbind(QR_1519_rename[1:2],df)
+colnames(df) <- colnames(QR_1519_rename[c(1,2,7,12,17,22,27,32,37,42,47,52)])
+save(df, file = '../output/qr_processed.RData')
+
+
+
+```
+
