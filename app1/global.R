@@ -106,9 +106,9 @@ trust_score_linechart <- function(bn){
   tr <- as_tibble(cbind(year,trust))
   ggplot(tr,aes(x=year,y=trust,group=1))+geom_line()+geom_point()+theme_light()
 }
-
+SS <- SS%>%mutate(DBN=str_extract(DBN, '[A-Z][0-9][0-9][0-9]'))%>%rename(BN=DBN)
 school_survey_hist <- function(bn){
   ss <- SS%>%filter(BN==bn)
   
 }
-
+ss <- SS%>%filter(BN=='K001')
