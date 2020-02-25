@@ -92,8 +92,7 @@ shinyUI(
 
                 fluidRow(column(6,plotlyOutput("plot_ethnicity1")),column(6,plotlyOutput("plot_ethnicity2"))),
                 fluidRow(column(6,plotlyOutput("plot_esl1")),column(6,plotlyOutput("plot_esl2")))
-                )
-              ),
+                ),
     
         tabItem(tabName = "menudata",
                 DT::dataTableOutput('tableschool')
@@ -116,5 +115,5 @@ shinyUI(
         )
   )
   
-  )
+  ))
 
