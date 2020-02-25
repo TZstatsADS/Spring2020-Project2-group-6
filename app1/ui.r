@@ -84,12 +84,13 @@ shinyUI(
                          selectizeInput("choice3", 'Choose school 2',
                                       choices = levels(demographic_by_school$BN)
                                      )
-                         ),
+                         )
+                  ),
                 fluidRow(column(6,plotlyOutput("plot_total_enrollment1")),column(6,plotlyOutput("plot_total_enrollment2"))),
                 fluidRow(column(6,plotlyOutput("plot_gender1")),column(6,plotlyOutput("plot_gender2"))),
                 fluidRow(column(6,plotOutput("plot_ethnicity1")),column(6,plotOutput("plot_ethnicity2"))),
                 fluidRow(column(6,plotOutput("plot_esl1")),column(6,plotOutput("plot_esl2")))
-                )
+              
               ),
     
         tabItem(tabName = "menudata",
