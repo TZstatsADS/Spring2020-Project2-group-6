@@ -104,6 +104,19 @@ school_survey_hist <- function(bn){
     labs(title='Latest School Survey Score',x='score type')+theme_light()+
     theme(plot.title = element_text(hjust = 0.5))
 }
+school_survery_hist1 <- function(bn){
+  test<-S %>% filter(BN == bn) %>% na.omit()
+  ggplot(test,aes(Score, as.numeric(value))) +
+    geom_col(aes(fill = as.factor(Year)),
+             width = 0.8,
+             position = position_dodge2(width = 0.8, preserve = "single")) +
+    ylab("Score") +
+    xlab("Score Criteria") +
+    ylim(0,5) +
+    labs(fill = "Year") +
+    theme(axis.text.x = element_text(angle = 20, hjust = 1)) +
+    geom_text(aes(label = value),position = position_dodge2(width = 0.8, preserve = "single"))
+}
 
 newest_ss_radar <- function(bn){
   ss <- SS_newest%>%filter(BN==bn)
