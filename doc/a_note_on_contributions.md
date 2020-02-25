@@ -11,7 +11,7 @@ Below is an example. If no contribution statement is provided, we will insert a 
 ---
 Sample project README statement.
 
-Project xxx
+Project 
 
 Team members: Avi Bond, Comma Deed, En Funn, Gem Hon
 
