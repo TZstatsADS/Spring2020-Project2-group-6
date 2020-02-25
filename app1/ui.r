@@ -63,9 +63,10 @@ shinyUI(
 
         tabItem(tabName = 'menuMap', splitLayout(cellWidths = c("40%", "60%"),
                                                  box(width=12,
-                                                     checkboxGroupInput("click_school_type", "school Types",
-                                                                        choices =c('Elementary','High school','Junior High-Intermediate-Middle','K-8'), 
-                                                                        selected =c('Elementary','High school','Junior High-Intermediate-Middle','K-8')),
+                                                     pickerInput("schoollevel", 'School Level',
+                                                                 choices = levels(SL$Level),
+                                                                 options = list(`actions-box` = TRUE),
+                                                                 multiple = TRUE, width = '100px'),
                                                      checkboxGroupInput("click_school_type", "school Types",
                                                                         choices =c('Elementary','High school','Junior High-Intermediate-Middle','K-8'), 
                                                                         selected =c('Elementary','High school','Junior High-Intermediate-Middle','K-8')), 
@@ -88,9 +89,10 @@ shinyUI(
                   ),
                 fluidRow(column(6,plotlyOutput("plot_total_enrollment1")),column(6,plotlyOutput("plot_total_enrollment2"))),
                 fluidRow(column(6,plotlyOutput("plot_gender1")),column(6,plotlyOutput("plot_gender2"))),
-                fluidRow(column(6,plotOutput("plot_ethnicity1")),column(6,plotOutput("plot_ethnicity2"))),
-                fluidRow(column(6,plotOutput("plot_esl1")),column(6,plotOutput("plot_esl2")))
-              
+
+                fluidRow(column(6,plotlyOutput("plot_ethnicity1")),column(6,plotlyOutput("plot_ethnicity2"))),
+                fluidRow(column(6,plotlyOutput("plot_esl1")),column(6,plotlyOutput("plot_esl2")))
+                )
               ),
     
         tabItem(tabName = "menudata",
@@ -114,5 +116,5 @@ shinyUI(
         )
   )
   
-  ))
+  )
 
