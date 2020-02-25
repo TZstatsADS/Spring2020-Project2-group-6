@@ -70,7 +70,8 @@ shinyUI(
                                                      checkboxGroupInput("click_school_type", "school Types",
                                                                         choices =c('Elementary','High school','Junior High-Intermediate-Middle','K-8'), 
                                                                         selected =c('Elementary','High school','Junior High-Intermediate-Middle','K-8')), 
-                                                     h2("result")),
+                                                     h2("result"),plotOutput("survey_hist")),
+                                                     
                                                  
                                                  leafletOutput("map",width="100%",height=800))
         ),
