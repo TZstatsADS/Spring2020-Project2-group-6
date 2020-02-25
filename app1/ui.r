@@ -59,7 +59,6 @@ shinyUI(
                            understanding of the school they are attending with the school’s 
                            demographic information and learning environment score our app 
                            provided.")
-                          )))
 
                         
                     )), 
