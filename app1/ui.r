@@ -8,7 +8,10 @@ library(shinydashboard)
 shinyUI(
 
   dashboardPage(skin='blue',
-    dashboardHeader(title = "Choose Your School"),
+    dashboardHeader(
+      
+      title = "Choose Your Best School in NYC",
+      titleWidth = 350),
     dashboardSidebar(
       width = 270,
       sidebarMenu(
@@ -120,13 +123,13 @@ shinyUI(
         tabItem(tabName = "menuSource",
                 fluidPage(
                   fluidRow(box(width = 12, title = "Data Source", status = "primary",
-                               solidHeader = TRUE, "The source data for this project is from", 
+                               solidHeader = TRUE, h3("The source data for this project is from:"), 
                                tags$a(href = "https://data.cityofnewyork.us/Public-Safety/NYPD-Shooting-Incident-Data-Historic-/833y-fsy8", 
-                                      "NYC open data"), ".")),
+                                      h3("NYC open data")), ".")),
                   fluidRow(box(width = 12, title = "Project Code", status = "primary",
-                               solidHeader = TRUE, "The codes for this project are shared at",
+                               solidHeader = TRUE, h3("The codes for this project are shared at:"),
                                tags$a(href = "https://github.com/TZstatsADS/fall2019-proj2--sec2-grp10",
-                                      "Github"), "."
+                                      h3("Github")), "."
                                )
                   )
                   )
