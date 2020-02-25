@@ -1,3 +1,8 @@
+
+
+
+
+
 library(shiny)
 library(leaflet)
 library(tidyverse)
@@ -100,6 +105,23 @@ school_survey_hist <- function(bn){
     theme(plot.title = element_text(hjust = 0.5))
 }
 
+newest_ss_radar <- function(bn){
+  ss <- SS_newest%>%filter(BN==bn)
+  tit <- ss$BN
+  qr_df <- ss[-c(1,2)]
+  qr_df <- as.numeric(as.character(qr_df))
+  labels<- c("Collaborative Teachers","Effective School Leadership","Rigorous Instruction",
+             "Supportive Environment","Strong Family-Community Ties",'Trust Score')
+  abbr <- c('S1','S2','S3','S4','S5','S6')
+  p <- plot_ly(
+    type = 'scatterpolar',fill = 'toself',mode = 'line') %>%
+    add_trace(r = qr_df,theta = abbr,name = tit,hoverinfo = "text",
+              text = ~paste(labels, '<br> Score: ', qr_df)) %>%
+    layout(title='Newest School Survey Score',
+           polar = list(radialaxis = list(visible = T,range = c(0,5),)))
+  p
+}
+
 qr_radar <- function(bn) {
   qr_df <- df %>% 
     filter (BN == bn) 
@@ -132,4 +154,5 @@ qr_radar <- function(bn) {
   p
   
 }
+
 

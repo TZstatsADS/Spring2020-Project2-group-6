@@ -4,11 +4,13 @@ library(shinyWidgets)
 library(shinydashboard)
 
 
+
 shinyUI(
 
   dashboardPage(skin='blue',
-    dashboardHeader(title = "School dashboard"),
+    dashboardHeader(title = "Choose Your School"),
     dashboardSidebar(
+      width = 250,
       sidebarMenu(
         menuItem("Guidance", tabName = "menuDash", icon = icon("dashboard")),
         menuItem("Map", tabName = "menuMap", icon = icon("map")),
@@ -20,22 +22,30 @@ shinyUI(
         )
     ),
     dashboardBody(
+      tags$head( 
+        tags$style(HTML(".main-sidebar { font-size: 20px; }")) #change the font size to 20
+      ),
+      
+      
+      
       tabItems( 
 
         tabItem(tabName = "menuDash",
                 fluidPage(
                   fluidRow(
-                    box(width = 12, title = "Introduction", status = "primary",
+                    box(width = 15, title = "Introduction", status = "primary",
                         solidHeader = TRUE, h3("NYC School & Housing Information"),
                         h4("By Liangcao Ling, Kexin Su, Guoying Li, Zhongtian Pan, Jiancong(Jack) Shen"),
-                        h5("Whether you are moving to New York with your family and would like 
+                        h3(
+                          tags$div(tags$ul(
+                            tags$li("Whether you are moving to New York with your family and would like 
                            to find a school for your children, or your children has reached school
-                           age and you have no idea which school they should attend, you probably 
-                           have many questions. What is the quality of each school? What are the 
-                           housing options around the school? What's the best option for your 
-                           children and your family? No worries, our app can help you figure out 
-                           these questions. "),
-                        h5("Our shiny app provides you information about school and housing in 
+                                    age and you have no idea which school they should attend, you probably 
+                                    have many questions. What is the quality of each school? What are the 
+                                    housing options around the school? What's the best option for your 
+                                    children and your family? No worries, our app can help you figure out 
+                                    these questions. "),
+                            tags$li("Our shiny app provides you information about school and housing in 
                            New York city, which benefits both parents and student.  For parents, 
                            our app provides detailed school information including teaching 
                            quality score, family-community ties score, etc, that helps parents 
@@ -48,16 +58,22 @@ shinyUI(
                            in that neighborhood. For students, they can have a better 
                            understanding of the school they are attending with the school’s 
                            demographic information and learning environment score our app 
-                           provided."), 
+                           provided.")
+                          )))
+
+                        
                     )), 
-                  fluidRow(box(width = 12, title = "User Guide", status = "primary",
+                  fluidRow(box(width = 15, title = "User Guide", status = "primary",
                                solidHeader = TRUE, h3("What Does This App Do?"),
-                               tags$div(tags$ul(
-                                 tags$li("Maps: This part is our search map. There are six filters in total: Boroughs, Start Date, End Date, Race, Gender and Age. Users can select their own choice to understand the shooting crimes in their chosen areas. For example, Amy, a 24 years-old Black girl. She's going to New York to work, but she has never been to New York. Then she can use our map to find places where she thinks safe to live in. Besides, for different boroughs, we have different pie charts for Race, Gender and Age, which could help users understand the situations in these boroughs more intuitively."),
-                                 tags$li("Comparison Chart: We have nine graphs for this part in total: Interactive pie-bar charts for different boroughs, Shooting Counts by Year, Season, Week, Boroughs, Murder or not, Race, Age and Gender. All these nine graphs help police departments to better understand the specific factors that drive gun violence."),
-                                 tags$li("Ranking: This part is our interesting finding. We found that on the day of holiday, there were more shooting crimes than other days. There are four holidays users can choose: Independence Day, Halloween, Christmas Day and New Year's Day. For example, on Christmas Day of 2017, there were 7 shootings in NYC, this was the day with the most shootings from Dec 20, 2017 to Dec 31, 2017. This finding could help police departments to better distribute the polices in important holidays."),
-                                 tags$li("Source: This part is our interesting finding. We found that on the day of holiday, there were more shooting crimes than other days. There are four holidays users can choose: Independence Day, Halloween, Christmas Day and New Year's Day. For example, on Christmas Day of 2017, there were 7 shootings in NYC, this was the day with the most shootings from Dec 20, 2017 to Dec 31, 2017. This finding could help police departments to better distribute the polices in important holidays.")
-                                ))))
+                               h3(
+                                 tags$div(tags$ul(
+                                   tags$li("Maps: This part is our search map. There are six filters in total: Boroughs, Start Date, End Date, Race, Gender and Age. Users can select their own choice to understand the shooting crimes in their chosen areas. For example, Amy, a 24 years-old Black girl. She's going to New York to work, but she has never been to New York. Then she can use our map to find places where she thinks safe to live in. Besides, for different boroughs, we have different pie charts for Race, Gender and Age, which could help users understand the situations in these boroughs more intuitively."),
+                                   tags$li("Comparison Chart: We have nine graphs for this part in total: Interactive pie-bar charts for different boroughs, Shooting Counts by Year, Season, Week, Boroughs, Murder or not, Race, Age and Gender. All these nine graphs help police departments to better understand the specific factors that drive gun violence."),
+                                   tags$li("Ranking: This part is our interesting finding. We found that on the day of holiday, there were more shooting crimes than other days. There are four holidays users can choose: Independence Day, Halloween, Christmas Day and New Year's Day. For example, on Christmas Day of 2017, there were 7 shootings in NYC, this was the day with the most shootings from Dec 20, 2017 to Dec 31, 2017. This finding could help police departments to better distribute the polices in important holidays."),
+                                   tags$li("Source: This part is our interesting finding. We found that on the day of holiday, there were more shooting crimes than other days. There are four holidays users can choose: Independence Day, Halloween, Christmas Day and New Year's Day. For example, on Christmas Day of 2017, there were 7 shootings in NYC, this was the day with the most shootings from Dec 20, 2017 to Dec 31, 2017. This finding could help police departments to better distribute the polices in important holidays.")
+                                 ))))
+                               )
+                               
                   
                   )),
 
