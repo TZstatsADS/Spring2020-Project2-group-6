@@ -27,39 +27,36 @@ shinyUI(
                   fluidRow(
                     box(width = 12, title = "Introduction", status = "primary",
                         solidHeader = TRUE, h3("NYC School & Housing Information"),
-                        h4("By Liangcao Ling, Kexin(Colleen) Su, Guoying Li, Zhongtian Pan, Jiancong(Jack) Shen"),
-                        h5("Whether you are moving to New York with your family and 
-                           would like to find a school for your children or your 
-                           children has reached school age and you have no idea which 
-                           school they should attend, you probably have many questions. 
-                           How is the quality of each school? What are the housing 
-                           options around the school? What's the best option for your 
-                           children and your family? No worries, our app can help you 
-                           figure out these questions. "),
-                        h5("Our shiny app provides you information about school and 
-                           housing in New York City, which benefits both parents and 
-                           students. For parents, our app provides detailed school 
-                           information including teaching quality score, 
-                           family-community ties score, etc, that helps the parents to 
+                        h4("By Liangcao Ling, Kexin Su, Guoying Li, Zhongtian Pan, Jiancong(Jack) Shen"),
+                        h5("Whether you are moving to New York with your family and would like 
+                           to find a school for your children, or your children has reached school
+                           age and you have no idea which school they should attend, you probably 
+                           have many questions. What is the quality of each school? What are the 
+                           housing options around the school? What's the best option for your 
+                           children and your family? No worries, our app can help you figure out 
+                           these questions. "),
+                        h5("Our shiny app provides you information about school and housing in 
+                           New York city, which benefits both parents and student.  For parents, 
+                           our app provides detailed school information including teaching 
+                           quality score, family-community ties score, etc, that helps parents 
                            select which school they want their children to attend. 
-                           When combining school and housing information, the parents 
-                           can choose the best school option within the family’s 
-                           housing budget. Furthermore, by looking at the median 
-                           housing price of the area, they can also get a sense of the 
-                           level of development and safety of the area, as well as the 
-                           socioeconomic status of the people living in that 
-                           neighborhood. For students, they can have a better 
-                           understanding of the school they are attending given the 
-                           school’s demographic information and learning environment 
-                           score."), 
+                           When combine school and housing information, parents can choose 
+                           the best school option within the family’s housing budget. 
+                           Furthermore, by looking at the median housing price of the area, 
+                           they can also get a sense of the level of development and safety of 
+                           the area, as well as the socioeconomic status of the people living 
+                           in that neighborhood. For students, they can have a better 
+                           understanding of the school they are attending with the school’s 
+                           demographic information and learning environment score our app 
+                           provided."), 
                     )), 
                   fluidRow(box(width = 12, title = "User Guide", status = "primary",
                                solidHeader = TRUE, h3("What Does This App Do?"),
                                tags$div(tags$ul(
-                                 tags$li("Maps: This map displays the school location and median housing price of the neighborhood. Each school is indicated by a green dot, and the median housing price is shown with a heat map: darker green indicates higher median price, and lighter green indicates lower."),
-                                 tags$li("Chart: This page is divided into two sub-part: “Overall” and “Comparison”. In “Overall”, you will find the average scores of all the schools in NYC. In “Comparison”: You can compare any two schools by selecting or entering their borough numbers (DBN), which can be found in the ‘Data’ page. The comparison will show both school’s total enrollment number from 2015-2019 and their demographic information including gender, ethnicity, and percentage of ESL(English as Second Language) student."),
-                                 tags$li("Data & Ranking: This page shows all of the available information of schools. You can use this page to search for a school’s borough number (DBN), look for complete information of a specific school, or look at the school ranking according to a specific aspect."),
-                                 tags$li("Source: This page includes the link to the website where we get our data from. All of our data are from ‘NYC open data’, and the starter code is from the class website on Github.")
+                                 tags$li("Maps: This part is our search map. There are six filters in total: Boroughs, Start Date, End Date, Race, Gender and Age. Users can select their own choice to understand the shooting crimes in their chosen areas. For example, Amy, a 24 years-old Black girl. She's going to New York to work, but she has never been to New York. Then she can use our map to find places where she thinks safe to live in. Besides, for different boroughs, we have different pie charts for Race, Gender and Age, which could help users understand the situations in these boroughs more intuitively."),
+                                 tags$li("Comparison Chart: We have nine graphs for this part in total: Interactive pie-bar charts for different boroughs, Shooting Counts by Year, Season, Week, Boroughs, Murder or not, Race, Age and Gender. All these nine graphs help police departments to better understand the specific factors that drive gun violence."),
+                                 tags$li("Ranking: This part is our interesting finding. We found that on the day of holiday, there were more shooting crimes than other days. There are four holidays users can choose: Independence Day, Halloween, Christmas Day and New Year's Day. For example, on Christmas Day of 2017, there were 7 shootings in NYC, this was the day with the most shootings from Dec 20, 2017 to Dec 31, 2017. This finding could help police departments to better distribute the polices in important holidays."),
+                                 tags$li("Source: This part is our interesting finding. We found that on the day of holiday, there were more shooting crimes than other days. There are four holidays users can choose: Independence Day, Halloween, Christmas Day and New Year's Day. For example, on Christmas Day of 2017, there were 7 shootings in NYC, this was the day with the most shootings from Dec 20, 2017 to Dec 31, 2017. This finding could help police departments to better distribute the polices in important holidays.")
                                 ))))
                   
                   )),
@@ -91,13 +88,17 @@ shinyUI(
                          )
                   )
                 ),
+                
+                navbarPage(title = '', tabPanel('tab1',
                 fluidRow(column(6,plotlyOutput("plot_total_enrollment1")),column(6,plotlyOutput("plot_total_enrollment2"))),
-                fluidRow(column(6,plotlyOutput("plot_gender1")),column(6,plotlyOutput("plot_gender2"))),
-                fluidRow(column(6,plotlyOutput("plot_qr1")),column(6,plotlyOutput("plot_qr2"))),
+                fluidRow(column(6,plotlyOutput("plot_gender1")),column(6,plotlyOutput("plot_gender2")))),
+                
+                
+                tabPanel('tab2',fluidRow(column(6,plotlyOutput("plot_qr1")),column(6,plotlyOutput("plot_qr2"))),
                 fluidRow(column(6,plotlyOutput("plot_ethnicity1")),column(6,plotlyOutput("plot_ethnicity2"))),
                 fluidRow(column(6,plotlyOutput("plot_esl1")),column(6,plotlyOutput("plot_esl2")))
                 
-                ),
+                ))),
     
         tabItem(tabName = "menudata",
                 DT::dataTableOutput('tableschool')
