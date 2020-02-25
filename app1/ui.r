@@ -38,7 +38,7 @@ shinyUI(
                            figure out these questions. "),
                         h5("Our shiny app provides you information about school and 
                            housing in New York City, which benefits both parents and 
-                           students. For parents, our app provides detailed school 
+                           students. For parents, our app proinvides detailed school 
                            information including teaching quality score, 
                            family-community ties score, etc, that helps the parents to 
                            select which school they want their children to attend. 
