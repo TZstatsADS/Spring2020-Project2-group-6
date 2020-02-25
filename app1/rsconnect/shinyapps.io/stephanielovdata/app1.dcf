@@ -5,6 +5,12 @@ account: stephanielovdata
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 1837032
-bundleId: 2824803
+<<<<<<< HEAD
+bundleId: 2829400
 url: https://stephanielovdata.shinyapps.io/app1/
-when: 1582559295.31823
+when: 1582664872.83392
+=======
+bundleId: 2829384
+url: https://stephanielovdata.shinyapps.io/app1/
+when: 1582664627.0208
+>>>>>>> b2ed6115c13d51cbd7a4adeec8dca7bdefe222a2
