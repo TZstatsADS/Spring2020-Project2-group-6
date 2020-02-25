@@ -10,7 +10,7 @@ shinyUI(
   dashboardPage(skin='blue',
     dashboardHeader(title = "Choose Your School"),
     dashboardSidebar(
-      width = 250,
+      width = 270,
       sidebarMenu(
         menuItem("Guidance", tabName = "menuDash", icon = icon("dashboard")),
         menuItem("Map", tabName = "menuMap", icon = icon("map")),
@@ -23,7 +23,7 @@ shinyUI(
     ),
     dashboardBody(
       tags$head( 
-        tags$style(HTML(".main-sidebar { font-size: 20px; }")) #change the font size to 20
+        tags$style(HTML(".main-sidebar { font-size: 22px; }")) #change the font size to 25
       ),
       
       
