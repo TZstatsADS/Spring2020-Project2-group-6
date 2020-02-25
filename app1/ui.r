@@ -12,7 +12,9 @@ shinyUI(
       sidebarMenu(
         menuItem("Guidance", tabName = "menuDash", icon = icon("dashboard")),
         menuItem("Map", tabName = "menuMap", icon = icon("map")),
-        menuItem("Comparison Chart", tabName = "menuChart", icon = icon("chart-line")),
+        menuItem("Chart", tabName = "menuChart", icon = icon("chart-line"), startexpanded =T,
+            menuSubItem("Overall",tabName = "menuOverall"),
+            menuSubItem("Comparison",tabName = "menuComparison")),
         menuItem("Data & Ranking", tabName = "menudata", icon = icon("table")),
         menuItem("Source", tabName = "menuSource", icon = icon("osi"))
         )
@@ -61,9 +63,10 @@ shinyUI(
 
         tabItem(tabName = 'menuMap', splitLayout(cellWidths = c("40%", "60%"),
                                                  box(width=12,
-                                                     checkboxGroupInput("click_school_type", "school Types",
-                                                                        choices =c('Elementary','High school','Junior High-Intermediate-Middle','K-8'), 
-                                                                        selected =c('Elementary','High school','Junior High-Intermediate-Middle','K-8')),
+                                                     pickerInput("schoollevel", 'School Level',
+                                                                 choices = levels(SL$Level),
+                                                                 options = list(`actions-box` = TRUE),
+                                                                 multiple = TRUE, width = '100px'),
                                                      checkboxGroupInput("click_school_type", "school Types",
                                                                         choices =c('Elementary','High school','Junior High-Intermediate-Middle','K-8'), 
                                                                         selected =c('Elementary','High school','Junior High-Intermediate-Middle','K-8')), 
@@ -71,7 +74,7 @@ shinyUI(
                                                  
                                                  leafletOutput("map",width="100%",height=800))
         ),
-        tabItem(tabName = "menuChart",
+        tabItem(tabName = "menuComparison",
                 fluidRow(
                   column(6,
                          selectizeInput("choice2", 'Choose school 1',
@@ -82,13 +85,14 @@ shinyUI(
                          selectizeInput("choice3", 'Choose school 2',
                                       choices = levels(demographic_by_school$BN)
                                      )
-                         ),
+                         )
+                  ),
                 fluidRow(column(6,plotlyOutput("plot_total_enrollment1")),column(6,plotlyOutput("plot_total_enrollment2"))),
                 fluidRow(column(6,plotlyOutput("plot_gender1")),column(6,plotlyOutput("plot_gender2"))),
-                fluidRow(column(6,plotOutput("plot_ethnicity1")),column(6,plotOutput("plot_ethnicity2"))),
-                fluidRow(column(6,plotOutput("plot_esl1")),column(6,plotOutput("plot_esl2")))
-                )
-              ),
+
+                fluidRow(column(6,plotlyOutput("plot_ethnicity1")),column(6,plotlyOutput("plot_ethnicity2"))),
+                fluidRow(column(6,plotlyOutput("plot_esl1")),column(6,plotlyOutput("plot_esl2")))
+                ),
     
         tabItem(tabName = "menudata",
                 DT::dataTableOutput('tableschool')
