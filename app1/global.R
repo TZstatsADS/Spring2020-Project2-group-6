@@ -8,7 +8,6 @@ library(plotly)
 library(fmsb)
 load('../output/final.RData')
 load('../output/demographic_by_school.RData')
-load('../output/School_Survey17-19.RData')
 load('../output/School_Survey_newest.RData')
 load('../output/qr_processed.RData')
 
