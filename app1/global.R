@@ -123,6 +123,7 @@ newest_ss_radar <- function(bn){
 }
 
 qr_radar <- function(bn) {
+  
   qr_df <- df %>% 
     filter (BN == bn) 
   tit <- qr_df$location_name
@@ -143,6 +144,7 @@ qr_radar <- function(bn) {
       text = ~paste(labels, '<br> Score: ', qr_df)
     ) %>%
     layout(
+      title = "Quality Review",
       polar = list(
         radialaxis = list(
           visible = T,
