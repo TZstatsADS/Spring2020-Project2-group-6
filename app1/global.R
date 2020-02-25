@@ -80,7 +80,7 @@ trust_score_linechart <- function(bn){
   tr <- as_tibble(cbind(year,trust))
   plot_ly(tr, x = ~year, y = ~trust, type = 'scatter', mode = 'lines')%>%
     layout(title="Trust Score from 2017 to 2019",
-           yaxis=list(title='trust score',rangemode = "normal",range=c(1,5)))
+           yaxis=list(title='trust score',rangemode = "normal",range=c(0,5)))
 }
 
 school_survey_hist <- function(bn){
@@ -89,18 +89,21 @@ school_survey_hist <- function(bn){
               'Rigorous Instruction Score','Supportive Environment Score',
               'Strong Family-Community Ties Score','Trust Score'),
           y=c(ss$colab_teacher,ss$eff_sch_leader,ss$rig_instr,ss$suprt_env,ss$fam_com_tie,ss$trust_score),
-          type='bar')
+          type='bar')%>%layout(title='Latest School Survey Score',
+                               yaxis=list(title='score',range=c(0,5)))
 }
 ss <- SS_newest%>%filter(BN=='K001')
-plot_ly(x=c('Collaborative Teachers Score','Effective School Leadership Score',
-           'Rigorous Instruction Score','Supportive Environment Score',
-           'Strong Family-Community Ties Score','Trust Score'),
-       y=c(ss$colab_teacher,ss$eff_sch_leader,ss$rig_instr,ss$suprt_env,ss$fam_com_tie,ss$trust_score),
-       type='bar')
 new <- cbind(c('Collaborative Teachers Score','Effective School Leadership Score',
         'Rigorous Instruction Score','Supportive Environment Score',
         'Strong Family-Community Ties Score','Trust Score'),
-      c(ss$colab_teacher,ss$eff_sch_leader,ss$rig_instr,ss$suprt_env,ss$fam_com_tie,ss$trust_score)
+         c(ss$colab_teacher,ss$eff_sch_leader,ss$rig_instr,ss$suprt_env,ss$fam_com_tie,ss$trust_score)
 )
-#ggplot(new,aes(new[,1]))
-#school_survey_hist('K002')
+new <- data.frame(new)%>%mutate(X1=as.factor(X1),X2=as.numeric(as.character(X2)))%>%rename(`score type`=X1,score=X2)
+ggplot(new, aes(x=c('S1','S2','S3','S4','S5','S6'),
+                y=score,fill=`score type`))+ geom_bar(stat = "identity")+ylim(0,5)+
+  geom_text(aes(x = c('S1','S2','S3','S4','S5','S6'),
+                y = score, label = round(score, 2)))+
+  labs(title='Latest School Survey Score',x='score type')+theme_light()+
+  theme(plot.title = element_text(hjust = 0.5))
+school_survey_hist('K001')
+trust_score_linechart('K005')
