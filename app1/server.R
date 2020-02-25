@@ -125,6 +125,13 @@ shinyServer(function(input, output) {
     y <- input$choice3
     esl_piechart(y)
   })
-  
+  output$plot_qr1 <- renderPlotly({
+    y <- input$choice2
+    qr_radar(y)
+  })
+  output$plot_qr2 <- renderPlotly({
+    y <- input$choice3
+    qr_radar(y)
+  })
   
 })
