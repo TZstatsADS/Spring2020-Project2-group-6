@@ -77,14 +77,15 @@ shinyUI(
                   
                   )),
 
-        tabItem(tabName = 'menuMap', splitLayout(cellWidths = c("40%", "60%"),
+        tabItem(tabName = 'menuMap', splitLayout(cellWidths = c("50%", "50%"),
                                                  box(width=12,
                                                      pickerInput("schoollevel", 'School Level',
                                                                  choices = levels(SL$Level),
                                                                  options = list(`actions-box` = TRUE),
                                                                  multiple = TRUE, width = '100px'),
                                                 
-                                                     h2("result"),plotOutput("survey_hist")),
+                                                     h2("result"),plotOutput("survey_hist"),
+                                                     plotlyOutput("ss_radar")),
                                                      
                                                  
                                                  leafletOutput("map",width="100%",height=800))
