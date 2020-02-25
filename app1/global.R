@@ -1,8 +1,3 @@
-
-
-
-
-
 library(shiny)
 library(leaflet)
 library(tidyverse)
@@ -11,6 +6,7 @@ library(ggrepel)
 library(stringr)
 library(plotly)
 library(fmsb)
+
 load('../output/finalsummary.RData')
 load('../output/demographic_by_school.RData')
 load('../output/School_Survey_newest.RData')

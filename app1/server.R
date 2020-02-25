@@ -6,7 +6,6 @@ library(tigris)
 library(ggplot2)
 
 
-
 load('../output/demographic_by_school.Rdata')
 load('../output/zip_code.Rdata')
 QR <- read_csv('../data/2005_-_2019_Quality_Review_Ratings.csv')
