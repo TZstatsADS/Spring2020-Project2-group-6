@@ -6,7 +6,6 @@ library(tigris)
 library(ggplot2)
 
 
-
 load('../output/demographic_by_school.Rdata')
 load('../output/zip_code.Rdata')
 QR <- read_csv('../data/2005_-_2019_Quality_Review_Ratings.csv')
@@ -81,8 +80,12 @@ shinyServer(function(input, output) {
     if(is.null(click))
       return()
     g1<-school_survey_hist(click$id)
+    g2<-newest_ss_radar(click$id)
     output$survey_hist<-renderPlot({
       g1
+    })
+    output$ss_radar<-renderPlotly({
+      g2
     })
     
   })
