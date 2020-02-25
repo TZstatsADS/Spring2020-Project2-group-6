@@ -40,26 +40,14 @@ shinyServer(function(input, output) {
     SL %>% filter(Level %in% selected_schoollevel) 
   })
   
- 
+
   
   output$map <- renderLeaflet({
     m <- leaflet() %>%
       addProviderTiles(providers$CartoDB.Positron) %>%
       setView(-73.9252853,40.7910694,zoom = 13)
     leafletProxy("map", data = SL) %>%
-    addCircleMarkers(lng=~LONGITUDE,
-                     lat=~LATITUDE,
-                     popup=~ paste0("<b>",location_name,"</b>",
-                                     "<br/>", "BN: ", BN,
-                                     "<br/>", "Address: ", primary_address_line_1, 
-                                     " ") ,
-                     radius=4,
-                     opacity=1,
-                     fillOpacity =1 ,
-                     stroke=F,
-                     color='green',
-                     layerId = ~BN)%>%
-    addPolygons(data = char_zips,
+      addPolygons(data = char_zips,
                   fillColor = ~pal(ONE.FAMILY.DWELLINGS),
                   weight = 2,
                   opacity = 1,
@@ -72,7 +60,19 @@ shinyServer(function(input, output) {
                                                fillOpacity = 0.7,
                                                bringToFront = TRUE),
                   label = labels,group='Price')%>%
-      addLayersControl(overlayGroups = c('Price'))
+    addCircleMarkers(lng=~LONGITUDE,
+                     lat=~LATITUDE,
+                     popup=~ paste0("<b>",location_name,"</b>",
+                                     "<br/>", "BN: ", BN,
+                                     "<br/>", "Address: ", primary_address_line_1, 
+                                     " ") ,
+                     radius=4,
+                     opacity=1,
+                     fillOpacity =1 ,
+                     stroke=F,
+                     color='green',
+                     layerId = ~BN)%>%
+      addLayersControl(overlayGroups = c('Price'),options = layersControlOptions(collapsed = FALSE))
     m
   })  
   
