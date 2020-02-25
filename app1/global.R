@@ -118,7 +118,7 @@ newest_ss_radar <- function(bn){
     add_trace(r = qr_df,theta = abbr,name = tit,hoverinfo = "text",
               text = ~paste(labels, '<br> Score: ', qr_df)) %>%
     layout(title='Newest School Survey Score',
-           polar = list(radialaxis = list(visible = T,range = c(0,5),)))
+           polar = list(radialaxis = list(visible = T,range = c(0,5))))
   p
 }
 
