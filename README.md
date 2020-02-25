@@ -7,7 +7,7 @@ Term: Spring 2020
 + Shiny Link: https://stephanielovdata.shinyapps.io/app1/
 + Team Members:
 	+ Liangcao Ling
-	+ Kexin Su
+	+ Kexin(Colleen) Su
 	+ Guoying Li
 	+ Zhongtian Pan
 	+ Jiancong Shen
@@ -19,13 +19,13 @@ the area, as well as the socioeconomic status of the people living
 in that neighborhood. For students, they can have a better understanding of the school they are attending with the school demographic information and learning environment score our app provided.
 
 + **Data Source**:
-We used data from NYC Open Data, including housing, school quality review, school survey, demographic information and etc. 
+We used data from NYC Open Data, including housing, school quality review, school survey, demographic information, etc. 
 
 + **Contribution statement**: ([default](doc/a_note_on_contributions.md)) All team members contributed equally in all stages of this project. 
 
 Liangcao Ling built the structure for the whole rshiny app and plotted the map. Liangcao also debugged for our whole coding part. Liangcao managed the project, contributed to the Github repository and prepared the presentation. 
 
-Kexin Su manipulated the data and plotted charts for school survey. 
+Kexin(Colleen) Su suggested the basic idea of this app, cleaned and manipulated the school survey data, helped manipulate the quality review data, wrote function for plotting school survey data used in the "map" page, and wrote the content for introduction and user guide for the "Guidance" page.
 
 Guoying Li manipulated the data and plotted the eight demographic charts for the comparison between two schools. 
 
