@@ -42,21 +42,19 @@ shinyUI(
                            information including teaching quality score, 
                            family-community ties score, etc, that helps the parents to 
                            select which school they want their children to attend. 
-                           When combining school and housing information, the parents 
-                           can choose the best school option within the family’s 
-                           housing budget. Furthermore, by looking at the median 
-                           housing price of the area, they can also get a sense of the 
-                           level of development and safety of the area, as well as the 
-                           socioeconomic status of the people living in that 
-                           neighborhood. For students, they can have a better 
-                           understanding of the school they are attending given the 
-                           school’s demographic information and learning environment 
-                           score."), 
+                           When combine school and housing information, parents can choose 
+                           the best school option within the family’s housing budget. 
+                           Furthermore, by looking at the median housing price of the area, 
+                           they can also get a sense of the level of development and safety of 
+                           the area, as well as the socioeconomic status of the people living 
+                           in that neighborhood. For students, they can have a better 
+                           understanding of the school they are attending with the school’s 
+                           demographic information and learning environment score our app 
+                           provided."), 
                     )), 
                   fluidRow(box(width = 12, title = "User Guide", status = "primary",
                                solidHeader = TRUE, h3("What Does This App Do?"),
-                               tags$div(tags$ul(
-                                 
+                               tags$div(tags$ul(                                
                                  tags$li("Maps: This map displays the school location and median housing price of the neighborhood. Each school is indicated by a green dot, and the median housing price is shown with a heat map: darker green indicates higher median price, and lighter green indicates lower."),
                                  tags$li("Chart: This page is divided into two sub-part: “Overall” and “Comparison”. In “Overall”, you will find the average scores of all the schools in NYC. In “Comparison”: You can compare any two schools by selecting or entering their borough numbers (DBN), which can be found in the ‘Data’ page. The comparison will show both school’s total enrollment number from 2015-2019 and their demographic information including gender, ethnicity, and percentage of ESL(English as Second Language) student."),
                                  tags$li("Data & Ranking: This page shows all of the available information of schools. You can use this page to search for a school’s borough number (DBN), look for complete information of a specific school, or look at the school ranking according to a specific aspect."),
@@ -92,13 +90,17 @@ shinyUI(
                          )
                   )
                 ),
+                
+                navbarPage(title = '', tabPanel('tab1',
                 fluidRow(column(6,plotlyOutput("plot_total_enrollment1")),column(6,plotlyOutput("plot_total_enrollment2"))),
-                fluidRow(column(6,plotlyOutput("plot_gender1")),column(6,plotlyOutput("plot_gender2"))),
-                fluidRow(column(6,plotlyOutput("plot_qr1")),column(6,plotlyOutput("plot_qr2"))),
+                fluidRow(column(6,plotlyOutput("plot_gender1")),column(6,plotlyOutput("plot_gender2")))),
+                
+                
+                tabPanel('tab2',fluidRow(column(6,plotlyOutput("plot_qr1")),column(6,plotlyOutput("plot_qr2"))),
                 fluidRow(column(6,plotlyOutput("plot_ethnicity1")),column(6,plotlyOutput("plot_ethnicity2"))),
                 fluidRow(column(6,plotlyOutput("plot_esl1")),column(6,plotlyOutput("plot_esl2")))
                 
-                ),
+                ))),
     
         tabItem(tabName = "menudata",
                 DT::dataTableOutput('tableschool')

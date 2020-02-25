@@ -123,19 +123,31 @@ qr_radar <- function(bn) {
   tit <- qr_df$location_name
   qr_df <- qr_df[-c(1,2)]
   qr_df <- as.numeric(as.character(qr_df))
-  data <- data.frame(matrix(qr_df,ncol = 5))
-  colnames(data) <- c("Curriculum","Pedagogy","Assessment","Expectation","Leadership")
-  data <- rbind(rep(5,5) , rep(0,5) ,data)
-  radarchart(data, axistype=1 , 
-                       #custom polygon
-                       pcol=rgb(0.2,0.5,0.5,0.9) , pfcol=rgb(0.2,0.5,0.5,0.5) , plwd=4 , 
-                       #custom the grid
-                       cglcol="black", cglty=1, axislabcol="black", caxislabels=c(0,1,2,3,4,5), cglwd=0.8,
-                       #custom labels
-                       vlcex=1.05, 
-                       title = "Quality Review"
-                    
-  )
+  labels<- c("Curriculum","Pedagogy","Assessment","Expectation","Leadership")
+  
+  p <- plot_ly(
+    type = 'scatterpolar',
+    fill = 'toself',
+    mode = 'line'
+  ) %>%
+    add_trace(
+      r = qr_df,
+      theta = labels,
+      name = tit,
+      hoverinfo = "text",
+      text = ~paste(labels, '<br> Score: ', qr_df)
+    ) %>%
+    layout(
+      polar = list(
+        radialaxis = list(
+          visible = T,
+          range = c(0,5)
+        )
+      )
+    )
+  
+  p
+  
 }
 
 
