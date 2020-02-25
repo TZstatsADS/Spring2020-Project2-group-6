@@ -1,3 +1,8 @@
+
+
+
+
+
 library(shiny)
 library(leaflet)
 library(tidyverse)
@@ -6,8 +11,7 @@ library(ggrepel)
 library(stringr)
 library(plotly)
 library(fmsb)
-
-load('../output/finalsummary.RData')
+load('../output/final.RData')
 load('../output/demographic_by_school.RData')
 load('../output/School_Survey_newest.RData')
 load('../output/qr_processed.RData')
@@ -15,7 +19,7 @@ load('../output/qr_processed.RData')
 gender_piechart <- function(bn) {
   
   gender_df <- demographic_by_school %>% 
-    dplyr::filter (BN == bn & Year == max(Year)) %>%
+    filter (BN == bn & Year == max(Year)) %>%
     select(`School Name`,`% Female`,`% Male`) %>%
     pivot_longer(names_to ="gender", values_to = "prop", cols = c(`% Female`,`% Male`))%>%
     mutate(prop=as.numeric(str_remove(prop, '%')))
@@ -32,7 +36,7 @@ ethnicity_piechart <- function(bn) {
   
   
   ethnicity_df <- demographic_by_school %>% 
-    dplyr::filter (BN == bn & Year == max(Year)) %>%rename(`%Multiple Race`=`% Multiple Race Categories Not Represented`)%>%
+    filter (BN == bn & Year == max(Year)) %>%rename(`%Multiple Race`=`% Multiple Race Categories Not Represented`)%>%
     select(`School Name`,`% Asian`,`% Black`, `% Hispanic`, `% White`, `%Multiple Race`)  %>%
     pivot_longer(names_to ="ethnicity", values_to = "prop", cols = c(`% Asian`,`% Black`, `% Hispanic`, `% White`, `%Multiple Race`))%>%
     mutate(prop=as.numeric(str_remove(prop, '%')))
@@ -48,7 +52,7 @@ ethnicity_piechart <- function(bn) {
 esl_piechart <- function(bn) {
   
   esl_df <- demographic_by_school %>% 
-    dplyr::filter (BN == bn & Year == max(Year)) %>%
+    filter (BN == bn & Year == max(Year)) %>%
     mutate(`% English Language Learners` = as.numeric(str_remove(`% English Language Learners`,'%')), 
            `% non English Language Learners` = 100 -`% English Language Learners`) %>%
     rename("% ESL" = `% English Language Learners`, "% non ESL"= `% non English Language Learners`)%>%
@@ -67,7 +71,7 @@ esl_piechart <- function(bn) {
 
 total_enrollment_history_linechart <- function(bn) {
   total_enrollment_df <- demographic_by_school %>% 
-    dplyr::filter (BN == bn) %>%
+    filter (BN == bn) %>%
     select(`School Name`, Year, `Total Enrollment`) 
   
   total_enrollment_plot <- total_enrollment_plot <- plot_ly(total_enrollment_df, x = ~Year, y = ~`Total Enrollment`, type = 'scatter', mode = 'lines')%>%
@@ -76,7 +80,7 @@ total_enrollment_history_linechart <- function(bn) {
 }
 
 trust_score_linechart <- function(bn){
-  ss <- SS%>%dplyr::filter(BN==bn)
+  ss <- SS%>%filter(BN==bn)
   year <- c('2017','2018','2019')
   trust <- as.numeric(c(ss$`17 Trust Score`,ss$`18 Trust Score`,ss$`19 Trust Score`))
   tr <- as_tibble(cbind(year,trust))
@@ -86,7 +90,7 @@ trust_score_linechart <- function(bn){
 }
 
 school_survey_hist <- function(bn){
-  ss <- SS_newest%>%dplyr::filter(BN==bn)
+  ss <- SS_newest%>%filter(BN==bn)
   new <- cbind(c('Collaborative Teachers Score','Effective School Leadership Score',
                  'Rigorous Instruction Score','Supportive Environment Score',
                  'Strong Family-Community Ties Score','Trust Score'),
@@ -102,7 +106,7 @@ school_survey_hist <- function(bn){
 }
 
 newest_ss_radar <- function(bn){
-  ss <- SS_newest%>%dplyr::filter(BN==bn)
+  ss <- SS_newest%>%filter(BN==bn)
   tit <- ss$BN
   qr_df <- ss[-c(1,2)]
   qr_df <- as.numeric(as.character(qr_df))
@@ -120,7 +124,7 @@ newest_ss_radar <- function(bn){
 
 qr_radar <- function(bn) {
   qr_df <- df %>% 
-    dplyr::filter (BN == bn) 
+    filter (BN == bn) 
   tit <- qr_df$location_name
   qr_df <- qr_df[-c(1,2)]
   qr_df <- as.numeric(as.character(qr_df))
