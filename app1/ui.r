@@ -26,7 +26,7 @@ shinyUI(
                 fluidPage(
                   fluidRow(
                     box(width = 12, title = "Introduction", status = "primary",
-                        solidHeader = TRUE, h3("NYC School & Housing Information"),
+                        solidHeader = TRUE, h3("NYC School & Near By Housing Information"),
                         h4("By Liangcao Ling, Kexin(Colleen) Su, Guoying Li, Zhongtian Pan, Jiancong(Jack) Shen"),
                         h5("Whether you are moving to New York with your family and 
                            would like to find a school for your children or your 
@@ -56,6 +56,7 @@ shinyUI(
                   fluidRow(box(width = 12, title = "User Guide", status = "primary",
                                solidHeader = TRUE, h3("What Does This App Do?"),
                                tags$div(tags$ul(
+                                 
                                  tags$li("Maps: This map displays the school location and median housing price of the neighborhood. Each school is indicated by a green dot, and the median housing price is shown with a heat map: darker green indicates higher median price, and lighter green indicates lower."),
                                  tags$li("Chart: This page is divided into two sub-part: “Overall” and “Comparison”. In “Overall”, you will find the average scores of all the schools in NYC. In “Comparison”: You can compare any two schools by selecting or entering their borough numbers (DBN), which can be found in the ‘Data’ page. The comparison will show both school’s total enrollment number from 2015-2019 and their demographic information including gender, ethnicity, and percentage of ESL(English as Second Language) student."),
                                  tags$li("Data & Ranking: This page shows all of the available information of schools. You can use this page to search for a school’s borough number (DBN), look for complete information of a specific school, or look at the school ranking according to a specific aspect."),

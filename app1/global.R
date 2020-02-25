@@ -112,7 +112,8 @@ newest_ss_radar <- function(bn){
     type = 'scatterpolar',fill = 'toself',mode = 'line') %>%
     add_trace(r = qr_df,theta = abbr,name = tit,hoverinfo = "text",
               text = ~paste(labels, '<br> Score: ', qr_df)) %>%
-    layout(title='Newest School Survey Score',polar = list(radialaxis = list(visible = T,range = c(0,5))))
+    layout(title='Newest School Survey Score',
+           polar = list(radialaxis = list(visible = T,range = c(0,5),)))
   p
 }
 
@@ -137,5 +138,4 @@ qr_radar <- function(bn) {
   )
 }
 
-newest_ss_radar('K005')
 
