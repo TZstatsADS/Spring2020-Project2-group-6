@@ -67,7 +67,7 @@ shinyUI(
                     )), 
                   fluidRow(box(width = 15, title = "User Guide", status = "primary",
                                solidHeader = TRUE, h3("What Does This App Do?"),
-                               h3(
+                               h5(
                                  tags$div(tags$ul(
                                    tags$li("Maps: This part is our search map. There are six filters in total: Boroughs, Start Date, End Date, Race, Gender and Age. Users can select their own choice to understand the shooting crimes in their chosen areas. For example, Amy, a 24 years-old Black girl. She's going to New York to work, but she has never been to New York. Then she can use our map to find places where she thinks safe to live in. Besides, for different boroughs, we have different pie charts for Race, Gender and Age, which could help users understand the situations in these boroughs more intuitively."),
                                    tags$li("Comparison Chart: We have nine graphs for this part in total: Interactive pie-bar charts for different boroughs, Shooting Counts by Year, Season, Week, Boroughs, Murder or not, Race, Age and Gender. All these nine graphs help police departments to better understand the specific factors that drive gun violence."),
