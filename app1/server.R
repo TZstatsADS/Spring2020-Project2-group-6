@@ -40,6 +40,7 @@ shinyServer(function(input, output) {
     SL %>% filter(Level %in% selected_schoollevel) 
   })
   
+ 
   
   output$map <- renderLeaflet({
     m <- leaflet() %>%
@@ -48,12 +49,16 @@ shinyServer(function(input, output) {
     leafletProxy("map", data = SL) %>%
     addCircleMarkers(lng=~LONGITUDE,
                      lat=~LATITUDE,
-                     popup=~location_name,
+                     popup=~ paste0("<b>",location_name,"</b>",
+                                     "<br/>", "BN: ", BN,
+                                     "<br/>", "Address: ", primary_address_line_1, 
+                                     " ") ,
                      radius=4,
                      opacity=1,
                      fillOpacity =1 ,
                      stroke=F,
-                     color='green')%>%
+                     color='green',
+                     layerId = ~BN)%>%
     addPolygons(data = char_zips,
                   fillColor = ~pal(ONE.FAMILY.DWELLINGS),
                   weight = 2,
@@ -71,6 +76,16 @@ shinyServer(function(input, output) {
     m
   })  
   
+  observe({
+    click<-input$map_marker_click
+    if(is.null(click))
+      return()
+    g1<-school_survey_hist(click$id)
+    output$survey_hist<-renderPlot({
+      g1
+    })
+    
+  })
   
   observe({
     df.marker = filteredData()
@@ -78,16 +93,20 @@ shinyServer(function(input, output) {
       clearPopups() %>%
       clearMarkers() %>%
       addCircleMarkers(lng = ~LONGITUDE, lat = ~LATITUDE, 
-                       popup=~location_name,
+                       popup=~ paste0("<b>",location_name,"</b>",
+                                      "<br/>", "BN: ", BN,
+                                      "<br/>", "Address: ", primary_address_line_1, 
+                                      " ") ,
                        radius=4,
                        opacity=1,
                        fillOpacity =1 ,
                        stroke=F,
-                       color='green')
+                       color='green',
+                       layerId = ~BN)
   })
   
   
-  output$tableschool<-DT::renderDataTable({a},filter='top',options = list(pageLength = 20, scrollX=T))
+  output$tableschool<-DT::renderDataTable({a},filter='top',options = list(pageLength = 20, scrollX=T, autoWidth = TRUE))
   
   
   
@@ -125,6 +144,13 @@ shinyServer(function(input, output) {
     y <- input$choice3
     esl_piechart(y)
   })
-  
+  output$plot_qr1 <- renderPlotly({
+    y <- input$choice2
+    qr_radar(y)
+  })
+  output$plot_qr2 <- renderPlotly({
+    y <- input$choice3
+    qr_radar(y)
+  })
   
 })
