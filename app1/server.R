@@ -93,16 +93,20 @@ shinyServer(function(input, output) {
       clearPopups() %>%
       clearMarkers() %>%
       addCircleMarkers(lng = ~LONGITUDE, lat = ~LATITUDE, 
-                       popup=~location_name,
+                       popup=~ paste0("<b>",location_name,"</b>",
+                                      "<br/>", "BN: ", BN,
+                                      "<br/>", "Address: ", primary_address_line_1, 
+                                      " ") ,
                        radius=4,
                        opacity=1,
                        fillOpacity =1 ,
                        stroke=F,
-                       color='green')
+                       color='green',
+                       layerId = ~BN)
   })
   
   
-  output$tableschool<-DT::renderDataTable({a},filter='top',options = list(pageLength = 20, scrollX=T))
+  output$tableschool<-DT::renderDataTable({a},filter='top',options = list(pageLength = 20, scrollX=T, autoWidth = TRUE))
   
   
   

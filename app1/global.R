@@ -7,7 +7,6 @@ library(stringr)
 library(plotly)
 load('../output/final.RData')
 load('../output/demographic_by_school.RData')
-load('../output/School_Survey17-19.RData')
 load('../output/School_Survey_newest.RData')
 
 gender_piechart <- function(bn) {
