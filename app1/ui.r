@@ -103,12 +103,12 @@ shinyUI(
                   )
                 ),
                 
-                tabBox(title = '', width = 12,height = '100%',tabPanel('tab1',
+                tabBox(title = '', width = 12,height = '100%',tabPanel('Enrollment & Quality Review',
                 fluidRow(column(6,plotlyOutput("plot_total_enrollment1")),column(6,plotlyOutput("plot_total_enrollment2"))),
                 fluidRow(column(6,plotlyOutput("plot_qr1")),column(6,plotlyOutput("plot_qr2")))),
                 
                 
-                tabPanel('tab2',fluidRow(column(6,plotlyOutput("plot_gender1")),column(6,plotlyOutput("plot_gender2"))),
+                tabPanel('Demongraphic Information',fluidRow(column(6,plotlyOutput("plot_gender1")),column(6,plotlyOutput("plot_gender2"))),
                 fluidRow(column(6,plotlyOutput("plot_ethnicity1")),column(6,plotlyOutput("plot_ethnicity2"))),
                 fluidRow(column(6,plotlyOutput("plot_esl1")),column(6,plotlyOutput("plot_esl2")))
                 
