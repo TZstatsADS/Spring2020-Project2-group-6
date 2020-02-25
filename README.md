@@ -7,7 +7,7 @@ Term: Spring 2020
 + Shiny Link: https://stephanielovdata.shinyapps.io/app1/
 + Team Members:
 	+ Liangcao Ling
-	+ Kexin Su
+	+ Kexin(Colleen) Su
 	+ Guoying Li
 	+ Zhongtian Pan
 	+ Jiancong Shen
