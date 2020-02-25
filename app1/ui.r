@@ -67,7 +67,7 @@ shinyUI(
                                h4(
                                  tags$div(tags$ul(
                                    tags$li("Maps: This map displays the school location and median housing price of the neighborhood. Each school is indicated by a green dot, and the median housing price is shown with a heat map: darker green indicates higher median price, and lighter green indicates lower."),
-                                   tags$li("Comparison Chart: In this page, you can compare any two schools by selecting or entering their borough numbers (BN), which can be found in the ‘Data’ page. The comparison will show both school’s total enrollment number from 2015-2019 and their demographic information including gender, ethnicity, and percentage of ESL(English as Second Language) student."),
+                                   tags$li("Comparison Chart: In this page, you can compare any two schools by selecting or entering their borough numbers (BN), which can be found in the ‘Data’ page. The comparison contains two tabs: “Total Enrollment & Quality Review”, and “Demographic Information”. The first tab shows the school’s total enrollment number from 2015-2019, and its newest quality review score. The second tab includes the schools’ demographic information including gender, ethnicity, and percentage of ESL(English as Second Language) student."),
                                    tags$li("Data & Ranking: This page shows all of the available information of schools. You can use this page to search for a school’s borough number (BN), look for complete information of a specific school, or look at the school ranking according to a specific aspect."),
                                    tags$li("Source: This part includes the link to the website where we get our data from. All of our data are from ‘NYC open data’, and the starter code is from the class website on Github.")
                                  ))))
@@ -103,7 +103,7 @@ shinyUI(
                   )
                 ),
                 
-                tabBox(title = '', width = 12,height = '100%',tabPanel('Enrollment & Quality Review',
+                tabBox(title = '', width = 12,height = '100%',tabPanel('Total Enrollment & Quality Review',
                 fluidRow(column(6,plotlyOutput("plot_total_enrollment1")),column(6,plotlyOutput("plot_total_enrollment2"))),
                 fluidRow(column(6,plotlyOutput("plot_qr1")),column(6,plotlyOutput("plot_qr2")))),
                 
