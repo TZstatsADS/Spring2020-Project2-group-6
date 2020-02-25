@@ -55,7 +55,7 @@ esl_piechart <- function(bn) {
     filter (BN == bn & Year == max(Year)) %>%
     mutate(`% English Language Learners` = as.numeric(str_remove(`% English Language Learners`,'%')), 
            `% non English Language Learners` = 100 -`% English Language Learners`) %>%
-    rename("% ESL" = `% English Language Learners`, "% non ESL"= `% non English Language Learners`)%>%
+    dplyr::rename("% ESL" = `% English Language Learners`, "% non ESL"= `% non English Language Learners`)%>%
     select(`School Name`,`% ESL`,`% non ESL`)%>%
     pivot_longer(names_to ="type", values_to = "prop", cols = c(`% ESL`,`% non ESL`))
     
@@ -96,7 +96,7 @@ school_survey_hist <- function(bn){
                  'Strong Family-Community Ties Score','Trust Score'),
                c(ss$colab_teacher,ss$eff_sch_leader,ss$rig_instr,ss$suprt_env,ss$fam_com_tie,ss$trust_score)
   )
-  new <- data.frame(new)%>%mutate(X1=as.factor(X1),X2=as.numeric(as.character(X2)))%>%rename(`score type`=X1,score=X2)
+  new <- data.frame(new)%>%mutate(X1=as.factor(X1),X2=as.numeric(as.character(X2)))%>%dplyr::rename(`score type`=X1,score=X2)
   ggplot(new, aes(x=c('S1','S2','S3','S4','S5','S6'),
                   y=score,fill=`score type`))+ geom_bar(stat = "identity")+ylim(0,5)+
     geom_text(aes(x = c('S1','S2','S3','S4','S5','S6'),
@@ -150,9 +150,7 @@ qr_radar <- function(bn) {
         )
       )
     )
-  
   p
-  
 }
 
 
