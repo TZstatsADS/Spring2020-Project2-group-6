@@ -27,7 +27,7 @@ shinyUI(
                   fluidRow(
                     box(width = 12, title = "Introduction", status = "primary",
                         solidHeader = TRUE, h3("NYC School & Housing Information"),
-                        h4("By Liangcao Ling, Kexin Su, Guoying Li, Zhongtian Pan, Jiancong(Jack) Shen"),
+                        h4("By Liangcao Ling, Kexin(Colleen) Su, Guoying Li, Zhongtian Pan, Jiancong(Jack) Shen"),
                         h5("Whether you are moving to New York with your family and 
                            would like to find a school for your children or your 
                            children has reached school age and you have no idea which 
