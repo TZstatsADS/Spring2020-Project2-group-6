@@ -8,12 +8,9 @@ library(shinydashboard)
 shinyUI(
 
   dashboardPage(skin='blue',
-    dashboardHeader(
-      
-      title = "Choose Your Best School in NYC",
-      titleWidth = 350),
+    dashboardHeader(title = "Choose Your School"),
     dashboardSidebar(
-      width = 270,
+      width = 250,
       sidebarMenu(
         menuItem("Guidance", tabName = "menuDash", icon = icon("dashboard")),
         menuItem("Map", tabName = "menuMap", icon = icon("map")),
@@ -26,7 +23,7 @@ shinyUI(
     ),
     dashboardBody(
       tags$head( 
-        tags$style(HTML(".main-sidebar { font-size: 18px; }")) #change the font size to 25
+        tags$style(HTML(".main-sidebar { font-size: 20px; }")) #change the font size to 20
       ),
       
       
@@ -62,6 +59,7 @@ shinyUI(
                            understanding of the school they are attending with the school’s 
                            demographic information and learning environment score our app 
                            provided.")
+                          )))
 
                         
                     )), 
@@ -123,13 +121,13 @@ shinyUI(
         tabItem(tabName = "menuSource",
                 fluidPage(
                   fluidRow(box(width = 12, title = "Data Source", status = "primary",
-                               solidHeader = TRUE, h3("The source data for this project is from:"), 
+                               solidHeader = TRUE, "The source data for this project is from", 
                                tags$a(href = "https://data.cityofnewyork.us/Public-Safety/NYPD-Shooting-Incident-Data-Historic-/833y-fsy8", 
-                                      h3("NYC open data")), ".")),
+                                      "NYC open data"), ".")),
                   fluidRow(box(width = 12, title = "Project Code", status = "primary",
-                               solidHeader = TRUE, h3("The codes for this project are shared at:"),
+                               solidHeader = TRUE, "The codes for this project are shared at",
                                tags$a(href = "https://github.com/TZstatsADS/fall2019-proj2--sec2-grp10",
-                                      h3("Github")), "."
+                                      "Github"), "."
                                )
                   )
                   )

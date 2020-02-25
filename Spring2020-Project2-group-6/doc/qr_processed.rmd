@@ -1,0 +1,202 @@
+---
+title: "qr processing"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+This rmd file processes the data  qr_1519 in the output folder.
+
+
+```{r }
+library(dplyr)
+load('../output/QR_1519_rename.RData')
+
+```
+
+
+
+```{r , echo=FALSE}
+
+# 1. curriculum
+df <- QR_1519_rename[3:7]
+df <- data.frame(df)
+indx <- which(!is.na(df), arr.ind=TRUE)
+df1 <- df[cbind(1:nrow(df),tapply(indx[,2], indx[,1], FUN=max))]
+
+# 2. Pedagogy
+df <- QR_1519_rename[8:12]
+df <- data.frame(df)
+indx <- which(!is.na(df), arr.ind=TRUE)
+df2 <- df[cbind(1:nrow(df),tapply(indx[,2], indx[,1], FUN=max))]
+
+# 3. Leveraging
+df <- QR_1519_rename[13:17]
+df <- data.frame(df)
+indx <- which(!is.na(df), arr.ind=TRUE)
+df3 <- df[cbind(1:nrow(df),tapply(indx[,2], indx[,1], FUN=max))]
+
+# 4. Environment
+df <- QR_1519_rename[18:22]
+df <- data.frame(df)
+indx <- which(!is.na(df), arr.ind=TRUE)
+df4 <- df[cbind(1:nrow(df),tapply(indx[,2], indx[,1], FUN=max))]
+
+# 5. Assessment
+df <- QR_1519_rename[23:27]
+df <- data.frame(df)
+indx <- which(!is.na(df), arr.ind=TRUE)
+df5 <- df[cbind(1:nrow(df),tapply(indx[,2], indx[,1], FUN=max))]
+
+# 6. Goals
+df <- QR_1519_rename[28:32]
+df <- data.frame(df)
+indx <- which(!is.na(df), arr.ind=TRUE)
+df6 <- df[cbind(1:nrow(df),tapply(indx[,2], indx[,1], FUN=max))]
+
+# 7. Expectations
+df <- QR_1519_rename[33:37]
+df <- data.frame(df)
+indx <- which(!is.na(df), arr.ind=TRUE)
+df7 <- df[cbind(1:nrow(df),tapply(indx[,2], indx[,1], FUN=max))]
+
+# 8. Teacher
+df <- QR_1519_rename[38:42]
+df <- data.frame(df)
+indx <- which(!is.na(df), arr.ind=TRUE)
+df8 <- df[cbind(1:nrow(df),tapply(indx[,2], indx[,1], FUN=max))]
+
+# 9. Leadership
+df <- QR_1519_rename[43:47]
+df <- data.frame(df)
+indx <- which(!is.na(df), arr.ind=TRUE)
+df9 <- df[cbind(1:nrow(df),tapply(indx[,2], indx[,1], FUN=max))]
+
+# 10. Monitoring
+df <- QR_1519_rename[48:52]
+df <- data.frame(df)
+indx <- which(!is.na(df), arr.ind=TRUE)
+df10 <- df[cbind(1:nrow(df),tapply(indx[,2], indx[,1], FUN=max))]
+
+df <- cbind(df1,df2)%>%
+  cbind(.,df3)%>%
+  cbind(.,df4)%>%
+  cbind(.,df5)%>%
+  cbind(.,df6)%>%
+  cbind(.,df7)%>%
+  cbind(.,df8)%>%
+  cbind(.,df9)%>%
+  cbind(.,df10)
+
+df <- cbind(QR_1519_rename[1:2],df)
+colnames(df) <- colnames(QR_1519_rename[c(1,2,7,12,17,22,27,32,37,42,47,52)])
+
+df <- df[c(1,2,3,4,7,9,11)]
+colnames(df) <- c("BN",
+                  "location_name",
+                  "Curriculum",
+                  "Pedagogy",
+                  "Assessment",
+                  "Expectation",
+                  "Leadership")
+
+
+save(df, file = '../output/qr_processed.RData')
+
+
+
+```
+
+
+Test chart
+```{r}
+
+load('../output/qr_processed.RData')
+df
+qr_radar <- function(bn) {
+  
+  qr_df <- df %>% 
+    filter (BN == bn) 
+  tit <- qr_df$location_name
+  qr_df <- qr_df[-c(1,2)]
+  qr_df <- as.numeric(as.character(qr_df))
+  data <- data.frame(matrix(qr_df,ncol = 5))
+  colnames(data) <- c("Curriculum","Pedagogy","Assessment","Expectation","Leadership")
+  data <- rbind(rep(5,5) , rep(0,5) ,data)
+  
+  radar <- radarchart( data  , axistype=1 , 
+ 
+    #custom polygon
+    pcol=rgb(0.2,0.5,0.5,0.9) , pfcol=rgb(0.2,0.5,0.5,0.5) , plwd=4 , 
+ 
+    #custom the grid
+    cglcol="black", cglty=1, axislabcol="black", caxislabels=c(0,1,2,3,4,5), cglwd=0.8,
+ 
+    #custom labels
+    vlcex=1.05, 
+    
+    title = "Quality Review",
+
+    )
+  radar
+  
+}
+
+qr_radar("K066")
+
+```
+
+```{r}
+
+test.df <- df[17,-c(1,2)]
+test.df <- as.numeric(as.character(test.df))
+data <- data.frame(matrix(test.df,ncol = 5))
+
+colnames(data) <- c("Curriculum","Pedagogy","Assessment","Expectation","Leadership")
+data <- rbind(rep(5,5) , rep(0,5) ,data)
+
+
+
+data
+ 
+# Check your data, it has to look like this!
+# head(data)
+
+# Custom the radarChart !
+radarchart( data  , axistype=1 , 
+ 
+    #custom polygon
+    pcol=rgb(0.2,0.5,0.5,0.9) , pfcol=rgb(0.2,0.5,0.5,0.5) , plwd=4 , 
+ 
+    #custom the grid
+    cglcol="grey", cglty=1, axislabcol="grey", caxislabels=c(0,1,2,3,4,5), cglwd=0.8,
+ 
+    #custom labels
+    vlcex=0.8 
+    )
+
+```
+
+```{r}
+p <- plot_ly(
+    type = 'scatterpolar',
+    fill = 'toself'
+  ) %>%
+  add_trace(
+    r = c(39, 28, 8, 7, 28, 39),
+    theta = c('A','B','C', 'D', 'E', 'A'),
+    name = 'Group A'
+  ) %>%
+  layout(
+    polar = list(
+      radialaxis = list(
+        visible = T,
+        range = c(0,50)
+      )
+    )
+  )
+p
+
+```

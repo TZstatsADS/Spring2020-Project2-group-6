@@ -6,13 +6,14 @@ library(tigris)
 library(ggplot2)
 
 
+
 load('../output/demographic_by_school.Rdata')
 load('../output/zip_code.Rdata')
 QR <- read_csv('../data/2005_-_2019_Quality_Review_Ratings.csv')
 
 
 
-#SL<-SL%>%dplyr::filter(Location_Category_Description %in% c('Elementary','High school','Junior High-Intermediate-Middle','K-8'))
+#SL<-SL%>%filter(Location_Category_Description %in% c('Elementary','High school','Junior High-Intermediate-Middle','K-8'))
 #house<-house%>%group_by(`ZIP CODE`)%>%summarize(price=median(avg_price_per_square_foot))%>%filter(is.na(`ZIP CODE`)==F)
 a<- SL%>%select(c(1,2,3,4,14,15,16,19,21,23,25,27,29,31))%>%mutate(`19 Trust Score`=as.numeric(`19 Trust Score`))
 
@@ -36,7 +37,7 @@ shinyServer(function(input, output) {
     if(is.null(input$schoollevel)){selected_schoollevel = levels(SL$Level)}
     else{selected_schoollevel = input$schoollevel}
 
-    SL %>% dplyr::filter(Level %in% selected_schoollevel) 
+    SL %>% filter(Level %in% selected_schoollevel) 
   })
   
 

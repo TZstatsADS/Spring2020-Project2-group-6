@@ -15,8 +15,6 @@ library(ggrepel)
 
 ```{r}
 load('../output/demographic_by_school.RData')
-
-
 demographic_by_school
 ```
 

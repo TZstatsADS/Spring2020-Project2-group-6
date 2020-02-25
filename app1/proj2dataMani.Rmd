@@ -25,11 +25,12 @@ load('../output/School_Locations.RData')
 QR <- read_csv('../data/2005_-_2019_Quality_Review_Ratings.csv')
 
 
-#SL <- School_Locations%>%dplyr::filter(Status_descriptions=='Open')%>%
- # select(location_code,location_name,location_type_description,Location_Category_Description,primary_address_line_1,LONGITUDE,LATITUDE)
+#SL <- School_Locations%>%filter(Status_descriptions=='Open')%>%
+ # select(location_code,location_name,location_type_description,Location_Category_Description,
+         #primary_address_line_1,LONGITUDE,LATITUDE)
 
 QR_1519 <- QR%>%
-  dplyr::filter(Start_Date>='2015-01-01')%>%
+  filter(Start_Date>='2015-01-01')%>%
   select(BN,School_Year,Indicator_1.1,Indicator_1.2,Indicator_1.3,Indicator_1.4,
          Indicator_2.2,Indicator_3.1,Indicator_3.4,Indicator_4.1,Indicator_4.2,Indicator_5.1)
 
@@ -100,7 +101,7 @@ SS_18 <- read_csv('../data/School Survey 2018.csv')
 SS_19 <- read_csv('../data/School Survey 2019.csv')
 SS_17 <- SS_17%>%select(DBN,`School Name`,`Collaborative Teachers Score`:`Trust Score`)%>%
   replace_with_na_all(condition = ~.x=='N/A')%>%
-  dplyr::filter_all(any_vars(!is.na(.)))%>%
+  filter_all(any_vars(!is.na(.)))%>%
   rename('17 Collaborative Teachers Score'='Collaborative Teachers Score',
                         '17 Effective School Leadership Score'=
                           'Effective School Leadership Score',
@@ -111,7 +112,7 @@ SS_17 <- SS_17%>%select(DBN,`School Name`,`Collaborative Teachers Score`:`Trust 
                         '17 Trust Score'='Trust Score')
 SS_18 <- SS_18%>%select(DBN,`Collaborative Teachers Score`:`Trust Score`)%>%
   replace_with_na_all(condition = ~.x=='N/A')%>%
-  dplyr::filter_all(any_vars(!is.na(.)))%>%
+  filter_all(any_vars(!is.na(.)))%>%
   rename('18 Collaborative Teachers Score'='Collaborative Teachers Score',
                         '18 Effective School Leadership Score'=
                           'Effective School Leadership Score',
@@ -122,7 +123,7 @@ SS_18 <- SS_18%>%select(DBN,`Collaborative Teachers Score`:`Trust Score`)%>%
                         '18 Trust Score'='Trust Score')
 SS_19 <- SS_19%>%select(DBN,`Collaborative Teachers Score`:`Trust Score`)%>%
   replace_with_na_all(condition = ~.x=='N/A')%>%
-  dplyr::filter_all(any_vars(!is.na(.)))%>%
+  filter_all(any_vars(!is.na(.)))%>%
   rename('19 Collaborative Teachers Score'='Collaborative Teachers Score',
                         '19 Effective School Leadership Score'=
                           'Effective School Leadership Score',
@@ -156,7 +157,7 @@ fam_com_tie <- df5[cbind(1:nrow(df5),tapply(indx5[,2], indx5[,1], FUN=max))]
 trust_score <- SS[20]%>%rename(trust_score=`19 Trust Score`)
 temp <- cbind(colab_teacher,eff_sch_leader,rig_instr,suprt_env,fam_com_tie,trust_score)
 temp <- apply(temp,2,as.character)%>%apply(2,as.numeric)
-SS_newest <- cbind(SS[c(1,2)],temp)%>%na.omit()
+SS_newest <- cbind(SS[c(1,2)],temp)
 save(SS_newest, file="../output/School_Survey_Newest.RData")
 ```
 
@@ -180,11 +181,13 @@ demographic_by_school$gradeLevel[demographic_by_school$`Grade 1` != 0 & demograp
 demographic_by_school$gradeLevel[demographic_by_school$`Grade 1` == 0 & demographic_by_school$`Grade 6` != 0 & demographic_by_school$`Grade 9` == 0] <- "middle" 
 demographic_by_school$gradeLevel[demographic_by_school$`Grade 1` == 0 & demographic_by_school$`Grade 6` != 0 & demographic_by_school$`Grade 9` != 0] <- "middle, high" 
 
+
 demographic_by_school$gradeLevel[demographic_by_school$`Grade 1` == 0 & demographic_by_school$`Grade 6` == 0 & demographic_by_school$`Grade 9` != 0] <- "high" 
 demographic_by_school$gradeLevel[demographic_by_school$`Grade 1` != 0 & demographic_by_school$`Grade 6` == 0 & demographic_by_school$`Grade 9` != 0] <- "elementary, high" 
 demographic_by_school <- demographic_by_school %>% inner_join(bn_sl, by = c('School Name' = 'location_name'))
 
 save(demographic_by_school, file="../output/demographic_by_school.RData")
+
 ```
 
 

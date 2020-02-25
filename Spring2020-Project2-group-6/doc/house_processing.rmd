@@ -1,0 +1,111 @@
+---
+title: "house_temp"
+output: html_document
+---
+
+This file is used to process house price data.
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, include=FALSE}
+library(dplyr)
+```
+
+
+```{r, include=FALSE}
+load("../output/house1.RData")
+
+price_overall <- house%>%
+  filter(`BUILDING CLASS CATEGORY`!= "21 OFFICE BUILDINGS")%>%
+  filter(`BUILDING CLASS CATEGORY`!= "22 STORE BUILDINGS")%>%
+  filter(`BUILDING CLASS CATEGORY`!= "25 LUXURY HOTELS")%>%
+  filter(`BUILDING CLASS CATEGORY`!= "26 OTHER HOTELS")%>%
+  filter(`BUILDING CLASS CATEGORY`!= "29 COMMERCIAL GARAGES")%>%
+  filter(`BUILDING CLASS CATEGORY`!= "30 WAREHOUSES")%>%
+  filter(`BUILDING CLASS CATEGORY`!= "32 HOSPITAL AND HEALTH FACILITIES")%>%
+  filter(`BUILDING CLASS CATEGORY`!= "35 INDOOR PUBLIC AND CULTURAL FACILITIES")%>%
+  filter(`BUILDING CLASS CATEGORY`!= "33 EDUCATIONAL FACILITIES")%>%
+  filter(`BUILDING CLASS CATEGORY`!= "37 RELIGIOUS FACILITIES")%>%
+  filter(`BUILDING CLASS CATEGORY`!= "11 SPECIAL CONDO BILLING LOTS")%>%
+  filter(`BUILDING CLASS CATEGORY`!= "27 FACTORIES")%>%
+  filter(`BUILDING CLASS CATEGORY`!= "41 TAX CLASS 4 - OTHER")%>%
+  filter(`BUILDING CLASS CATEGORY`!= "34 THEATRES")%>%
+  filter(`BUILDING CLASS CATEGORY`!= "36 OUTDOOR RECREATIONAL FACILITIES")%>%
+  filter(`BUILDING CLASS CATEGORY`!= "38 ASYLUMS AND HOMES")%>%
+  filter(`BUILDING CLASS CATEGORY`!= "06 TAX CLASS 1 - OTHER")%>%
+  filter(`BUILDING CLASS CATEGORY`!= "23 LOFT BUILDINGS")%>%
+  filter(avg_price_per_square_foot<4000)%>%
+  filter(avg_price_per_square_foot>110)
+
+price_dwellings1 <- price_overall%>%
+  filter(`BUILDING CLASS CATEGORY`== "01 ONE FAMILY DWELLINGS")%>%
+  group_by(`ZIP CODE`)%>%
+  summarise(`mean price` = mean(avg_price_per_square_foot))
+
+price_dwellings2 <- price_overall%>%
+  filter(`BUILDING CLASS CATEGORY`== "02 TWO FAMILY DWELLINGS")%>%
+  group_by(`ZIP CODE`)%>%
+  summarise(`mean price` = mean(avg_price_per_square_foot))
+
+price_dwellings3 <- price_overall%>%
+  filter(`BUILDING CLASS CATEGORY`== "03 THREE FAMILY DWELLINGS")%>%
+  group_by(`ZIP CODE`)%>%
+  summarise(`mean price` = mean(avg_price_per_square_foot))
+
+price_rent_ele <- price_overall%>%
+  filter(`BUILDING CLASS CATEGORY`== "08 RENTALS - ELEVATOR APARTMENTS")%>%
+  group_by(`ZIP CODE`)%>%
+  summarise(`mean price` = mean(avg_price_per_square_foot))
+
+price_rent_walk <- price_overall%>%
+  filter(`BUILDING CLASS CATEGORY`== "07 RENTALS - WALKUP APARTMENTS")%>%
+  group_by(`ZIP CODE`)%>%
+  summarise(`mean price` = mean(avg_price_per_square_foot))
+
+price_rent_410 <- price_overall%>%
+  filter(`BUILDING CLASS CATEGORY`== "14 RENTALS - 4-10 UNIT")%>%
+  group_by(`ZIP CODE`)%>%
+  summarise(`mean price` = mean(avg_price_per_square_foot))
+
+processed_price <- full_join(price_dwellings1,price_dwellings2,by="ZIP CODE")%>%
+  full_join(.,price_dwellings3,by="ZIP CODE")%>%
+  full_join(.,price_rent_ele,by="ZIP CODE")%>%
+  full_join(.,price_rent_walk,by="ZIP CODE")%>%
+  full_join(.,price_rent_410,by="ZIP CODE")
+
+colnames(processed_price) <- c("ZIP CODE",
+                               "ONE FAMILY DWELLINGS",
+                               "TWO FAMILY DWELLINGS",
+                               "THREE FAMILY DWELLINGS",
+                               "RENTALS - ELEVATOR APARTMENTS",
+                               "RENTALS - WALKUP APARTMENTS",
+                               "RENTALS - 4-10 UNIT")
+
+save(processed_price,file = "../output/house_processed.RData")
+
+
+```
+
+
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
