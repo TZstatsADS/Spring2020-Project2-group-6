@@ -33,7 +33,6 @@ shinyUI(
         tabItem(tabName = "menuDash",
                 fluidPage(
                   fluidRow(
-<<<<<<< HEAD
                     box(width = 12, title = "Introduction", status = "primary",
                         solidHeader = TRUE, h3("NYC School & Near By Housing Information"),
                         h4("By Liangcao Ling, Kexin(Colleen) Su, Guoying Li, Zhongtian Pan, Jiancong(Jack) Shen"),
@@ -50,24 +49,6 @@ shinyUI(
                            students. For parents, our app proinvides detailed school 
                            information including teaching quality score, 
                            family-community ties score, etc, that helps the parents to 
-=======
-                    box(width = 15, title = "Introduction", status = "primary",
-                        solidHeader = TRUE, h3("NYC School & Housing Information"),
-                        h4("By Liangcao Ling, Kexin Su, Guoying Li, Zhongtian Pan, Jiancong(Jack) Shen"),
-                        h3(
-                          tags$div(tags$ul(
-                            tags$li("Whether you are moving to New York with your family and would like 
-                           to find a school for your children, or your children has reached school
-                                    age and you have no idea which school they should attend, you probably 
-                                    have many questions. What is the quality of each school? What are the 
-                                    housing options around the school? What's the best option for your 
-                                    children and your family? No worries, our app can help you figure out 
-                                    these questions. "),
-                            tags$li("Our shiny app provides you information about school and housing in 
-                           New York city, which benefits both parents and student.  For parents, 
-                           our app provides detailed school information including teaching 
-                           quality score, family-community ties score, etc, that helps parents 
->>>>>>> b2ed6115c13d51cbd7a4adeec8dca7bdefe222a2
                            select which school they want their children to attend. 
                            When combine school and housing information, parents can choose 
                            the best school option within the family’s housing budget. 
@@ -78,7 +59,6 @@ shinyUI(
                            understanding of the school they are attending with the school’s 
                            demographic information and learning environment score our app 
                            provided.")
-                          )))
 
                         
                     )), 
