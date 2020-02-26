@@ -30,7 +30,7 @@ labels <-
   lapply(htmltools::HTML)
 
 
-shinyServer(function(input, output) {
+shinyServer(function(input, output,session) {
   
   
   filteredData <- reactive({
@@ -40,6 +40,17 @@ shinyServer(function(input, output) {
     SL %>% filter(Level %in% selected_schoollevel) 
   })
   
+  # Chosse all and clear button
+  observeEvent(input$click_all_house_types, {
+    updateCheckboxGroupInput(session, "click_house_type",
+                             choices = colnames(processed_price[,2:7]),
+                             selected =colnames(processed_price[,2:7]))
+  })
+  observeEvent(input$click_none_house_types, {
+    updateCheckboxGroupInput(session, "click_house_type",
+                             choices = colnames(processed_price[,2:7]),
+                             selected = NULL)
+  })
 
   
   output$map <- renderLeaflet({
@@ -82,13 +93,16 @@ shinyServer(function(input, output) {
       return()
     g1<-school_survey_hist(click$id)
     g2<-newest_ss_radar(click$id)
+    g3<-school_survey_hist1(click$id)
     output$survey_hist<-renderPlot({
       g1
     })
     output$ss_radar<-renderPlotly({
       g2
     })
-    
+    output$school_survey_hist_1<-renderPlot({
+      g3
+    })
   })
   
   observe({

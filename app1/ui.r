@@ -82,8 +82,12 @@ shinyUI(
                                                                  choices = levels(SL$Level),
                                                                  options = list(`actions-box` = TRUE),
                                                                  multiple = TRUE, width = '100px'),
-                                                
-                                                     h2("result"),plotOutput("survey_hist"),
+                                                     checkboxGroupInput("click_house_type","House Types",
+                                                                        choices = c('ONE FAMILY DWELLINGS', 'TWO FAMILY DWELLINGS', 'THREE FAMILY DWELLINGS', 'RENTALS - ELEVATOR APARTMENTS','RENTALS - WALKUP APARTMENTS','RENTALS - 4-10 UNIT'),
+                                                                        selected =c('ONE FAMILY DWELLINGS', 'TWO FAMILY DWELLINGS', 'THREE FAMILY DWELLINGS', 'RENTALS - ELEVATOR APARTMENTS','RENTALS - WALKUP APARTMENTS','RENTALS - 4-10 UNIT')),
+                                                     actionButton("click_all_house_types", "Select All"),
+                                                     actionButton("click_none_house_types", "Clear"),
+                                                     h2("result"),plotOutput("school_survey_hist_1"),plotOutput("survey_hist"),
                                                      plotlyOutput("ss_radar")),
                                                      
                                                  
@@ -108,7 +112,7 @@ shinyUI(
                 fluidRow(column(6,plotlyOutput("plot_qr1")),column(6,plotlyOutput("plot_qr2")))),
                 
                 
-                tabPanel('Demongraphic Information',fluidRow(column(6,plotlyOutput("plot_gender1")),column(6,plotlyOutput("plot_gender2"))),
+                tabPanel('Demographic Information',fluidRow(column(6,plotlyOutput("plot_gender1")),column(6,plotlyOutput("plot_gender2"))),
                 fluidRow(column(6,plotlyOutput("plot_ethnicity1")),column(6,plotlyOutput("plot_ethnicity2"))),
                 fluidRow(column(6,plotlyOutput("plot_esl1")),column(6,plotlyOutput("plot_esl2")))
                 

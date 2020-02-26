@@ -185,7 +185,7 @@ demographic_by_school$gradeLevel[demographic_by_school$`Grade 1` == 0 & demograp
 demographic_by_school$gradeLevel[demographic_by_school$`Grade 1` == 0 & demographic_by_school$`Grade 6` == 0 & demographic_by_school$`Grade 9` != 0] <- "high" 
 demographic_by_school$gradeLevel[demographic_by_school$`Grade 1` != 0 & demographic_by_school$`Grade 6` == 0 & demographic_by_school$`Grade 9` != 0] <- "elementary, high" 
 demographic_by_school <- demographic_by_school %>% inner_join(bn_sl, by = c('School Name' = 'location_name'))
-
+write.csv(demographic_by_school,"../output/demographic_by_school.csv", row.names = FALSE)
 save(demographic_by_school, file="../output/demographic_by_school.RData")
 
 ```
