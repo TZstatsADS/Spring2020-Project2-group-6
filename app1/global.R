@@ -7,10 +7,11 @@ library(stringr)
 library(plotly)
 
 
-load('../app1/schoolfinal.RData')
-load('../app1/output/demographic_by_school.RData')
-load('../app1/output/School_Survey_newest.RData')
-load('../app1/output/qr_processed.RData')
+# load('../app1/schoolfinal.RData')
+# load('../app1/output/demographic_by_school.RData')
+# load('../app1/output/School_Survey_newest.RData')
+# load('../app1/output/qr_processed.RData')
+
 
 gender_piechart <- function(bn) {
   
@@ -85,20 +86,18 @@ trust_score_linechart <- function(bn){
            yaxis=list(title='trust score',rangemode = "normal",range=c(0,5)))
 }
 
-school_survey_hist <- function(bn){
-  ss <- SS_newest%>%filter(BN==bn)
-  new <- cbind(c('Collaborative Teachers Score','Effective School Leadership Score',
-                 'Rigorous Instruction Score','Supportive Environment Score',
-                 'Strong Family-Community Ties Score','Trust Score'),
-               c(ss$colab_teacher,ss$eff_sch_leader,ss$rig_instr,ss$suprt_env,ss$fam_com_tie,ss$trust_score)
-  )
-  new <- data.frame(new)%>%mutate(X1=as.factor(X1),X2=as.numeric(as.character(X2)))%>%rename(`score type`=X1,score=X2)
-  ggplot(new, aes(x=c('S1','S2','S3','S4','S5','S6'),
-                  y=score,fill=`score type`))+ geom_bar(stat = "identity")+ylim(0,5)+
-    geom_text(aes(x = c('S1','S2','S3','S4','S5','S6'),
-                  y = score, label = round(score, 2)))+
-    labs(title='Latest School Survey Score',x='score type')+theme_light()+
-    theme(plot.title = element_text(hjust = 0.5))
+school_survey_hist1 <- function(bn){
+  test<-S %>% filter(BN == bn) %>% na.omit()
+  ggplot(test,aes(Score, as.numeric(value))) +
+    geom_col(aes(fill = as.factor(Year)),
+             width = 0.8,
+             position = position_dodge2(width = 0.8, preserve = "single")) +
+    ylab("Score") +
+    xlab("Score Criteria") +
+    ylim(0,5) +
+    labs(fill = "Year") +
+    theme(axis.text.x = element_text(angle = 20, hjust = 1)) +
+    geom_text(aes(label = value),position = position_dodge2(width = 0.8, preserve = "single"))
 }
 
 newest_ss_radar <- function(bn){
@@ -150,7 +149,6 @@ qr_radar <- function(bn) {
   p
   
 }
-
 
 
 
