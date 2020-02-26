@@ -20,17 +20,17 @@ a<- SL%>%select(c(1,2,3,4,14,15,16,19,21,23,25,27,29,31))%>%mutate(`19 Trust Sco
 
 pal <- colorNumeric(
   palette = "Greens",
-  domain = char_zips@data$ONE.FAMILY.DWELLINGS)
+  domain = char_zips@data$price)
 labels <- 
   paste0(
     "Zip Code: ",
     char_zips@data$GEOID10, "<br/>",
-    "price: ",
-    scales::dollar(char_zips@data$ONE.FAMILY.DWELLINGS)) %>%
+    "Housing Price: ",
+    scales::dollar(char_zips@data$price)) %>%
   lapply(htmltools::HTML)
 
 
-shinyServer(function(input, output,session) {
+shinyServer(function(input, output) {
   
   
   filteredData <- reactive({
@@ -40,26 +40,15 @@ shinyServer(function(input, output,session) {
     SL %>% filter(Level %in% selected_schoollevel) 
   })
   
-  # Chosse all and clear button
-  observeEvent(input$click_all_house_types, {
-    updateCheckboxGroupInput(session, "click_house_type",
-                             choices = colnames(processed_price[,2:7]),
-                             selected =colnames(processed_price[,2:7]))
-  })
-  observeEvent(input$click_none_house_types, {
-    updateCheckboxGroupInput(session, "click_house_type",
-                             choices = colnames(processed_price[,2:7]),
-                             selected = NULL)
-  })
 
-  
+  ##Map Section: initialization
   output$map <- renderLeaflet({
     m <- leaflet() %>%
       addProviderTiles(providers$CartoDB.Positron) %>%
       setView(-73.9252853,40.7910694,zoom = 13)
     leafletProxy("map", data = SL) %>%
       addPolygons(data = char_zips,
-                  fillColor = ~pal(ONE.FAMILY.DWELLINGS),
+                  fillColor = ~pal(price),
                   weight = 2,
                   opacity = 1,
                   color = "white",
@@ -87,22 +76,20 @@ shinyServer(function(input, output,session) {
     m
   })  
   
+  ## Map section: some hard coding to change element on maps, one may find simpler ways to do this.
   observe({
     click<-input$map_marker_click
     if(is.null(click))
       return()
     g1<-school_survey_hist(click$id)
     g2<-newest_ss_radar(click$id)
-    g3<-school_survey_hist1(click$id)
     output$survey_hist<-renderPlot({
       g1
     })
     output$ss_radar<-renderPlotly({
       g2
     })
-    output$school_survey_hist_1<-renderPlot({
-      g3
-    })
+    
   })
   
   observe({
@@ -124,6 +111,189 @@ shinyServer(function(input, output,session) {
   })
   
   
+  observe({
+    choose_type<-input$house_type
+    if(choose_type=="ONE.FAMILY.DWELLINGS"){
+      pal0 <- colorNumeric(
+        palette = "Greens",
+        domain = char_zips@data$ONE.FAMILY.DWELLINGS)
+      
+      labels0 <-paste0("Zip Code: ",
+                       char_zips@data$GEOID10, "<br/>",
+                       "Housing Price: ",
+                       scales::dollar(char_zips@data$ONE.FAMILY.DWELLINGS)) %>%
+        lapply(htmltools::HTML)
+      
+      leafletProxy("map") %>%
+        clearShapes() %>%
+        addPolygons(data = char_zips,
+                    fillColor = ~pal0(ONE.FAMILY.DWELLINGS),
+                    weight = 2,
+                    opacity = 1,
+                    color = "white",
+                    dashArray = "3",
+                    fillOpacity = 0.5,
+                    highlight = highlightOptions(weight = 2,
+                                                 color = "#666",
+                                                 dashArray = "",
+                                                 fillOpacity = 0.7,
+                                                 bringToFront = TRUE),
+                    label = labels0,group='Price')}
+    
+  })
+  observe({
+    choose_type<-input$house_type
+    if(choose_type=="TWO.FAMILY.DWELLINGS"){
+      pal0 <- colorNumeric(
+        palette = "Greens",
+        domain = char_zips@data$TWO.FAMILY.DWELLINGS)
+      
+      labels0 <-paste0("Zip Code: ",
+                       char_zips@data$GEOID10, "<br/>",
+                       "Housing Price: ",
+                       scales::dollar(char_zips@data$TWO.FAMILY.DWELLINGS)) %>%
+        lapply(htmltools::HTML)
+      
+      leafletProxy("map") %>%
+        clearShapes() %>%
+        addPolygons(data = char_zips,
+                    fillColor = ~pal0(TWO.FAMILY.DWELLINGS),
+                    weight = 2,
+                    opacity = 1,
+                    color = "white",
+                    dashArray = "3",
+                    fillOpacity = 0.5,
+                    highlight = highlightOptions(weight = 2,
+                                                 color = "#666",
+                                                 dashArray = "",
+                                                 fillOpacity = 0.7,
+                                                 bringToFront = TRUE),
+                    label = labels0,group='Price')}
+    
+  })
+  observe({
+    choose_type<-input$house_type
+    if(choose_type=="THREE.FAMILY.DWELLINGS"){
+      pal0 <- colorNumeric(
+        palette = "Greens",
+        domain = char_zips@data$THREE.FAMILY.DWELLINGS)
+      
+      labels0 <-paste0("Zip Code: ",
+                       char_zips@data$GEOID10, "<br/>",
+                       "Housing Price: ",
+                       scales::dollar(char_zips@data$THREE.FAMILY.DWELLINGS)) %>%
+        lapply(htmltools::HTML)
+      
+      leafletProxy("map") %>%
+        clearShapes() %>%
+        addPolygons(data = char_zips,
+                    fillColor = ~pal0(THREE.FAMILY.DWELLINGS),
+                    weight = 2,
+                    opacity = 1,
+                    color = "white",
+                    dashArray = "3",
+                    fillOpacity = 0.5,
+                    highlight = highlightOptions(weight = 2,
+                                                 color = "#666",
+                                                 dashArray = "",
+                                                 fillOpacity = 0.7,
+                                                 bringToFront = TRUE),
+                    label = labels0,group='Price')}
+    
+  })
+  observe({
+    choose_type<-input$house_type
+    if(choose_type=="RENTALS...ELEVATOR.APARTMENTS"){
+      pal0 <- colorNumeric(
+        palette = "Greens",
+        domain = char_zips@data$RENTALS...ELEVATOR.APARTMENTS)
+      
+      labels0 <-paste0("Zip Code: ",
+                       char_zips@data$GEOID10, "<br/>",
+                       "Housing Price: ",
+                       scales::dollar(char_zips@data$RENTALS...ELEVATOR.APARTMENTS)) %>%
+        lapply(htmltools::HTML)
+      
+      leafletProxy("map") %>%
+        clearShapes() %>%
+        addPolygons(data = char_zips,
+                    fillColor = ~pal0(RENTALS...ELEVATOR.APARTMENTS),
+                    weight = 2,
+                    opacity = 1,
+                    color = "white",
+                    dashArray = "3",
+                    fillOpacity = 0.5,
+                    highlight = highlightOptions(weight = 2,
+                                                 color = "#666",
+                                                 dashArray = "",
+                                                 fillOpacity = 0.7,
+                                                 bringToFront = TRUE),
+                    label = labels0,group='Price')}
+    
+  })
+  observe({
+    choose_type<-input$house_type
+    if(choose_type=="RENTALS...WALKUP.APARTMENTS"){
+      pal0 <- colorNumeric(
+        palette = "Greens",
+        domain = char_zips@data$RENTALS...WALKUP.APARTMENTS)
+      
+      labels0 <-paste0("Zip Code: ",
+                       char_zips@data$GEOID10, "<br/>",
+                       "Housing Price: ",
+                       scales::dollar(char_zips@data$RENTALS...WALKUP.APARTMENTS)) %>%
+        lapply(htmltools::HTML)
+      
+      leafletProxy("map") %>%
+        clearShapes() %>%
+        addPolygons(data = char_zips,
+                    fillColor = ~pal0(RENTALS...WALKUP.APARTMENTS),
+                    weight = 2,
+                    opacity = 1,
+                    color = "white",
+                    dashArray = "3",
+                    fillOpacity = 0.5,
+                    highlight = highlightOptions(weight = 2,
+                                                 color = "#666",
+                                                 dashArray = "",
+                                                 fillOpacity = 0.7,
+                                                 bringToFront = TRUE),
+                    label = labels0,group='Price')}
+    
+  })
+  observe({
+    choose_type<-input$house_type
+    if(choose_type=="RENTALS...4.10.UNIT"){
+      pal0 <- colorNumeric(
+        palette = "Greens",
+        domain = char_zips@data$RENTALS...4.10.UNIT)
+      
+      labels0 <-paste0("Zip Code: ",
+                       char_zips@data$GEOID10, "<br/>",
+                       "Housing Price: ",
+                       scales::dollar(char_zips@data$RENTALS...4.10.UNIT)) %>%
+        lapply(htmltools::HTML)
+      
+      leafletProxy("map") %>%
+        clearShapes() %>%
+        addPolygons(data = char_zips,
+                    fillColor = ~pal0(RENTALS...4.10.UNIT),
+                    weight = 2,
+                    opacity = 1,
+                    color = "white",
+                    dashArray = "3",
+                    fillOpacity = 0.5,
+                    highlight = highlightOptions(weight = 2,
+                                                 color = "#666",
+                                                 dashArray = "",
+                                                 fillOpacity = 0.7,
+                                                 bringToFront = TRUE),
+                    label = labels0,group='Price')}
+    
+  })
+  
+  
+  # Data & Ranking Section.
   output$tableschool<-DT::renderDataTable({a},filter='top',options = list(pageLength = 20, scrollX=T, autoWidth = TRUE))
   
   
