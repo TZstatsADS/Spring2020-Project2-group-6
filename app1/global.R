@@ -7,12 +7,13 @@ library(plotly)
 library(tidyverse)
 library(stringr)
 
+
 load('output/schoolfinal.RData')
 load('output/demographic_by_school.RData')
 load('output/survey_newest.RData')
 load('output/qr_processed.RData')
 load('output/selected_BN.RData')
-
+load('output/survey_clean.RData')
 
 gender_piechart <- function(bn) {
   

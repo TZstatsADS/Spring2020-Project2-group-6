@@ -1,9 +1,15 @@
 # Project 2: Shiny App Development Version 2.0
-
-![screenshot](doc/1.png)
+![](doc/0.png)
+![](doc/1.png)
+![](doc/2.png)
+![](doc/3.png)
 
 ## NYC School and Housing Map
 Term: Spring 2020
+
+Scan the QR code below to open this app on the mobile terminal:  
+
+![](doc/2.jpg)
 
 + Team #6
 + Shiny Link: https://nycschool.shinyapps.io/app1/
