@@ -9,10 +9,10 @@ library(plotly)
 library(fmsb)
 library(stats)
 library(graphics)
-load('../output/finalsummary.RData')
-load('../output/demographic_by_school.RData')
-load('../output/School_Survey_newest.RData')
-load('../output/qr_processed.RData')
+load('../finalsummary.RData')
+load('../demographic_by_school.RData')
+load('../School_Survey_newest.RData')
+load('../qr_processed.RData')
 
 gender_piechart <- function(bn) {
   
