@@ -66,9 +66,9 @@ shinyUI(
                                            h3(
                                              tags$div(tags$ul(
                                                tags$li("Maps: This map displays the school location and median housing price of the neighborhood. Each school is indicated by a green dot, and the median housing price is shown with a heat map: darker green indicates higher median price, and lighter green indicates lower."),
-                                               tags$li("Chart: In this page, you can compare any two schools by selecting or entering their borough numbers (BN), which can be found in the Data page. The comparison contains two tabs: 'Total Enrollment & Quality Review'?, and 'Demographic Information'?. The first tab shows the school's total enrollment number from 2015-2019, and its newest quality review score. The second tab includes the schools\' demographic information including gender, ethnicity, and percentage of ESL(English as Second Language) student."),
+                                               tags$li("Chart: In this page, you can compare any two schools by selecting or entering their borough numbers (BN), which can be found in the Data page. The comparison contains two tabs: 'Total Enrollment & Quality Review', and 'Demographic Information'. The first tab shows the school's total enrollment number from 2015-2019, and its newest quality review score. The second tab includes the schools\' demographic information including gender, ethnicity, and percentage of ESL(English as Second Language) student."),
                                                tags$li("Data & Ranking: This page shows all of the available information of schools. You can use this page to search for a school's borough number (BN), look for complete information of a specific school, or look at the school ranking according to a specific aspect."),
-                                               tags$li("Source: This part includes the link to the website where we get our data from. All of our data are from 'NYC open data', and the starter code is from the class website on Github.")
+                                               tags$li("Source: This part includes the link to the website where we get our data from. All of our data are from 'NYC open data' and 'NYC Department of Education', and the code to our entire project is shared on Github.")
                                              ))))
                               )
                               
@@ -123,11 +123,13 @@ shinyUI(
                     tabItem(tabName = "menuSource",
                             fluidPage(
                               fluidRow(box(width = 12, title = "Data Source", status = "primary",
-                                           solidHeader = TRUE, "The source data for this project is from", 
+                                           solidHeader = TRUE, "The source data for this project is from the websites", 
                                            tags$a(href = "https://opendata.cityofnewyork.us/data/", 
                                                   "NYC open data"), ',',
                                            tags$a(href = "https://www.schools.nyc.gov/about-us/reports/school-quality/nyc-school-survey", 
-                                                  "NYC School Survey"),".")),
+                                                  "NYC Department of Education (School Survey data)"),", and",
+                                           tags$a(href = "https://www1.nyc.gov/site/finance/taxes/property-rolling-sales-data.page", 
+                                                  "NYC Department of Finance (housing data)"),".")),
                               fluidRow(box(width = 12, title = "Project Code", status = "primary",
                                            solidHeader = TRUE, "The codes for this project are shared at",
                                            tags$a(href = "https://github.com/TZstatsADS/Spring2020-Project2-group-6",
