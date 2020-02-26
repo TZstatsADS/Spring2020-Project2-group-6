@@ -116,9 +116,7 @@ Test chart
 load('../output/qr_processed.RData')
 df
 qr_radar <- function(bn) {
-  if(!bn%in%df$BN){
-    return ("No Available Data")
-  }
+  
   qr_df <- df %>% 
     filter (BN == bn) 
   tit <- qr_df$location_name
