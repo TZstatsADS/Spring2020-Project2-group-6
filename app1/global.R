@@ -14,6 +14,7 @@ load('output/survey_newest.RData')
 load('output/qr_processed.RData')
 load('output/selected_BN.RData')
 load('output/survey_clean.RData')
+load('output/schoolinfo.RData')
 
 gender_piechart <- function(bn) {
   
