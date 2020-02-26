@@ -6,10 +6,11 @@ library(stringr)
 library(plotly)
 
 
-load('../app1/schoolfinal.RData')
+load('../app1/output/schoolfinal.RData')
 load('../app1/output/demographic_by_school.RData')
 load('../app1/output/School_Survey_newest.RData')
 load('../app1/output/qr_processed.RData')
+load('../app1/output/selected_BN.RData')
 
 
 gender_piechart <- function(bn) {
