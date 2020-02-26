@@ -99,7 +99,8 @@ school_survey_hist1 <- function(bn){
     ylim(0,5) +
     labs(fill = "Year") +
     theme(axis.text.x = element_text(angle = 20, hjust = 1)) +
-    geom_text(aes(label = value),position = position_dodge2(width = 0.8, preserve = "single"))
+    geom_text(aes(label = value),position = position_dodge2(width = 0.8, preserve = "single"))+
+    labs(title='School Survey Score from 2017-2019')+theme(plot.title = element_text(hjust = 0.5))
 }
 
 newest_ss_radar <- function(bn){
