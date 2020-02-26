@@ -1,14 +1,14 @@
 library(shiny)
 library(leaflet)
-library(tidyverse)
+#library(tidyverse)
 library(scales)
 library(ggrepel)
 library(stringr)
 library(plotly)
-load('../output/final.RData')
-load('../output/demographic_by_school.RData')
-load('../output/School_Survey17-19.RData')
-load('../output/School_Survey_newest.RData')
+load('../app1/output/final.RData')
+load('../app1/output/demographic_by_school.RData')
+load('../app1/output/School_Survey17-19.RData')
+load('../app1/output/School_Survey_Newest.RData')
 
 gender_piechart <- function(bn) {
   
