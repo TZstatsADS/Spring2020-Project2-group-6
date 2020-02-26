@@ -33,7 +33,7 @@ shinyUI(
                               fluidRow(
                                 box(width = 15, title = "Introduction", status = "primary",
                                     solidHeader = TRUE, h3("NYC School & Housing Information"),
-                                    h5("By Liangcao Ling, Kexin Su, Guoying Li, Zhongtian Pan, Jiancong(Jack) Shen"),
+                                    h5("By Liangcao Ling, Kexin(Colleen) Su, Guoying Li, Zhongtian Pan, Jiancong(Jack) Shen"),
                                     h4(
                                       tags$div(tags$ul(
                                         tags$li("Whether you are moving to New York with your family and would like 
