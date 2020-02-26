@@ -26,15 +26,13 @@ We used data from NYC Open Data, including housing, school quality review, schoo
 
 + **Contribution statement**: All team members contributed equally in all stages of this project. 
 
-     + Liangcao Ling built the structure for the whole rshiny app and plotted the map. Liangcao also debugged for our whole coding part. Liangcao managed the project, contributed to the Github repository and prepared the presentation. 
+     + Liangcao Ling built the structure for the whole rshiny app and plotted the map, debug for whole coding part, managed the project, contributed to the Github repository and prepared the presentation. 
 
-     + Kexin(Colleen) Su suggested the basic idea of this app, cleaned and manipulated the school survey data, helped manipulate the quality review data, wrote function for plotting school survey data used in the "map" page, and wrote the content for introduction and user guide for the "Guidance" page.
+     + Kexin(Colleen) Su suggested the basic idea of this app, cleaned and manipulated the school survey data, helped manipulate the quality review data, wrote function for plotting school survey data used in the "map" page, and wrote the content for introduction and user guide for the "Guidance" page, initiated the written parts, including the introduction, user guide and other descriptions on the app.
 
-     + Guoying Li manipulated the data and plotted the eight demographic charts for the comparison between two schools. 
+     + Guoying Li manipulated the data and plotted the eight demographic charts for the comparison between two schools, initiated the written parts, including the introduction, user guide and other descriptions on the app.
 
-     + Kexin and Guoying initiated all the written parts, including the introduction, user guide and other descriptions on the app.  
-
-     + Zhongtian manipulated the data in housing and demonstrated onto the map,and plotted the school quality review. 
+     + Zhongtian Pan manipulated the housing data and quality review data, demonstrated housing price onto the map, plot the school quality review for comparison between schools, optimized UI of guidance and source, suggested the idea of the comparison page. 
 
      + Jiancong manipulated the data in housing, demonstrated onto the map, and plotted the school survey charts. 
 
