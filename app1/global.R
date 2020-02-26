@@ -5,11 +5,11 @@ library(scales)
 library(ggrepel)
 library(stringr)
 library(plotly)
-library(fmsb)
+
 load('../app1/schoolfinal.RData')
-load('../output/demographic_by_school.RData')
-load('../output/School_Survey_newest.RData')
-load('../output/qr_processed.RData')
+load('../app1/output/demographic_by_school.RData')
+load('../app1/output/School_Survey_newest.RData')
+load('../app1/output/qr_processed.RData')
 
 gender_piechart <- function(bn) {
   
@@ -53,8 +53,8 @@ esl_piechart <- function(bn) {
     rename("% ESL" = `% English Language Learners`, "% non ESL"= `% non English Language Learners`)%>%
     select(`School Name`,`% ESL`,`% non ESL`)%>%
     pivot_longer(names_to ="type", values_to = "prop", cols = c(`% ESL`,`% non ESL`))
-    
-    
+  
+  
   pie <- plot_ly(esl_df, labels = ~type, values = ~prop, type = 'pie') %>%
     layout(title = 'Percentages of the ESL',
            xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
