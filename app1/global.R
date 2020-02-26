@@ -88,8 +88,7 @@ trust_score_linechart <- function(bn){
 
 school_survey_hist1 <- function(bn){
   test<-S %>% filter(BN == bn) %>% na.omit()
-  ggplot(test,aes(c("Collaborative Teachers","Effective School Leadership","Rigorous Instruction",
-                    "Supportive Environment","Strong Family-Community Ties",'Trust Score'), as.numeric(value))) +
+  ggplot(test,aes(Score, as.numeric(value))) +
     geom_col(aes(fill = as.factor(Year)),
              width = 0.8,
              position = position_dodge2(width = 0.8, preserve = "single")) +
