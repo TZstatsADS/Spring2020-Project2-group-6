@@ -6,8 +6,8 @@ library(tigris)
 library(ggplot2)
 
 
-load('../app1/output/demographic_by_school.Rdata')
-load('../app1/output/zip_code.Rdata')
+load('output/demographic_by_school.RData')
+load('output/zip_code.RData')
 
 
 
@@ -81,11 +81,9 @@ shinyServer(function(input, output) {
     click<-input$map_marker_click
     if(is.null(click))
       return()
-    g1<-school_survey_hist1(click$id)
+    
     g2<-newest_ss_radar(click$id)
-    output$survey_hist<-renderPlot({
-      g1
-    })
+ 
     output$ss_radar<-renderPlotly({
       g2
     })
