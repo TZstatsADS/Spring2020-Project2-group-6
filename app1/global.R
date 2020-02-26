@@ -74,7 +74,7 @@ total_enrollment_history_linechart <- function(bn) {
     select(`School Name`, Year, `Total Enrollment`) 
   
   total_enrollment_plot <- total_enrollment_plot <- plot_ly(total_enrollment_df, x = ~Year, y = ~`Total Enrollment`, type = 'scatter', mode = 'lines')%>%
-    layout(title="Total Enrollment from 2015 to 2019")
+    layout(title="Total Enrollment")
   
 }
 
