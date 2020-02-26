@@ -1,6 +1,5 @@
 library(shiny)
 library(leaflet)
-library(tidyverse)
 library(scales)
 library(ggrepel)
 library(stringr)
@@ -117,41 +116,4 @@ newest_ss_radar <- function(bn){
            polar = list(radialaxis = list(visible = T,range = c(0,5))))
   p
 }
-
-qr_radar <- function(bn) {
-  qr_df <- df %>% 
-    filter (BN == bn) 
-  tit <- qr_df$location_name
-  qr_df <- qr_df[-c(1,2)]
-  qr_df <- as.numeric(as.character(qr_df))
-  labels<- c("Curriculum","Pedagogy","Assessment","Expectation","Leadership")
-  
-  p <- plot_ly(
-    type = 'scatterpolar',
-    fill = 'toself',
-    mode = 'line'
-  ) %>%
-    add_trace(
-      r = qr_df,
-      theta = labels,
-      name = tit,
-      hoverinfo = "text",
-      text = ~paste(labels, '<br> Score: ', qr_df)
-    ) %>%
-    layout(
-      polar = list(
-        radialaxis = list(
-          visible = T,
-          range = c(0,5)
-        )
-      )
-    )
-  
-  p
-  
-}
-
-
-
-
 
