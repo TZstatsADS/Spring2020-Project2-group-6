@@ -41,7 +41,7 @@ shinyUI(
                                     age and you have no idea which school they should attend, you probably 
                                     have many questions. What is the quality of each school? What are the 
                                     housing options around the school? What's the best option for your 
-                                    children and your family? No worries, our app can help you figure out 
+                                    children and yonnur family? No worries, our app can help you figure out 
                                     these questions. "),
                                         tags$li("Our shiny app provides you information about school and housing in 
                            New York city, which benefits both parents and student.  For parents, 
@@ -86,7 +86,8 @@ shinyUI(
                                                                              choices = c('ONE.FAMILY.DWELLINGS', 'TWO.FAMILY.DWELLINGS', 'THREE.FAMILY.DWELLINGS', 'RENTALS...ELEVATOR.APARTMENTS','RENTALS...WALKUP.APARTMENTS','RENTALS...4.10.UNIT'),
                                                                              options = list(`actions-box` = TRUE),
                                                                              width = '100px'),
-                                                                 h2("result"),plotOutput("survey_hist"),
+                                                                 h2("result"), h6('First unselect the checkbox for "price" to hide the housing-price layer, '), h6('then click on each school to see detailed school information.'),
+                                                                 plotOutput("survey_hist"),
                                                                  plotlyOutput("ss_radar")),
                                                              
                                                              
