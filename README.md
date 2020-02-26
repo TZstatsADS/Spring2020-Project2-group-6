@@ -6,7 +6,7 @@
 Term: Spring 2020
 
 + Team #6
-+ Shiny Link: https://stephanielovdata.shinyapps.io/app1/
++ Shiny Link: https://nycschool.shinyapps.io/app1/
 + Team Members:
      + Liangcao Ling
      + Kexin(Colleen) Su
