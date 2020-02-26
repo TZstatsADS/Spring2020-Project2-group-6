@@ -19,5 +19,15 @@ House_Price<- PLUTO %>%
   summarise(avg_price = mean(price_per_square))
 
 
-setwd("~/Downloads/ads-project1/Spring2020-Project2-group-6/output")
+setwd("~/Downloads/ads-project1/Spring2020-Project2-group-6/app1/output")
 save(House_Price,file = "house.RData")
+save(S, file = 'school_survey_tidied.RData')
+
+
+
+
+
+
+
+
+

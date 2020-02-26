@@ -5,6 +5,12 @@ account: stephanielovdata
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 1837032
+<<<<<<< Updated upstream
 bundleId: 2831396
 url: https://stephanielovdata.shinyapps.io/app1/
 when: 1582725076.48099
+=======
+bundleId: 2831782
+url: https://stephanielovdata.shinyapps.io/app1/
+when: 1582733574.60363
+>>>>>>> Stashed changes

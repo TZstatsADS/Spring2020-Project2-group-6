@@ -6,10 +6,10 @@ library(tigris)
 library(ggplot2)
 
 
-
 load('../app1/output/demographic_by_school.Rdata')
 load('../app1/output/zip_code.Rdata')
-QR <- read_csv('../data/2005_-_2019_Quality_Review_Ratings.csv')
+QR <- read_csv('../app1/output/2005_-_2019_Quality_Review_Ratings.csv')
+
 
 
 
@@ -81,7 +81,7 @@ shinyServer(function(input, output) {
     click<-input$map_marker_click
     if(is.null(click))
       return()
-    g1<-school_survey_hist(click$id)
+    g1<-school_survey_hist1(click$id)
     g2<-newest_ss_radar(click$id)
     output$survey_hist<-renderPlot({
       g1
