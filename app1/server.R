@@ -294,7 +294,7 @@ shinyServer(function(input, output) {
   
   
   # Data & Ranking Section.
-  output$tableschool<-DT::renderDataTable({a},filter='top',options = list(pageLength = 20, scrollX=T, autoWidth = TRUE))
+  output$tableschool<-DT::renderDataTable({info},filter='top',options = list(pageLength = 20, scrollX=T, autoWidth = TRUE))
   
   
   
