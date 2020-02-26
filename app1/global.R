@@ -11,6 +11,7 @@ load('../app1/output/demographic_by_school.RData')
 load('../app1/output/School_Survey_newest.RData')
 load('../app1/output/qr_processed.RData')
 load('../app1/output/selected_BN.RData')
+load('../app1/output/school_survey_tidied.RData')
 
 
 gender_piechart <- function(bn) {
