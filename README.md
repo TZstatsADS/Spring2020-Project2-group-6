@@ -6,7 +6,7 @@
 Term: Spring 2020
 
 + Team #6
-+ Shiny Link: https://stephanielovdata.shinyapps.io/app1/
++ Shiny Link: https://nycschool.shinyapps.io/app1/
 + Team Members:
      + Liangcao Ling
      + Kexin(Colleen) Su
@@ -32,9 +32,9 @@ We used data from NYC Open Data, including housing, school quality review, schoo
 
      + Guoying Li manipulated the data and plotted the eight demographic charts for the comparison between two schools, initiated the written parts, including the introduction, user guide and other descriptions on the app.
 
-     + Zhongtian Pan manipulated the housing data and quality review data, demonstrated housing price onto the map, plot the school quality review for comparison between schools, optimized UI of guidance and source, suggested the idea of the comparison page. 
+     + Zhongtian Pan manipulated the housing data and quality review data, demonstrated housing price onto the map, plot the school quality review for comparison between schools, optimized UI of guidance and source, white documentations of the repo, suggested the idea of the comparison page. 
 
-     + Jiancong manipulated the data in housing, demonstrated onto the map, and plotted the school survey charts. 
+     + Jiancong(Jack) Shen manipulated data in housing and school survey, demonstrated the house types button on the map, suggested the graph types in the comparison chart, targetted some loopholes and errors in the code, plotted the school survey charts.
 
 All team members approve our work presented in this GitHub repository including this contributions statement. 
 

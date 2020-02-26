@@ -6,3 +6,4 @@ The doc directory contains the report or presentation files. It can have subfold
 
 house_processing.rmd is used to process the data of house price in NY.
 
+The doc directory contains all the codes for data processing. The cleaned data are in output folder.
