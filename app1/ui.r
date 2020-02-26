@@ -37,7 +37,7 @@ shinyUI(
                                     h3(
                                       tags$div(tags$ul(
                                         tags$li("Whether you are moving to New York with your family and would like 
-                           to find a school for your children, or your children has reached school
+                                    to find a school for your children, or your children has reached school
                                     age and you have no idea which school they should attend, you probably 
                                     have many questions. What is the quality of each school? What are the 
                                     housing options around the school? What's the best option for your 
@@ -130,7 +130,7 @@ shinyUI(
                                                   "NYC School Survey"),".")),
                               fluidRow(box(width = 12, title = "Project Code", status = "primary",
                                            solidHeader = TRUE, "The codes for this project are shared at",
-                                           tags$a(href = "https://github.com/TZstatsADS/fall2019-proj2--sec2-grp10",
+                                           tags$a(href = "https://github.com/TZstatsADS/Spring2020-Project2-group-6",
                                                   "Github"), "."
                               )
                               )
