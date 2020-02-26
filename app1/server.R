@@ -15,7 +15,7 @@ load('output/zip_code.RData')
 
 #SL<-SL%>%filter(Location_Category_Description %in% c('Elementary','High school','Junior High-Intermediate-Middle','K-8'))
 #house<-house%>%group_by(`ZIP CODE`)%>%summarize(price=median(avg_price_per_square_foot))%>%filter(is.na(`ZIP CODE`)==F)
-a<- SL%>%select(c(1,2,3,4,14,15,16,19,21,23,25,27,29,31))%>%mutate(`19 Trust Score`=as.numeric(`19 Trust Score`))
+
 
 
 pal <- colorNumeric(
@@ -81,9 +81,11 @@ shinyServer(function(input, output) {
     click<-input$map_marker_click
     if(is.null(click))
       return()
-    
+    g1<-school_survey_hist1(click$id)
     g2<-newest_ss_radar(click$id)
- 
+    output$survey_hist<-renderPlot({
+      g1
+    })
     output$ss_radar<-renderPlotly({
       g2
     })

@@ -78,7 +78,7 @@ shinyUI(
                     tabItem(tabName = 'menuMap', splitLayout(cellWidths = c("50%", "50%"),
                                                              box(width=12,
                                                                  pickerInput("schoollevel", 'School Level',
-                                                                             choices = levels(SL$Level),
+                                                                             choices = c('Elementary','High school','Junior High-Intermediate-Middle','K-8'),
                                                                              options = list(`actions-box` = TRUE),
                                                                              multiple = TRUE, width = '100px'),
                                                                  
@@ -90,7 +90,7 @@ shinyUI(
                                                                  plotlyOutput("ss_radar")),
                                                              
                                                              
-                                                             leafletOutput("map",width="100%",height=800))
+                                                             leafletOutput("map",width="100%",height=1000))
                     ),
                     tabItem(tabName = "menuChart",fluidPage(
                       fluidRow(
