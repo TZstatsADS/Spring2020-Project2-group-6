@@ -124,8 +124,10 @@ shinyUI(
                             fluidPage(
                               fluidRow(box(width = 12, title = "Data Source", status = "primary",
                                            solidHeader = TRUE, "The source data for this project is from", 
-                                           tags$a(href = "https://data.cityofnewyork.us/Public-Safety/NYPD-Shooting-Incident-Data-Historic-/833y-fsy8", 
-                                                  "NYC open data"), ".")),
+                                           tags$a(href = "https://opendata.cityofnewyork.us/data/", 
+                                                  "NYC open data"), ',',
+                                           tags$a(href = "https://www.schools.nyc.gov/about-us/reports/school-quality/nyc-school-survey", 
+                                                  "NYC School Survey"),".")),
                               fluidRow(box(width = 12, title = "Project Code", status = "primary",
                                            solidHeader = TRUE, "The codes for this project are shared at",
                                            tags$a(href = "https://github.com/TZstatsADS/fall2019-proj2--sec2-grp10",
