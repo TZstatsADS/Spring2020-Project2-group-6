@@ -6,8 +6,8 @@ library(tigris)
 library(ggplot2)
 
 
-load('../app1/output/demographic_by_school.Rdata')
-load('../app1/output/zip_code.Rdata')
+load('output/demographic_by_school.RData')
+load('output/zip_code.RData')
 
 
 
@@ -15,7 +15,7 @@ load('../app1/output/zip_code.Rdata')
 
 #SL<-SL%>%filter(Location_Category_Description %in% c('Elementary','High school','Junior High-Intermediate-Middle','K-8'))
 #house<-house%>%group_by(`ZIP CODE`)%>%summarize(price=median(avg_price_per_square_foot))%>%filter(is.na(`ZIP CODE`)==F)
-a<- SL%>%select(c(1,2,3,4,14,15,16,19,21,23,25,27,29,31))%>%mutate(`19 Trust Score`=as.numeric(`19 Trust Score`))
+
 
 
 pal <- colorNumeric(

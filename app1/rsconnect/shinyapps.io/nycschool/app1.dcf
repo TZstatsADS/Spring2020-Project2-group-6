@@ -1,0 +1,12 @@
+name: app1
+title: app1
+username:
+account: nycschool
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 1867403
+bundleId: 2832149
+url: https://nycschool.shinyapps.io/app1/
+when: 1582743368.42843
+asMultiple: FALSE
+asStatic: FALSE

@@ -21,7 +21,7 @@ shinyUI(
                 ),
                 dashboardBody(
                   tags$head( 
-                    tags$style(HTML(".main-sidebar { font-size: 20px; }")) #change the font size to 20
+                    tags$style(HTML(".main-sidebar { font-size:18px; }")) 
                   ),
                   
                   
@@ -33,8 +33,8 @@ shinyUI(
                               fluidRow(
                                 box(width = 15, title = "Introduction", status = "primary",
                                     solidHeader = TRUE, h3("NYC School & Housing Information"),
-                                    h4("By Liangcao Ling, Kexin Su, Guoying Li, Zhongtian Pan, Jiancong(Jack) Shen"),
-                                    h3(
+                                    h5("By Liangcao Ling, Kexin Su, Guoying Li, Zhongtian Pan, Jiancong(Jack) Shen"),
+                                    h4(
                                       tags$div(tags$ul(
                                         tags$li("Whether you are moving to New York with your family and would like 
                                     to find a school for your children, or your children has reached school
@@ -63,7 +63,7 @@ shinyUI(
                                 )), 
                               fluidRow(box(width = 15, title = "User Guide", status = "primary",
                                            solidHeader = TRUE, h3("What Does This App Do?"),
-                                           h3(
+                                           h4(
                                              tags$div(tags$ul(
                                                tags$li("Maps: This map displays the school location and median housing price of the neighborhood. Each school is indicated by a green dot, and the median housing price is shown with a heat map: darker green indicates higher median price, and lighter green indicates lower."),
                                                tags$li("Chart: In this page, you can compare any two schools by selecting or entering their borough numbers (BN), which can be found in the Data page. The comparison contains two tabs: 'Total Enrollment & Quality Review', and 'Demographic Information'. The first tab shows the school's total enrollment number from 2015-2019, and its newest quality review score. The second tab includes the schools\' demographic information including gender, ethnicity, and percentage of ESL(English as Second Language) student."),
@@ -78,7 +78,7 @@ shinyUI(
                     tabItem(tabName = 'menuMap', splitLayout(cellWidths = c("50%", "50%"),
                                                              box(width=12,
                                                                  pickerInput("schoollevel", 'School Level',
-                                                                             choices = levels(SL$Level),
+                                                                             choices = c('Elementary','High school','Junior High-Intermediate-Middle','K-8'),
                                                                              options = list(`actions-box` = TRUE),
                                                                              multiple = TRUE, width = '100px'),
                                                                  
@@ -90,7 +90,7 @@ shinyUI(
                                                                  plotlyOutput("ss_radar")),
                                                              
                                                              
-                                                             leafletOutput("map",width="100%",height=800))
+                                                             leafletOutput("map",width="100%",height=1000))
                     ),
                     tabItem(tabName = "menuChart",fluidPage(
                       fluidRow(
