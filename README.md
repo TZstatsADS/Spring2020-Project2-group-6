@@ -38,7 +38,7 @@ We used data from NYC Open Data, including housing, school quality review, schoo
 
      + Guoying Li manipulated the data and plotted the eight demographic charts for the comparison between two schools, initiated the written parts, including the introduction, user guide and other descriptions on the app.
 
-     + Zhongtian Pan manipulated the housing data and quality review data, demonstrated housing price onto the map, plot the school quality review for comparison between schools, optimized UI of guidance and source, white documentations of the repo, suggested the idea of the comparison page. 
+     + Zhongtian Pan manipulated the housing data and quality review data, demonstrated housing price onto the map, plot the school quality review for comparison between schools, optimized UI of guidance and source, white documentations of the repo, help prepare presentation, suggested the idea of the comparison page. 
 
      + Jiancong(Jack) Shen manipulated data in housing and school survey, demonstrated the house types button on the map, suggested the graph types in the comparison chart, targetted some loopholes and errors in the code, plotted the school survey charts.
 
