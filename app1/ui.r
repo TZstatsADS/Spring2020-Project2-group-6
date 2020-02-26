@@ -96,12 +96,12 @@ shinyUI(
                       fluidRow(
                         column(6,
                                selectizeInput("choice2", 'Choose school 1',
-                                              choices = levels(demographic_by_school$BN)
+                                              choices = levels(df$BN)
                                )
                         ),
                         column(6,
                                selectizeInput("choice3", 'Choose school 2',
-                                              choices = levels(demographic_by_school$BN)
+                                              choices = levels(df$BN)
                                )
                         )
                       ),

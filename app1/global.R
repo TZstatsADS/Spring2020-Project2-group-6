@@ -1,6 +1,5 @@
 library(shiny)
 library(leaflet)
-library(tidyverse)
 library(scales)
 library(ggrepel)
 library(stringr)
@@ -117,6 +116,7 @@ newest_ss_radar <- function(bn){
   p
 }
 
+
 qr_radar <- function(bn) {
   qr_df <- df %>% 
     filter (BN == bn) 
@@ -149,7 +149,5 @@ qr_radar <- function(bn) {
   p
   
 }
-
-
 
 
